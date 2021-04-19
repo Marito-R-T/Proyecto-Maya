@@ -1,0 +1,78 @@
+#formImg {
+    background: rgba(63, 64, 66, 0.7);
+    transition: 0.5s;
+    font-size: 10px;
+    width: 40%;
+    
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+.fileuploader-items{
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+ .fileuploader-input-button {
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 50px;
+    transition: 0.5s;
+    margin: 10px;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+  
+.fileuploader-input-caption{
+    color: #2dc997;
+}
+
+.fileuploader {
+    background:rgba(63, 64, 66, 0.7);
+}
+
+ .fileuploader-input-button:hover {
+    background: #2dc997;
+    border: 2px solid #2dc997;
+  }
+  
+  @media (max-width:994px){
+ .fileuploader-input-button {
+      font-family: "Poppins", sans-serif;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 1px;
+      display: inline-block;
+      padding: 8px 28px;
+      border-radius: 50px;
+      transition: 0.5s;
+      margin: 6px;
+      border: 2px solid #fff;
+      color: #fff;
+    }
+  }
