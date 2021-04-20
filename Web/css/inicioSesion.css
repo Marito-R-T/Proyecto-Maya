@@ -1,0 +1,67 @@
+
+#formulario {
+    background: rgba(63, 64, 66, 0.7);
+    transition: 0.5s;
+    width: 30%;
+}
+#formulario h1{
+    margin: 30px;
+    padding: 0;
+}
+
+.form-label {
+    color: rgba(204, 211, 226);
+    font-size: 20px;
+}
+
+
+.form-control{
+    width: 85%;
+    font-size: 18px;
+    margin: auto;
+}
+
+#inicio .btn-get-started {
+    margin-left: 25px;
+    margin-bottom: 25px;
+}
+
+#inicio h1 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 56px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  
+  @media (max-width: 994px) {
+    #inicio h1 {
+      font-size: 25px;
+      line-height: 36px;
+      margin: 10px;
+      
+     
+    }
+    .form-control{
+        font-size: 10px;
+    }
+
+    .form-label{
+        font-size: 15px;
+    }
+    #formulario{
+        width: 40%;
+    }
+    
+  }
+
+.loginfixed{
+    margin-top: 360px;
+    transition: 0.5s;
+}
+
+@media (min-width: 994px){
+    .loginfixed {
+        margin-top: 75px;
+    }
+}
