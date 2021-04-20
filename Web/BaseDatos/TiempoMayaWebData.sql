@@ -1,21 +1,47 @@
-CREATE DATABASE  IF NOT EXISTS `tiempomaya` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `tiempomaya`;
--- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
+-- MySQL dump 10.17  Distrib 10.3.25-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: 127.0.0.1    Database: tiempomaya
+-- Host: localhost    Database: tiempomaya
 -- ------------------------------------------------------
--- Server version	8.0.23
+-- Server version	10.3.25-MariaDB-0ubuntu1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `acontecimiento`
+--
+
+DROP TABLE IF EXISTS `acontecimiento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `acontecimiento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `autor` varchar(20) NOT NULL,
+  `titulo` varchar(45) NOT NULL,
+  `Periodo_nombre` varchar(50) NOT NULL,
+  `htmlCodigo` mediumtext NOT NULL,
+  `categoria` varchar(100) NOT NULL,
+  `fechaInicio` varchar(4) NOT NULL,
+  `ACInicio` varchar(3) NOT NULL,
+  `fechaFin` varchar(4) DEFAULT NULL,
+  `ACFin` varchar(3) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_ACONTECIMIENTO_USUARIO_idx` (`autor`),
+  KEY `fk_ACONTECIMIENTO_CATEGORIA1_idx` (`categoria`),
+  KEY `fk_ACONTECIMIENTO_Perido1_idx` (`Periodo_nombre`),
+  CONSTRAINT `fk_ACONTECIMIENTO_CATEGORIA1` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`nombre`),
+  CONSTRAINT `fk_ACONTECIMIENTO_Perido1` FOREIGN KEY (`Periodo_nombre`) REFERENCES `periodo` (`nombre`),
+  CONSTRAINT `fk_ACONTECIMIENTO_USUARIO` FOREIGN KEY (`autor`) REFERENCES `usuario` (`usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `acontecimiento`
@@ -28,14 +54,43 @@ INSERT INTO `acontecimiento` VALUES (1,'Odra12','Escritura','PreClasico','sdfasd
 UNLOCK TABLES;
 
 --
+-- Table structure for table `administrador`
+--
+
+DROP TABLE IF EXISTS `administrador`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `administrador` (
+  `password` varchar(200) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  PRIMARY KEY (`correo`),
+  KEY `Correo_idx` (`correo`),
+  CONSTRAINT `Correo` FOREIGN KEY (`correo`) REFERENCES `usuario` (`correo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `administrador`
 --
 
 LOCK TABLES `administrador` WRITE;
 /*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
-INSERT INTO `administrador` VALUES ('2d422502699416f636c31029665163721a427857a1f04626ccd07b3d50fe2149','fatima.tezo.99@gmail.com');
+INSERT INTO `administrador` VALUES ('8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','admin@gmail.com'),('2d422502699416f636c31029665163721a427857a1f04626ccd07b3d50fe2149','fatima.tezo.99@gmail.com');
 /*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `categoria`
+--
+
+DROP TABLE IF EXISTS `categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categoria` (
+  `nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `categoria`
@@ -48,6 +103,26 @@ INSERT INTO `categoria` VALUES ('Abandono8'),('asdfasdf10'),('Calendario Cholqui
 UNLOCK TABLES;
 
 --
+-- Table structure for table `energia`
+--
+
+DROP TABLE IF EXISTS `energia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `energia` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `htmlCodigo` mediumtext NOT NULL,
+  `categoria` varchar(100) NOT NULL,
+  `nombreYucateco` varchar(30) NOT NULL,
+  `significado` varchar(130) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_ENERGIA_CATEGORIA1_idx` (`categoria`),
+  CONSTRAINT `fk_ENERGIA_CATEGORIA1` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `energia`
 --
 
@@ -56,6 +131,24 @@ LOCK TABLES `energia` WRITE;
 INSERT INTO `energia` VALUES (1,'Jun','Principio de Unidad.<br><span></span>Proposito, Atraer, Unificar.<br><span></span>El principio y origen, el ser humano como un todo.<br><span></span>La unidad establece el proposito, el objeto y la meta de accion por pequena que esta sea.<br><span></span>La unidad es el todo, la unica verdad absoluta, es la creacion mental del todo.<br><span></span>En el circulo de la perfeccion todos los seres estan unidos inseparablemente sin importar su dimension de manifestacion, la creencia de que no es asi, crea una grieta en la relacion original y esa grieta en el campo de energia crea una polaridad (como proceso de cicatrizacion) que ha de convertirse en vibracion.','Energia_1','Jun','El Todo, La Unidad, El Absoluto, La Pureza'),(2,'Kab','Principio de Polaridad.<br><span></span>Desafio, Estabilizar, Polarizar.<br><span></span>Esqueleto y esencia, Masculino y femenino; forman el principio generador dual, la simetria dual de los seres. Son los extremos de un mismo fenomeno, opuestos identicos en su naturaleza: espiritu y materia, luz y oscuridad, ying y yang.<br><span></span>Armonizar la vibracion es resolver la polaridad equilibrando los dos extremos, o sea, incluyendolos<br><span></span>Si todo es luz, las formas se difuminan, por eso es necesario el contraste de las sombras.<br><span></span>Cultivar nuestra resonancia es armonizar nuestra vibracion con resonancias superiores como la planetaria, solar y galactica.','Energia_2','Ka','La Pareja, La Polaridad, El Complemento, El Apoyo'),(3,'Oxib','Principio del ritmo o compensacion.<br><span></span>Servicio, Unir, Activar.<br><span></span>Flujo y reflujo, ascenso y descenso, accion y relacion; es el movimiento entre los polos de todos los planos (fisico, mental y espiritual).<br><span></span>Cada fenomeno, cada proceso tiene su propio ritmo: todo tiene un inicio, nace, crece, muere y renace. Liquido precioso que da calor y energia al cuerpo, sangre, el agua de la naturaleza, lluvia.<br><span></span>Al crear polaridades, desencadenamos eventos, circunstancias que experimentamos y superamos, las acciones que producen un campo de negatividad (ignorancia, oscuridad espiritual) son kharmas, las acciones que suprimen y corrigen la negatividad (sabiduria) son Dharmas y crean un campo benefico.','Energia_3','Ox','Los Resultados, Los Hijos, El Temor, Los Frutos'),(4,'Kiejeb','Principio de la medida.<br><span></span>Forma, Medir, Definir.<br><span></span>El cuatro como medida de todas las estructuras materiales (la piramide), entra siempre en relacion con la composicion trina de lo espiritual, formando la estructura Septernal de todo lo que Es.<br><span></span>El poder del ordenamiento matematico del macro y microcosmos. Todo cuanto existe es segun la medida de la ley del todo.<br><span></span>Establece los limites de las estructuras; las 4 fuerzas principales, 4 rumbos sagrados, 4 elementos: calor, viento y agua sobre tierra. Cuatro son las regiones mayas, 4 los elementales, 4 los nucleotidos, 4 los elementos quimicos primarios, 4 las razas cosmicas, rumbos cardinales, estaciones solares, chacras de personalidad, etc','Energia_4','Kan','La Solidez, La Fortaleza, La Felicidad, La Estabilidad'),(5,'Job','Principio de lo nuclear.<br><span></span>Esplendor, Mandar, Dar poder.<br><span></span>La capacidad de realizacion, la movilidad de los dedos, percibir la belleza de la naturaleza, el 5� punto o centro del Universo.<br><span></span>Toda unidad, por pequena que sea, objetiva o subjetiva comporta un nucleo como atractor y una periferia de manifestacion (nucleo del atomo y electrones, por ejemplo).<br><span></span>Deriva la concepcion del matiz cromatico de cinco, que es la accion de la quinta fuerza galactica; el matiz del color da la entonacion.','Energia_5','Jo','El Amor, El Trabajo, El Esfuerzo, Analizar'),(6,'Waquib','Principio del equilibrio organico: 2x3. (Polaridad por ritmo)<br><span></span>Igualdad, Equilibrar, Organizo.<br><span></span>La polaridad del ritmo genera el principio organico, la ley del ordenamiento Hexagonal de las estructuras cristalinas y celulares. La tendencia de las estructuras ligadas al proceso de la vida es la de alcanzar el equilibrio relativo, estado de realizacion intermedio, a partir del cual continuar el movimiento hacia la conciencia superior.<br><span></span>El principio del Diferencial de Potencial aporta la resolucion de situaciones a traves de saltos cualitativos entre estados de la energia. Nada de cuanto sucede es casual, todo esta sujeto al poder de la ley primigenia; todo efecto tiene su causa y a la vez es causal de otros efectos, la Causa Centro Primera es el Creador.<br><span></span>Su accion es equilibrar, el principio de la integracion de nuestra introspeccion','Energia_6','Wak','El Mundo Material, La Materia, La Amistad, La Reaccion'),(7,'Wuqub','Principio de unificacion mental. (Poder mistico)<br><span></span>Armonizacion, Inspirar, Canalizo.<br><span></span>Los hombres somos unidades resonantes dentro de un todo Mental, el orden material es un fractal del ordenamiento mental del universo; nosotros no controlamos la mente, somos pensados por la mente, vivimos inmersos en ella.<br><span></span>El siete canaliza energia inspirando la armonizacion. Representa las fases lunares de 7 dias, el segundo paso de la transformacion interior; el intelecto activo, inquieto, la influencia lunar.','Energia_7','Uuk','El Equilibrio, El Movimiento, El Integrar, El Realizar'),(8,'Waqxaqib','Principio de Resonancia armonica. (Octavas resonantes)<br><span></span>Integridad, Modelar, Armonizar.<br><span></span>Asi como en musica, las escalas se suceden en octavas, las energias vibratorias contactan y resuenan con sus respectivas equisonantes en los niveles superiores e inferiores de manifestacion, como tambien con los armonicos secundarios derivados de la vibracion.<br><span></span>Las octavas son el vehiculo de informacion del todo, como ley de la armonia; el tono ocho otorga la habilidad de dar forma, de modelar, de describir aspectos del nivel inmediatamente superior de vibracion.<br><span></span>Ocho es la esencia interior, el ser como recipiente de la esencia cosmica, el 2 veces NAHUI (4), conjuga las 4 direcciones (+) y los 4 rincones (X) del mundo.','Energia_8','Waxac','La Espiritualidad, El Arte, La Alegria, La Energia Masculina'),(9,'Belejeb','Principio de la Periodicidad ciclica.<br><span></span>Intencion, Realizar, Pulso.<br><span></span>Todo cuanto se mueve lo hace de acuerdo a la Ley Cosmica; la periodicidad ciclica, no la repeticion de los sucesos, es la cualidad por la que un evento se asocia a otros anteriores y posteriores en el tiempo como fenomenos resonantes (ciclos entre ciclos).<br><span></span>Representa lo femenino del principio generatriz (Yin), el polo creativo en el cual se manifiesta la generacion o produccion de formas, energias y conceptos nuevos dinamizadores del proceso evolutivo de la vida, el objetivo; la intencion de poner la accion en movimiento','Energia_9','Bolon','La Realizacion, El Poder, Accion, La Energia Femenina'),(10,'Lajuj','Principio de la Manifestacion.<br><span></span>Manifestar, Producir, Perfecciono.<br><span></span>El movimiento como energia se manifiesta en cada nivel u octava de vibracion (dimension); todo lo que se manifiesta, es decir, que cobra presencia (objetiva o subjetiva) se puede medir y viceversa.<br><span></span>La manifestacion de la energia en todos los planos, implica vencer o enfrentar los obstaculos inherentes al plano dimensional y al tipo de presencia a manifestarse. Las manos juntas, la dualidad de las manos (5+5=10), equilibrandose mutuamente, como flecha al objetivo.','Energia_10','Lajun','La Ley, La Autoridad, La Rectitud, La Impecabilidad'),(11,'Julajuj','Principio de las Estructuras disonantes.<br><span></span>Liberacion, Divulgar, Disolver.<br><span></span>Todas las estructuras, cualquiera sea su naturaleza, tienden a ingresar a nuevas realidades; el movimiento perpetuo implica mutacion y cambio constante, en la vida vamos haciendo conscientes estas nuevas realidades.<br><span></span>Las estructuras que se \"desordenan\" como un aparente caos para el mundo material, en realidad estan ingresando a otro orden superior no comprensible desde la tridimensionalidad. La grieta que nos escinde del todo es la no evolucion, nuestra tendencia a quedarnos resguardados donde nos sentimos comodos y seguros es un espejismo; un orden superior que hoy asimilamos como caos esta a la espera de nuestro ingreso, es la quinta dimension que trasciende a las anteriores','Energia_11','Buluk','Compartir, Separar, Las Posibilidades, Dejarse-abandonarse'),(12,'KabLajuj','Principio de la Estabilidad compleja: 2x6.<br><span></span>Cooperacion, Universalizar, Dedicacion.<br><span></span>Es la polarizacion del equilibrio organico, mediante el cual cada especie gana su propio nivel de frecuencia armonica, es decir, su estatuto como especie: codigo, nicho, habitat, etc. Genera las fuerzas conservacionistas de los organismos vivos, incluida la tierra, como cooperacion simbiotica.','Energia_12','Kaalajun','La Familia, La Comunidad, Los Grupos, La Seguridad'),(13,'Oxlajuj','Principio del movimiento universal o principio de vibracion.<br><span></span>Presencia, Trascender, Perdurar.<br><span></span>Todo cuanto existe esta en perpetuo movimiento, desde lo mas sutil con las vibraciones, hasta lo mas denso y pesado como expresion de las bajas frecuencias, a tal punto que estos extremos parecen en reposo. <br><span></span>El movimiento es la energia que fluye desde la fuente y regresa a ella. Este principio otorga trascendencia a todo lo que funciona con y obedece a la ley del uno, trascendencia es la cualidad de perdurar mas alla del tiempo y del espacio. La union total de todos los numeros anteriores, el ultimo numero representa el conocimiento interno, la introspeccion, centralidad y transparencia, Sabiduria del Universo, La Madre Tierra, respeto a lo que existe, florece y da frutos.','Energia_13','Oxlajun','La Magia, EL Poder del Camino, La Teurgia, El Trasmutar');
 /*!40000 ALTER TABLE `energia` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `imagen`
+--
+
+DROP TABLE IF EXISTS `imagen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `imagen` (
+  `nombre` varchar(25) NOT NULL,
+  `descripcion` varchar(45) DEFAULT NULL,
+  `categoria` varchar(100) NOT NULL,
+  `data` longtext DEFAULT NULL,
+  PRIMARY KEY (`nombre`),
+  KEY `fk_IMAGEN_CATEGORIA1_idx` (`categoria`),
+  CONSTRAINT `fk_IMAGEN_CATEGORIA1` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `imagen`
@@ -68,6 +161,22 @@ INSERT INTO `imagen` VALUES ('articulacionesCholqij.png',NULL,'Calendario Haab',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `kin`
+--
+
+DROP TABLE IF EXISTS `kin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `kin` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `significado` varchar(45) NOT NULL,
+  `htmlCodigo` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `kin`
 --
 
@@ -76,6 +185,25 @@ LOCK TABLES `kin` WRITE;
 INSERT INTO `kin` VALUES (0,'Imix',' ',' '),(1,'Ik',' ',' '),(2,'Akbal',' ',' '),(3,'Kan',' ',' '),(4,'Chikchan',' ',' '),(5,'Kimi',' ',' '),(6,'Manik',' ',' '),(7,'Lamat',' ',' '),(8,'Muluk',' ',' '),(9,'Ok',' ',' '),(10,'Chuen',' ',' '),(11,'Eb',' ',' '),(12,'Ben ',' ',' '),(13,'Ix',' ',' '),(14,'Men',' ','  '),(15,'Kib',' ',' '),(16,'Kaban',' ',' '),(17,'Etzanab',' ',' '),(18,'Kauak',' ',' '),(19,'Ajau',' ',' ');
 /*!40000 ALTER TABLE `kin` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `nahual`
+--
+
+DROP TABLE IF EXISTS `nahual`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nahual` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `significado` varchar(30) NOT NULL,
+  `categoria` varchar(100) NOT NULL,
+  `htmlCodigo` longtext NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_NAHUAL_CATEGORIA1_idx` (`categoria`),
+  CONSTRAINT `fk_NAHUAL_CATEGORIA1` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `nahual`
@@ -88,6 +216,25 @@ INSERT INTO `nahual` VALUES (0,'Tzikin','Pajaro','Nahual_0','<p>Es el Nawal del 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `pagina`
+--
+
+DROP TABLE IF EXISTS `pagina`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pagina` (
+  `nombre` varchar(30) NOT NULL,
+  `categoria` varchar(100) NOT NULL,
+  `orden` int(11) DEFAULT NULL,
+  `seccion` varchar(45) DEFAULT NULL,
+  `htmlCodigo` longtext DEFAULT NULL,
+  PRIMARY KEY (`nombre`,`categoria`),
+  KEY `fk_CALENDARIO_CATEGORIA1_idx` (`categoria`),
+  CONSTRAINT `fk_CALENDARIO_CATEGORIA1` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `pagina`
 --
 
@@ -96,6 +243,29 @@ LOCK TABLES `pagina` WRITE;
 INSERT INTO `pagina` VALUES ('Energia','Calendario Cholquij',2,'Elementos',NULL),('Informacion','Calendario Cholquij',0,'Informacion',NULL),('Informacion','Calendario Haab',0,'Informacion','<p>El calendario solar maya, llamado Haab, es una cuenta de 365 días y por lo tanto se aproxima al año solar es el calendario civil, agricola Maya, es el calendario de los reyes Mayas.</p>    <p>La palabra <strong> \"HAAB\" </strong> significa <strong> \"AÑO\" </strong> en el idioma maya yucateco.</p>    <p>El Haab está compuesto por 18 meses de 20 días cada uno, más un mes que consta de 5 días. Cada mes de 20 días, conocido como uinal, tiene su propio nombre. Todos estos 18 meses juntos suman 360 días.</p>    <p>El último mes, compuesto de 5 días, se conoce como Wayeb. Los 19 meses en su totalidad suman 365 días.</p>    <p><strong>18 x 20 + 5 = 365 </strong></p>    <p> </p>    <figure class=\"easyimage easyimage-full\"><img alt=\"\" src=\"imgs/Calendario Haab/0.jpeg\" width=\"300\" />  <figcaption></figcaption>  </figure>    <p>Fue elaborado por los astrónomos y matemáticos Mayas para dar respuesta a la necesidad de las personas para su abastecimiento de alimento con la siembra y cosecha del sagrado maiz, el frijol, y toda clase de productos agricolas indispensable para la buena alimentación del ser humano; y en la necesidad de establecer el tiempo de duración del mando y cambio de autoridades imperiales, comunales y civiles del pueblo.</p>    <p>Este calendario, según los expertos, se estima que se utilizó por primera vez alrededor del solsticio de invierno de 550 ANE (Antes de Nuestra Era) y fue creado para ser utilizado en conjunto con el <strong> Tzolkin </strong>. En operación conjunta, el <strong> Haab </strong> y el <strong> Tzolkin </strong> crean un ciclo más grande de 52 años llamado como la <strong> Rueda Calendárica </strong> o <strong> Calendario Redondo</strong> que fue utilizado no solo por los mayas sino también por el resto de las culturas en Mesoamericanas.</p>    <p> </p>    <h3>Utilidad</h3>    <hr />  <p>El calendario <strong> Habb </strong> sirve para el control de los fenomenos astronomicos y estacionales del año solar como lo son:</p>    <ul>  	<li>Equinoccios</li>  	<li>Solsticios</li>  </ul>    <p>Tambien sirve para el establecimiento de nuevas autoridades de los pueblos, marca los ritos ceremoniales colectivos y las temporadas para la siembra de cultivos, aparte de definir el temperamento de las personas de acuerdo a la fecha de su nacimiento</p>    <h3>Exactitud</h3>    <hr />  <p>Debido a que el tiempo real que tarda nuestro Sol en reaparecer exactamente en las mismas posiciones que se ve desde la Tierra es un poco más largo que 365 días (365.2421897 días), se necesitan ajustes periódicos para mantener una acumulación de los recuentos anuales del calendario en alineación con la Tierra girando alrededor del sol.</p>    <p>Los antiguos mayas abordaron este problema de manera diferente a lo que hacemos hoy. En lugar de agregar un año bisiesto cada 4 años, restaron 13 días cada 52 años.</p>    <p>Es muy interesante saber que el calendario Haab tiene un error de solo 1 día en 6729 años, mientras que nuestro calendario “moderno” tiene un error de solo 1 día en 3236 años.</p>   '),('Informacion','Rueda Calendarica',0,'Informacion',NULL),('Kin','Calendario Haab',1,'Elementos','<p>aasdfasdf</p>    <figure class=\"easyimage easyimage-full\"><img alt=\"\" src=\"imgs/Kin/0.jpeg\" width=\"300\" />  <figcaption></figcaption>  </figure>    <p> </p>'),('Nahual','Calendario Cholquij',1,'Elementos',NULL),('Uayeb','Calendario Haab',3,'Elementos','<p>Los últimos cinco días del ciclo de Haab son el mes 19, llamado Uayeb. Estos son días impredecibles, no para planificar eventos importantes o viajar fuera de casa.</p>'),('Uinal','Calendario Haab',2,'Elementos','<p>El uinal se puede ver como el equivalente a nuestros meses ya que constan de 20 días, pero en lugar de 12 de ellos, el calendario Haab Maya cuenta con 18 de ellos. Los uinales, a parte de contar el tiempo se utilizaban para realizar ciertas actividades.</p>');
 /*!40000 ALTER TABLE `pagina` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `periodo`
+--
+
+DROP TABLE IF EXISTS `periodo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `periodo` (
+  `nombre` varchar(50) NOT NULL,
+  `fechaInicio` varchar(6) NOT NULL,
+  `ACInicio` varchar(3) NOT NULL,
+  `fechaFin` varchar(6) NOT NULL,
+  `ACFin` varchar(3) NOT NULL,
+  `categoria` varchar(100) NOT NULL,
+  `htmlCodigo` longtext DEFAULT NULL,
+  `orden` int(11) DEFAULT NULL,
+  `descripcion` tinytext DEFAULT NULL,
+  PRIMARY KEY (`nombre`),
+  KEY `fk_Perido_CATEGORIA1_idx` (`categoria`),
+  CONSTRAINT `fk_Perido_CATEGORIA1` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `periodo`
@@ -108,6 +278,25 @@ INSERT INTO `periodo` VALUES ('Clasico','292','D.C','900','D.C','Clasico',NULL,2
 UNLOCK TABLES;
 
 --
+-- Table structure for table `uinal`
+--
+
+DROP TABLE IF EXISTS `uinal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `uinal` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(25) NOT NULL,
+  `significado` varchar(45) NOT NULL,
+  `categoria` varchar(100) NOT NULL,
+  `htmlCodigo` mediumtext DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_WINAL_CATEGORIA1_idx` (`categoria`),
+  CONSTRAINT `fk_WINAL_CATEGORIA1` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `uinal`
 --
 
@@ -118,14 +307,39 @@ INSERT INTO `uinal` VALUES (0,'Uayeb','Dias desafortunados','Uinal_0','<p>Cuando
 UNLOCK TABLES;
 
 --
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario` (
+  `usuario` varchar(20) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `celular` varchar(10) DEFAULT NULL,
+  `password` varchar(200) NOT NULL,
+  `fechaNacimiento` date DEFAULT NULL,
+  `correo` varchar(75) NOT NULL,
+  `imagen` longtext DEFAULT NULL,
+  PRIMARY KEY (`correo`),
+  UNIQUE KEY `usuario_UNIQUE` (`usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `usuario`
 --
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('Odra12','Fatima','Tezó','59245825','2d422502699416f636c31029665163721a427857a1f04626ccd07b3d50fe2149','1999-02-12','fatima.tezo.99@gmail.com','data:image/jpeg;base64,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');
+INSERT INTO `usuario` VALUES ('admin','Admin','Admin',NULL,'8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','2000-01-01','admin@gmail.com','data:image/jpeg;base64,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'),('Odra12','Fatima','Tezó','59245825','2d422502699416f636c31029665163721a427857a1f04626ccd07b3d50fe2149','1999-02-12','fatima.tezo.99@gmail.com','data:image/jpeg;base64,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');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'tiempomaya'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -136,4 +350,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-18 21:39:22
+-- Dump completed on 2021-04-20 16:32:27
