@@ -12,6 +12,7 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
     if ($sql->num_rows == 1) {
         while ($row = mysqli_fetch_assoc($sql)) {
             $htmlCode = $row['htmlCodigo'];
+            $categoria = $row['categoria'];
         }
     }
     $conn->close();
