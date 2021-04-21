@@ -15,7 +15,6 @@
 <?php include "../backend/verificarSesion.php"?>
 <?php include "../backend/obtenerDatosUsuario.php" ?>
 
-
 <body>
   <div>
     <section id="inicio">
@@ -55,7 +54,7 @@
               </div>
             </div>
           </div>
-          <form action="backend/actualizarUsuario.php" method="POST" style="margin-top: 60px;">
+          <form action="../backend/actualizarUsuario.php" method="POST" style="margin-top: 60px;">
             <h1>Informacion de Usuario</h1>
             <div class="form-group d-flex justify-content-between">
               <label for="nombre">Nombre</label>

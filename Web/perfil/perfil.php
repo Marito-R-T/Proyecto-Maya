@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <?php include "NavBar.php" ; ?>
-    <?php include "../backend/verificarSesion.php"?>
+    <?php include "NavBar.php" ?>
+    <?php include "../backend/verificarSesion.php"?>   
      <?php include '../backend/obtenerDatosUsuario.php' ?>
     <section id="inicio">
         <div id="inicioContainer" class="inicio-container">
@@ -77,6 +77,6 @@
             </div>
         </div>
     </section>
-    <?php include "../Web/blocks/bloquesJs.html" ?>
+    <?php include "../blocks/bloquesJs.html" ?>
 </body>
 </html>
