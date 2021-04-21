@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+
+use function PHPSTORM_META\type;
+
+session_start(); ?>
 <?php
 
 $conn = include '../conexion/conexion.php';
@@ -79,10 +83,10 @@ $informacion = $conn->query("SELECT htmlCodigo FROM tiempomaya.pagina WHERE nomb
             <?php
             $stringPrint = " <div class='row' id='portafolio-wrapper'>";
             $filtro = str_replace(' ', '', $tabla);
-            $imgs = $conn->query("SELECT * FROM tiempomaya.imagen WHERE categoria like '" . $tabla . "%';");
+            $sql="SELECT * FROM tiempomaya.imagen WHERE categoria like '" . $tabla . "%';";
+            $imgs = $conn->query($sql);
             $stringPrint .= "<div class='col-lg-3 col-md-6 portafolio-item '>";
             foreach ($imgs as $img) {
-
                 $stringPrint .= "<a href=\"" . $img['data'] . "\"><img src=\"" . $img['data'] . "\" width=\"150%\" target='_blank'/>";
                 $stringPrint .= "<div class='details'>";
                 $stringPrint .= "<h4>" . $img['descripcion'] . "</h4>";
