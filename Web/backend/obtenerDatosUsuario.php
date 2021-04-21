@@ -1,7 +1,7 @@
 <?php
 // Obtengo los datos cargados en el formulario de login.
 $email = $_SESSION['correo'];
-$root = $_SERVER['DOCUMENT_ROOT'] . '/Tiempo_Maya_Web/';
+$root = $_SERVER['DOCUMENT_ROOT'] . '/Proyecto-Maya/Web/';
 $connection = include $root . 'conexion/conexion.php';
 // Consulta segura para evitar inyecciones SQL.
 $user_info = $connection->query("SELECT * FROM tiempomaya.usuario WHERE correo='" . $email . "';");

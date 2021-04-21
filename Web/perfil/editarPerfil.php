@@ -6,14 +6,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tiempo Maya - Editar Perfil</title>
-  <?php include "blocks/bloquesCss.html" ?>
-  <link rel="stylesheet" href="css/estilo.css?v=<?php echo (rand()); ?>" />
-  <link rel="stylesheet" href="css/registroSesion.css?v=<?php echo (rand()); ?>" />
-  <link rel="stylesheet" href="css/editarPerfil.css?v=<?php echo (rand()); ?>" />
+  <?php include "../blocks/bloquesCss.html" ?>
+  <link rel="stylesheet" href="../css/estilo.css?v=<?php echo (rand()); ?>" />
+  <link rel="stylesheet" href="../css/registroSesion.css?v=<?php echo (rand()); ?>" />
+  <link rel="stylesheet" href="../css/editarPerfil.css?v=<?php echo (rand()); ?>" />
 </head>
 <?php include "NavBar.php" ?>
-<?php include "backend/verificarSesion.php"?>
-<?php include "backend/obtenerDatosUsuario.php" ?>
+<?php include "../backend/verificarSesion.php"?>
+<?php include "../backend/obtenerDatosUsuario.php" ?>
+
 
 <body>
   <div>
@@ -22,7 +23,7 @@
         <div class="inner" style="padding-top: 0px;margin-top: 85px;">
           <div class="row" style="width: 45%;">
             <div class="profile ">
-              <form action="backend/guardarFoto.php" method="POST">
+              <form action="../backend/guardarFoto.php" method="POST">
                 <div class="avatar-upload">
                   <div class="avatar-edit" style="left: 200px;">
                     <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg ,.jfif" />
@@ -122,7 +123,7 @@
   </script>
 
 
-  <?php include "blocks/bloquesJs.html" ?>
+  <?php include "../blocks/bloquesJs.html" ?>
 </body>
 
 </html>

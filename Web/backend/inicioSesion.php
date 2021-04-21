@@ -13,9 +13,12 @@ if ($user->num_rows == 1) {
       session_start();
       $_SESSION['usuario'] = $row['usuario'];
       $_SESSION['correo']=$row['correo'];
-      $admin = $connection->query("SELECT correo FROM tiempomaya.admin as a INNER JOIN tiempomaya.usuario as u WHERE a.correo==u.correo;");
-        if($user->num_rows ==1){
+      $admin = $connection->query("SELECT a.correo FROM tiempomaya.administrador as a INNER JOIN tiempomaya.usuario as u WHERE  a.correo=u.correo AND a.correo='". $_SESSION['correo']."';");
+        //echo "SELECT a.correo FROM tiempomaya.administrador as a INNER JOIN tiempomaya.usuario as u WHERE  a.correo=u.correo AND a.correo='". $_SESSION['correo']."';";
+        if($admin->num_rows ==1){
           $_SESSION['admin']=$row['correo'];
+        }else{
+         // $_SESSION['admin'] = null;
         }
       $mensaje = "?mensaje='Inicio de Sesion exitoso'";
     }else{

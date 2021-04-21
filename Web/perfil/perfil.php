@@ -6,15 +6,15 @@
     <meta charset="utf-8">
     <title>Tiempo Maya - Perfil</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <?php include "blocks/bloquesCss.html" ?>
-    <link rel="stylesheet" href="css/estilo.css?v=<?php echo (rand()); ?>" />
-    <link rel="stylesheet" href="css/Perfil.css?v=<?php echo (rand()); ?>" />
+    <?php include "../blocks/bloquesCss.html" ?>
+    <link rel="stylesheet" href="../css/estilo.css?v=<?php echo (rand()); ?>" />
+    <link rel="stylesheet" href="../css/Perfil.css?v=<?php echo (rand()); ?>" />
 </head>
 
 <body>
-    <?php include "NavBar.php" ?>
-    <?php include "backend/verificarSesion.php"?>   
-     <?php include 'backend/obtenerDatosUsuario.php' ?>
+    <?php include "NavBar.php" ; ?>
+    <?php include "../backend/verificarSesion.php"?>
+     <?php include '../backend/obtenerDatosUsuario.php' ?>
     <section id="inicio">
         <div id="inicioContainer" class="inicio-container">
             <div class="container">
@@ -77,6 +77,6 @@
             </div>
         </div>
     </section>
-    <?php include "blocks/bloquesJs.html" ?>
+    <?php include "../Web/blocks/bloquesJs.html" ?>
 </body>
 </html>
