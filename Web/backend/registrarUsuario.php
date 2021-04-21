@@ -1,6 +1,6 @@
 <?php
 
-$url = "../registrarSesion.php";
+$url = "../sesion/registrarSesion.php";
 $mensaje = "?mensaje=";
 if (!(isset($_POST['usuario']) || isset($_POST['password']) //Verificacion de los campos
     || isset($_POST['nombre'])

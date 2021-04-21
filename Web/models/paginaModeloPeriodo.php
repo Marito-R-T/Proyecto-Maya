@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php
 
-$conn = include 'conexion/conexion.php';
+$conn = include '../conexion/conexion.php';
 $periodoP = $_GET['n'];
 $infos = $conn->query("SELECT * FROM tiempomaya.periodo WHERE nombre = '".$periodoP."';");
 $info = mysqli_fetch_assoc($infos);
@@ -17,9 +17,9 @@ $info = mysqli_fetch_assoc($infos);
     <meta charset="utf-8">
     <title>Tiempo Maya - <?php echo $periodoP; ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <?php include "blocks/bloquesCss.html" ?>
-    <link rel="stylesheet" href="css/estilo.css?v=<?php echo (rand()); ?>" />
-    <link rel="stylesheet" href="css/paginaModelo.css?v=<?php echo (rand()); ?>" />
+    <?php include "../blocks/bloquesCss.html" ?>
+    <link rel="stylesheet" href="../css/estilo.css?v=<?php echo (rand()); ?>" />
+    <link rel="stylesheet" href="../css/paginaModelo.css?v=<?php echo (rand()); ?>" />
 
 
 </head>
@@ -79,7 +79,7 @@ $info = mysqli_fetch_assoc($infos);
         </div>
     </section>
 
-    <?php include "blocks/bloquesJs.html" ?>
+    <?php include "../blocks/bloquesJs.html" ?>
 
 
 

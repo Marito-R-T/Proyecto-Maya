@@ -297,7 +297,7 @@ class PRESTimeline {
 // ## document load ##
 $(document).ready(function () {
   let colorcode = {
-    period1: "#2DC997",
+    period1: "#D8DDEF",
     period2: "#F46036",
     period3: "#3C153B",
   };
