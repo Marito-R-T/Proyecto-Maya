@@ -18,7 +18,7 @@ if ($user_info->num_rows == 1) {
 $contribution_number = $connection->query("SELECT count(id) as acontecimientos FROM tiempomaya.acontecimiento WHERE autor='" . $_SESSION['usuario'] . "';");
 $number_con = mysqli_fetch_assoc($contribution_number);
 $number = $number_con['acontecimientos'];
-$fecha = $user['fechaNacimiento'];
+$fecha_consultar = $user['fechaNacimiento'];
 // $nahual = include $root . '../backend/buscar/conseguir_nahual_nombre.php';
 // $energia = include $root . '../backend/buscar/conseguir_energia_numero.php';
 $nahual = include '../backend/buscar/conseguir_nahual_nombre.php';
