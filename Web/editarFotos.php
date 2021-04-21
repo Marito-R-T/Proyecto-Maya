@@ -1,8 +1,8 @@
 <?php session_start(); ?>
 <?php
 $conn = include 'conexion/conexion.php';
-if (isset($_POST['nombre'])) {
-    $nombre = $_POST['nombre'];
+if (isset($_POST['categoria'])) {
+    $nombre = $_POST['categoria'];
 } elseif (isset($_GET['nombre'])) {
     $nombre = $_GET['nombre'];
 }
