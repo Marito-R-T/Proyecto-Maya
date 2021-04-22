@@ -7,7 +7,7 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
     if($nombre=='Calendario Haab' || $nombre=='Calendario Cholquij' || $nombre=='Rueda Calendarica'){
         $sql = $conn->query("SELECT htmlCodigo,categoria  FROM tiempomaya." . $table . " WHERE nombre='Informacion' AND categoria='" . $nombre . "' ;");
     }else{
-    $sql = $conn->query("SELECT htmlCodigo,categoria FROM tiempomaya." . $table . " WHERE nombre='" . $nombre . "';");
+    $sql = $conn->query("SELECT htmlCodigo, nombre as categoria FROM tiempomaya." . $table . " WHERE nombre='" . $nombre . "';");
     }
     if ($sql->num_rows == 1) {
         while ($row = mysqli_fetch_assoc($sql)) {
@@ -112,7 +112,7 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
 
         }
     </script>
-    <?php include 'blocks/bloquesJs.html' ?>
+    <?php include 'blocks/bloquesJs1.html' ?>
 
     <!--
 Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.

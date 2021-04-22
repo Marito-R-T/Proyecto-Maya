@@ -78,7 +78,7 @@ $cholquij = $nahual." ". strval($energia);
     </div>
 
 
-    <?php include "blocks/bloquesJs.html" ?>
+    <?php include "blocks/bloquesJs1.html" ?>
 
 </body>
 
