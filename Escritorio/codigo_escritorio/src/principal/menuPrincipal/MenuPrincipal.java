@@ -106,6 +106,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         panelPrincipal.setBackground(new java.awt.Color(0, 204, 204));
 
+        tabPP.setForeground(new java.awt.Color(60, 21, 59));
+
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
@@ -121,14 +123,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jMenuBar1.setBackground(new java.awt.Color(184, 220, 245));
+        jMenuBar1.setBackground(new java.awt.Color(45, 201, 151));
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenuBar1.setPreferredSize(new java.awt.Dimension(64, 60));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(64, 55));
 
+        jMenu5.setBackground(new java.awt.Color(45, 201, 151));
         jMenu5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu5.setForeground(new java.awt.Color(60, 21, 59));
         jMenu5.setText("Nahuales");
-        jMenu5.setFont(new java.awt.Font("Jenna Sue", 1, 30)); // NOI18N
-        jMenu5.setPreferredSize(new java.awt.Dimension(93, 40));
+        jMenu5.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu5.setPreferredSize(new java.awt.Dimension(105, 40));
 
         menuNahuales.setText("Conocer Nahuales");
         menuNahuales.addActionListener(new java.awt.event.ActionListener() {
@@ -140,9 +146,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu2.setBackground(new java.awt.Color(45, 201, 151));
         jMenu2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu2.setForeground(new java.awt.Color(60, 21, 59));
         jMenu2.setText("Calendario Cholqij");
-        jMenu2.setFont(new java.awt.Font("Jenna Sue", 1, 30)); // NOI18N
+        jMenu2.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu2.setPreferredSize(new java.awt.Dimension(200, 29));
 
         menuCalendarioLunarCC.setText("Calendario Lunar");
         menuCalendarioLunarCC.addActionListener(new java.awt.event.ActionListener() {
@@ -202,10 +213,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setBackground(new java.awt.Color(45, 201, 151));
         jMenu3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu3.setForeground(new java.awt.Color(60, 21, 59));
         jMenu3.setText("Calendario Haab");
-        jMenu3.setFont(new java.awt.Font("Jenna Sue", 1, 30)); // NOI18N
-        jMenu3.setPreferredSize(new java.awt.Dimension(141, 45));
+        jMenu3.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu3.setPreferredSize(new java.awt.Dimension(180, 45));
 
         menuCalendarioHaab.setText("Explorar Calendario Haab");
         menuCalendarioHaab.addActionListener(new java.awt.event.ActionListener() {
@@ -217,10 +232,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setBackground(new java.awt.Color(45, 201, 151));
         jMenu4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu4.setForeground(new java.awt.Color(60, 21, 59));
         jMenu4.setText("Rueda Calendarica");
-        jMenu4.setFont(new java.awt.Font("Jenna Sue", 1, 30)); // NOI18N
-        jMenu4.setPreferredSize(new java.awt.Dimension(171, 45));
+        jMenu4.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu4.setPreferredSize(new java.awt.Dimension(195, 45));
 
         menuRC.setText("Explorar rueda Calendarica");
         menuRC.addActionListener(new java.awt.event.ActionListener() {
@@ -232,10 +251,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu6.setBackground(new java.awt.Color(45, 201, 151));
         jMenu6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu6.setForeground(new java.awt.Color(60, 21, 59));
         jMenu6.setText("Linea de Tiempo");
-        jMenu6.setFont(new java.awt.Font("Jenna Sue", 1, 30)); // NOI18N
-        jMenu6.setPreferredSize(new java.awt.Dimension(141, 45));
+        jMenu6.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu6.setPreferredSize(new java.awt.Dimension(200, 45));
 
         menuLineaTiempo.setText("Explorar Linea de Tiempo");
         menuLineaTiempo.addActionListener(new java.awt.event.ActionListener() {
@@ -247,9 +270,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
+        jMenu1.setBackground(new java.awt.Color(45, 201, 151));
         jMenu1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu1.setForeground(new java.awt.Color(60, 21, 59));
         jMenu1.setText("Limpiar pantalla");
-        jMenu1.setFont(new java.awt.Font("Jenna Sue", 1, 31)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu1.setOpaque(true);
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
