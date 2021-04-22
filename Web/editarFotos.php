@@ -129,7 +129,7 @@ $array = "";
             $("#imgs").val(arv);
         }
     </script>
-    <?php include "blocks/bloquesJs.html" ?>
+    <?php include "blocks/bloquesJs1.html" ?>
 </body>
 
 </html>

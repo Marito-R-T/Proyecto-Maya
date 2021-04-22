@@ -105,6 +105,7 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
 
               </ul>
             </li>
+            <li class="nav-item"><a class="nav-link" href="../calculadora.php">Calculadora</a></li>
             <?php
             if (isset($_SESSION['usuario'])) {
               if (isset($_SESSION['admin'])) {
