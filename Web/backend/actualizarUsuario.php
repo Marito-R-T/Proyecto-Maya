@@ -1,6 +1,6 @@
 <?php
 session_start();
-$url = "../editarPerfil.php";
+$url = "../perfil/editarPerfil.php";
 $mensaje = "?mensaje=";
 if (!(isset($_POST['usuario']) //Verificacion de los campos
     || isset($_POST['nombre'])
@@ -34,7 +34,7 @@ if (!(isset($_POST['usuario']) //Verificacion de los campos
     }
     $sql= $sql." WHERE (correo='".$_SESSION['correo']."');";
     if ($connection->query($sql)) {
-        $url = "../editarPerfil.php?";
+        $url = "../perfil/editarPerfil.php?";
         $mensaje = "mensaje='Informacion modificada con exito'";
     } else {
         $mensaje = $mensaje . "'No se pudo modificar la informacion'";

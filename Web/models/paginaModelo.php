@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php
 
-$conn = include 'conexion/conexion.php';
+$conn = include '../conexion/conexion.php';
 $pagina = $_GET['pagina'];
 $informacion = $conn->query("SELECT htmlCodigo,seccion,nombre FROM tiempomaya.pagina WHERE categoria='" . $pagina . "' order by orden;");
 $secciones = $conn->query("SELECT seccion FROM tiempomaya.pagina WHERE categoria='" . $pagina . "' group by seccion  order by orden;");
@@ -18,9 +18,9 @@ $elementos = $conn->query("SELECT nombre FROM tiempomaya.pagina WHERE categoria=
     <meta charset="utf-8">
     <title>Tiempo Maya - <?php echo $pagina ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <?php include "blocks/bloquesCss.html" ?>
-    <link rel="stylesheet" href="css/estilo.css?v=<?php echo (rand()); ?>" />
-    <link rel="stylesheet" href="css/paginaModelo.css?v=<?php echo (rand()); ?>" />
+    <?php include "../blocks/bloquesCss.html" ?>
+    <link rel="stylesheet" href="../css/estilo.css?v=<?php echo (rand()); ?>" />
+    <link rel="stylesheet" href="../css/paginaModelo.css?v=<?php echo (rand()); ?>" />
 
 
 </head>
@@ -149,7 +149,7 @@ $elementos = $conn->query("SELECT nombre FROM tiempomaya.pagina WHERE categoria=
         </div>
     </section>
 
-    <?php include "blocks/bloquesJs.html" ?>
+    <?php include "../blocks/bloquesJs.html" ?>
 
 
 

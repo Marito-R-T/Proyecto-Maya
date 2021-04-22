@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <title>Tiempo Maya - Inicio de Sesion</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <?php include "blocks/bloquesCss.html" ?>
-  <link rel="stylesheet" href="css/estilo.css?v=<?php echo (rand()); ?>" />
-  <link rel="stylesheet" href="css/inicioSesion.css?v=<?php echo (rand()); ?>" />
+  <?php include "../blocks/bloquesCss.html" ?>
+  <link rel="stylesheet" href="../css/estilo.css?v=<?php echo (rand()); ?>" />
+  <link rel="stylesheet" href="../css/inicioSesion.css?v=<?php echo (rand()); ?>" />
 
 </head>
 
@@ -20,7 +20,7 @@
       <div id="inicioContainer" class="inicio-container">
 
         <div id='formulario'>
-          <form action="backend/inicioSesion.php" method="POST">
+          <form action="../backend/inicioSesion.php" method="POST">
             <h1>Inicio de Sesion</h1>
             <div class="mb-1">
               <label for="email" class="form-label">Correo Electronico</label>
@@ -40,7 +40,7 @@
   </div>
 
 
-  <?php include "blocks/bloquesJs.html" ?>
+  <?php include "../blocks/bloquesJs.html" ?>
 
 </body>
 

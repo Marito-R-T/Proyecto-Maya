@@ -5,13 +5,14 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
     $nombre = $_GET['n'];
     $conn = include 'conexion/conexion.php';
     if($nombre=='Calendario Haab' || $nombre=='Calendario Cholquij' || $nombre=='Rueda Calendarica'){
-        $sql = $conn->query("SELECT htmlCodigo  FROM tiempomaya." . $table . " WHERE nombre='Informacion' AND categoria='" . $nombre . "' ;");
+        $sql = $conn->query("SELECT htmlCodigo,categoria  FROM tiempomaya." . $table . " WHERE nombre='Informacion' AND categoria='" . $nombre . "' ;");
     }else{
-    $sql = $conn->query("SELECT htmlCodigo FROM tiempomaya." . $table . " WHERE nombre='" . $nombre . "';");
+    $sql = $conn->query("SELECT htmlCodigo, nombre as categoria FROM tiempomaya." . $table . " WHERE nombre='" . $nombre . "';");
     }
     if ($sql->num_rows == 1) {
         while ($row = mysqli_fetch_assoc($sql)) {
             $htmlCode = $row['htmlCodigo'];
+            $categoria = $row['categoria'];
         }
     }
     $conn->close();
@@ -50,21 +51,22 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
             <main>
                 <div class="adjoined-bottom">
                     <div class="grid-container">
-                    <h3><?php echo $nombre ?></h3>
+                    <h3><?php echo isset($nombre) ? $nombre : ''; ?> </h3>
                         <div class="">
                             <div id="editor">
                             </div>
                             <form action="backend/editarInformacion.php" method="POST"> 
                                 <textarea hidden id="auxiliarData" name="text"><?php echo isset($htmlCode) ? $htmlCode : ''; ?></textarea>
                                 <button class="btn btn-get-started" type="submit" onclick="save()">Guardar Cambios <i class="far fa-save"></i></button>
-                                <input hidden type="text" name="tabla" value="<?php echo $table ?>">
-                                <input hidden type="text" name="nombre" value="<?php echo $nombre ?>">
-                                <input hidden type="text" name="categoria" value="<?php echo $nombre ?>">
+                                <input hidden type="text" name="tabla" value="<?php echo isset($table) ? $table : ''; ?>">
+                                <input hidden type="text" name="nombre" value="<?php echo isset($nombre) ? $nombre : ''; ?>">
+                                <input hidden type="text" name="categoria" value="<?php echo isset($categoria) ? $categoria : ''; ?>">
                             </form>
                             <input type="text" hidden id='pivot'>
                             <form action="editarFotos.php" method="POST"> 
                                 <button class="btn btn-get-started" type="submit" >Subir Fotos <i class="far fa-save"></i></button>
-                                <input hidden type="text" name="nombre" value="<?php echo $nombre ?>">
+                                <input hidden type="text" name="nombre" value="<?php echo isset($nombre) ? $nombre : ''; ?>">
+                                 <input hidden type="text" name="categoria" value="<?php echo isset($categoria) ? $categoria : ''; ?>">
                                 <input hidden type="text" name="admin" value="1">
                             </form>
                         </div>
@@ -110,7 +112,7 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
 
         }
     </script>
-    <?php include 'blocks/bloquesJs.html' ?>
+    <?php include 'blocks/bloquesJs1.html' ?>
 
     <!--
 Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.

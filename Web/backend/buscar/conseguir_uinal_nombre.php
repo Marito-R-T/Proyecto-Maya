@@ -1,8 +1,8 @@
 <?php
 $fecha1 = new DateTime("1990-04-03");
-$fecha2 = new DateTime($_POST['fecha']);
+$fecha2 = new DateTime($fecha_consultar);
 $fecha_actual = strtotime(date("d-m-Y H:i:00", $fecha1->getTimestamp()));
-$fecha_entrada = strtotime($_POST['fecha']);
+$fecha_entrada = strtotime($fecha_consultar);
 $diff = $fecha1->diff($fecha2);
 $dias = $diff->days;
 $reversa = false;
@@ -33,12 +33,10 @@ if ($reversa) {
     }
 }
 
-$conn = include "../../conexion/conexion.php";
+
 $Query = $conn->query("SELECT nombre FROM uinal WHERE id=".$mes." ;");
 $row = mysqli_fetch_assoc($Query);
-$query = $row['nombre'];
-echo "Uinal ".$query;
-echo "\n";
-echo "Kin ".$dia;
+$uinal = $row['nombre']." ";
+return $uinal.strval($dia);
 
 ?>

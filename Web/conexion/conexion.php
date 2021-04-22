@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username_DB = "root";
-$password_DB = "Inegap11";
+$password_DB = "Inegap111220";
 $dbname = "tiempomaya";
 
 // Create connection

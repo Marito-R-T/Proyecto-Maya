@@ -1,7 +1,11 @@
-<?php session_start(); ?>
 <?php
 
-$conn = include 'conexion/conexion.php';
+use function PHPSTORM_META\type;
+
+session_start(); ?>
+<?php
+
+$conn = include '../conexion/conexion.php';
 $tabla = $_GET['elemento'];
 $table =strtolower($tabla);
 $datos = $conn->query("SELECT nombre,significado,htmlCodigo FROM tiempomaya." . $table . ";");
@@ -19,9 +23,9 @@ $informacion = $conn->query("SELECT htmlCodigo FROM tiempomaya.pagina WHERE nomb
     <meta charset="utf-8">
     <title>Tiempo Maya - <?php echo $tabla; ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <?php include "blocks/bloquesCss.html" ?>
-    <link rel="stylesheet" href="css/estilo.css?v=<?php echo (rand()); ?>" />
-    <link rel="stylesheet" href="css/paginaModelo.css?v=<?php echo (rand()); ?>" />
+    <?php include "../blocks/bloquesCss.html" ?>
+    <link rel="stylesheet" href="../css/estilo.css?v=<?php echo (rand()); ?>" />
+    <link rel="stylesheet" href="../css/paginaModelo.css?v=<?php echo (rand()); ?>" />
 
 
 </head>
@@ -79,10 +83,10 @@ $informacion = $conn->query("SELECT htmlCodigo FROM tiempomaya.pagina WHERE nomb
             <?php
             $stringPrint = " <div class='row' id='portafolio-wrapper'>";
             $filtro = str_replace(' ', '', $tabla);
-            $imgs = $conn->query("SELECT * FROM tiempomaya.imagen WHERE categoria like '" . $tabla . "%';");
+            $sql="SELECT * FROM tiempomaya.imagen WHERE categoria like '" . $tabla . "%';";
+            $imgs = $conn->query($sql);
             $stringPrint .= "<div class='col-lg-3 col-md-6 portafolio-item '>";
             foreach ($imgs as $img) {
-
                 $stringPrint .= "<a href=\"" . $img['data'] . "\"><img src=\"" . $img['data'] . "\" width=\"150%\" target='_blank'/>";
                 $stringPrint .= "<div class='details'>";
                 $stringPrint .= "<h4>" . $img['descripcion'] . "</h4>";
@@ -99,7 +103,7 @@ $informacion = $conn->query("SELECT htmlCodigo FROM tiempomaya.pagina WHERE nomb
         </div>
     </section>
 
-    <?php include "blocks/bloquesJs.html" ?>
+    <?php include "../blocks/bloquesJs.html" ?>
 
 
 

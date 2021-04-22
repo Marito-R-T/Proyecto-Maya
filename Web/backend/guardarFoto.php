@@ -1,5 +1,5 @@
 <?php 
-$url = "../perfil.php?";
+$url = "../perfil/perfil.php?";
 if (!(isset($_POST['path']))) {
     $mensaje = $mensaje . "'No hay cambios que guardar'";
 } else {

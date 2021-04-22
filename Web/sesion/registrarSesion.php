@@ -7,9 +7,9 @@
     <meta charset="utf-8">
     <title>Tiempo Maya - Registrarse</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <?php include "blocks/bloquesCss.html" ?>
-    <link rel="stylesheet" href="css/estilo.css?v=<?php echo (rand()); ?>" />
-    <link rel="stylesheet" href="css/registroSesion.css?v=<?php echo (rand()); ?>" />
+    <?php include "../blocks/bloquesCss.html" ?>
+    <link rel="stylesheet" href="../css/estilo.css?v=<?php echo (rand()); ?>" />
+    <link rel="stylesheet" href="../css/registroSesion.css?v=<?php echo (rand()); ?>" />
 
 </head>
 
@@ -22,7 +22,7 @@
                     <div class="image-holder">
                         <img src="img/icono.jpg" alt="">
                     </div>
-                    <form action="backend/registrarUsuario.php" method="POST">
+                    <form action="../backend/registrarUsuario.php" method="POST">
                         <h1>Registrarse</h1>
                         <div class="form-group d-flex justify-content-between">
                             <label for="nombre">Nombre</label>
@@ -77,7 +77,7 @@
             </div>
         </section>
     </div>
-    <?php include "blocks/bloquesJs.html" ?>
+    <?php include "../blocks/bloquesJs.html" ?>
 </body>
 
 </html>

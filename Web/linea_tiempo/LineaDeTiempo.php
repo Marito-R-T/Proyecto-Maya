@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php
 
-$conn = include 'conexion/conexion.php';
+$conn = include '../conexion/conexion.php';
 $periodos = $conn->query("SELECT nombre, concat( concat(fechaInicio,' ',ACInicio) ,' - ',concat(fechaFin,' ',ACFin) ) as fechaTotal,descripcion,orden FROM tiempomaya.periodo order by orden;");
 $acontecimientosL = $conn->query("SELECT a.*, concat(a.fechaInicio,' ', a.ACInicio ) as fechaI, concat(a.fechaFin,' ', a.ACFin ) as fechaF, p.orden FROM tiempomaya.acontecimiento as a INNER JOIN tiempomaya.periodo as p WHERE p.nombre = a.Periodo_nombre order by p.orden;");
 ?>
@@ -13,9 +13,9 @@ $acontecimientosL = $conn->query("SELECT a.*, concat(a.fechaInicio,' ', a.ACInic
   <meta charset="utf-8">
   <title>Tiempo Maya - Linea del Tiempo</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <?php include "blocks/bloquesCss.html" ?>
-  <link rel="stylesheet" href="css/estilo.css?v=<?php echo (rand()); ?>" />
-  <link rel="stylesheet" href="css/lineaTiempo.css?v=<?php echo (rand()); ?>" />
+  <?php include "../blocks/bloquesCss.html" ?>
+  <link rel="stylesheet" href="../css/estilo.css?v=<?php echo (rand()); ?>" />
+  <link rel="stylesheet" href="../css/lineaTiempo.css?v=<?php echo (rand()); ?>" />
 
 
 
@@ -36,7 +36,7 @@ $acontecimientosL = $conn->query("SELECT a.*, concat(a.fechaInicio,' ', a.ACInic
                     <h4 class="year"><?php echo $periodo['fechaTotal'] ?></h4>
                     <h2 class="title"><?php echo $periodo['nombre'] ?></h2>
                     <p><?php echo $periodo['descripcion'] ?></p>
-                    <form action="paginaModeloPeriodo.php" method="GET">
+                    <form action="../models/paginaModeloPeriodo.php" method="GET">
                     <input hidden name="periodo" value="<?php echo $periodo['nombre'] ?>">
                     <button class=" btn btn-get-started">Ver
                       <i class="far fa-eye"></i>
@@ -97,11 +97,11 @@ $acontecimientosL = $conn->query("SELECT a.*, concat(a.fechaInicio,' ', a.ACInic
   </div>
 
 
-  <?php include "blocks/bloquesJs.html" ?>
+  <?php include "../blocks/bloquesJs.html" ?>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
-  <script src="js/LineaTiempo.js"></script>
+  <script src="../js/LineaTiempo.js"></script>
 </body>
 
 </html>

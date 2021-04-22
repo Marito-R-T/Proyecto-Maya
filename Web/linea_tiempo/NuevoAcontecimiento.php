@@ -8,14 +8,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tiempo Maya - Acontecimiento</title>
-    <?php include "blocks/bloquesCss.html" ?>
-    <link rel="stylesheet" href="css/estilo.css?v=<?php echo (rand()); ?>" />
-    <link rel="stylesheet" href="css/registroSesion.css?v=<?php echo (rand()); ?>" />
-    <link rel="stylesheet" href="css/editarPerfil.css?v=<?php echo (rand()); ?>" />
+    <?php include "../blocks/bloquesCss.html" ?>
+    <link rel="stylesheet" href="../css/estilo.css?v=<?php echo (rand()); ?>" />
+    <link rel="stylesheet" href="../css/registroSesion.css?v=<?php echo (rand()); ?>" />
+    <link rel="stylesheet" href="../css/editarPerfil.css?v=<?php echo (rand()); ?>" />
 
 </head>
 <?php include "NavBar.php" ?>
-<?php include "backend/verificarSesion.php"?>
+<?php include "../backend/verificarSesion.php"?>
 
 <body>
     <div>
@@ -27,7 +27,7 @@
                             <img src="img/icono.jpg" style="padding-top: 30px;" class="rounded-circle" alt="tikal en animacion">
                         </div>
                     </div>
-                    <form action="backend/guardarAcontecimiento.php" method="POST">
+                    <form action="../backend/guardarAcontecimiento.php" method="POST">
                         <h1>Acontecimiento</h1>
                         <div class="form-group">
                             <label for="nombre">Titulo</label>
@@ -85,7 +85,7 @@
         </section>
     </div>
 
-    <?php include "blocks/bloquesJs.html" ?>
+    <?php include "../blocks/bloquesJs.html" ?>
 
 
 </body>

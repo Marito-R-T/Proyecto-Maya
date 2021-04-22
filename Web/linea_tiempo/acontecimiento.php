@@ -3,8 +3,8 @@
 
 if(isset($_GET['categoria'])){
     $categoria = $_GET['categoria'];
-    $connection = include 'conexion/conexion.php';
-    $acontecimiento_info = $connection->query("SELECT a.* , u.nombre , u.apellido, concat(a.fechaInicio,' ', a.ACInicio ) as fechaI, concat(a.fechaFin,' ', a.ACFin ) as fechaF FROM tiempomaya.acontecimiento as a INNER JOIN tiempomaya.usuario as u ON u.usuario=a.autor WHERE a.categoria='" . $categoria . "';");
+    $connection = include '../conexion/conexion.php';
+    $acontecimiento_info = $connection->query("SELECT a.* , u.nombre , u.apellido, concat(a.fechaInicio,' ', a.ACInicio ) as fechaI, concat(a.fechaFin,' ', a.ACFin ) as fechaF, u.usuario, a.id as idAcon FROM tiempomaya.acontecimiento as a INNER JOIN tiempomaya.usuario as u ON u.usuario=a.autor WHERE a.categoria='" . $categoria . "';");
     if ($acontecimiento_info->num_rows == 1) {
       $acontecimiento = mysqli_fetch_assoc($acontecimiento_info);
     }
@@ -14,7 +14,7 @@ if(isset($_GET['categoria'])){
     
     $connection->close();
 }else{
-    header('location: index.php');
+    header('location: ../index.php');
 }
 
 ?>
@@ -26,9 +26,9 @@ if(isset($_GET['categoria'])){
     <meta charset="utf-8">
     <title>Tiempo Maya - Registrarse</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <?php include "blocks/bloquesCss.html" ?>
-    <link rel="stylesheet" href="css/estilo.css?v=<?php echo (rand()); ?>" />
-    <link rel="stylesheet" href="css/acontecimiento.css?v=<?php echo (rand()); ?>" />
+    <?php include "../blocks/bloquesCss.html" ?>
+    <link rel="stylesheet" href="../css/estilo.css?v=<?php echo (rand()); ?>" />
+    <link rel="stylesheet" href="../css/acontecimiento.css?v=<?php echo (rand()); ?>" />
 
 </head>
 
@@ -49,7 +49,7 @@ if(isset($_GET['categoria'])){
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img class="d-block" src="img/icono.jpg" width="300" height="300" alt="Imagen 1">
+                                    <img class="d-block" src="../img/icono.jpg" width="300" height="300" alt="Imagen 1">
                                 </div>
                                 <?php foreach($imagens as $img){?>
                                     <div class="carousel-item">
@@ -69,13 +69,23 @@ if(isset($_GET['categoria'])){
                         <label>Descripcion: </label> <br>
                         <p><?php echo $acontecimiento['htmlCodigo'];?></p> <br>
                         <div> <label style="font-size: 10px;">Autor:  <?php echo $acontecimiento['nombre']." ".$acontecimiento['apellido'];?></label></div>
+                        <?php 
+                            
+                            if($_SESSION['usuario']==$acontecimiento['usuario']){
+                                ?>
+                                <a href="./editarAcontecimiento.php?id=<?php echo $acontecimiento['idAcon'];?>" target="_blank" >Editar</a>
+                                <?php
+                            }
+                            
+                            
+                        ?>
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <?php include "blocks/bloquesJs.html" ?>
+    <?php include "../blocks/bloquesJs.html" ?>
 
 </body>
 

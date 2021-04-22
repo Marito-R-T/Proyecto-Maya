@@ -21,7 +21,7 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <ul class="navbar-nav nav-menu">
             <li>
-              <a class="nav-link" href="paginaModelo.php?pagina=Calendario Haab">Calendario Haab &nbsp;&nbsp;&nbsp;&nbsp; </a>
+              <a class="nav-link" href="models/paginaModelo.php?pagina=Calendario Haab">Calendario Haab &nbsp;&nbsp;&nbsp;&nbsp; </a>
               <button type="button" style="opacity: 0; height: 0;" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Calendario Haab
               </button>
@@ -35,7 +35,7 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <div div style="width: 200px; height: 400px; overflow-y: scroll;">
                       <?php foreach ($uinalesNav as $uinal) {
-                        echo "<li class='nav-item'><a class='nav-link' href='paginaModeloElemento.php?elemento=uinal#" . $uinal['nombre'] . "'>" . $uinal['nombre'] . "</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloElemento.php?elemento=uinal#" . $uinal['nombre'] . "'>" . $uinal['nombre'] . "</a></li>";
                       } ?>
                   </ul>
                 </li>
@@ -43,7 +43,7 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
             </li>
 
             <li>
-              <a class="nav-link" href="paginaModelo.php?pagina=Calendario Cholquij">Calendario Cholquij &nbsp;&nbsp;&nbsp;&nbsp; </a>
+              <a class="nav-link" href="models/paginaModelo.php?pagina=Calendario Cholquij">Calendario Cholquij &nbsp;&nbsp;&nbsp;&nbsp; </a>
               <button type="button" style="opacity: 0; height: 0;" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Calendario Cholquij
               </button>
@@ -57,7 +57,7 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <div div style="width: 200px; height: 400px; overflow-y: scroll;">
                       <?php foreach ($nahualesNav as $nahual) {
-                        echo "<li class='nav-item'><a class='nav-link' href='paginaModeloElemento.php?elemento=nahual#" . $nahual['nombre'] . "'>" . $nahual['nombre'] . "</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloElemento.php?elemento=nahual#" . $nahual['nombre'] . "'>" . $nahual['nombre'] . "</a></li>";
                       } ?>
                     </div>
                   </ul>
@@ -70,7 +70,7 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <div div style="width: 200px; height:400px; overflow-y: scroll;">
                       <?php foreach ($energiasNav as $energia) {
-                        echo "<li class='nav-item'><a class='nav-link' href='paginaModeloElemento.php?elemento=energia#" . $energia['nombre'] . "'>" . $energia['nombre'] . "</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloElemento.php?elemento=energia#" . $energia['nombre'] . "'>" . $energia['nombre'] . "</a></li>";
                       } ?>
                     </div>
                   </ul>
@@ -78,17 +78,17 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="paginaModelo.php?pagina=Rueda Calendarica">Rueda Calendarica</a>
+              <a class="nav-link" href="models/paginaModelo.php?pagina=Rueda Calendarica">Rueda Calendarica</a>
             </li>
             <li>
-              <a class="nav-link" href="LineaDeTiempo.php">Linea del Tiempo &nbsp;&nbsp;&nbsp;&nbsp; </a>
+              <a class="nav-link" href="linea_tiempo/LineaDeTiempo.php">Linea del Tiempo &nbsp;&nbsp;&nbsp;&nbsp; </a>
               <button type="button" style="opacity: 0; height: 0;" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Linea del Tiempo
               </button>
 
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <?php if (isset($_SESSION['usuario'])) {
-                  echo " <li class='nav-item'><a class='nav-link' href='NuevoAcontecimiento.php'>Agregar Nuevo Acontecimiento</a></li>";
+                  echo " <li class='nav-item'><a class='nav-link' href='linea_tiempo/NuevoAcontecimiento.php'>Agregar Nuevo Acontecimiento</a></li>";
 
                 } ?>
                 <li>
@@ -98,23 +98,24 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
                   <a class="nav-link" href="#" style="font-size: 13px;">Periodos </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <?php foreach ($periodosNav as $periodo) {
-                      echo "<li class='nav-item'><a class='nav-link' href='paginaModeloPeriodo.php?n=" . $periodo['nombre'] . "'>" . $periodo['nombre'] . "</a></li>";
+                      echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloPeriodo.php?n=" . $periodo['nombre'] . "'>" . $periodo['nombre'] . "</a></li>";
                     } ?>
                   </ul>
                 </li>
-
+               
               </ul>
             </li>
+            <li class="nav-item"><a class="nav-link" href="calculadora.php">Calculadora</a></li>
             <?php
             if (isset($_SESSION['usuario'])) {
               if (isset($_SESSION['admin'])) {
                 echo '<li class="nav-item"><a class="nav-link" href="administracion.php">Administrar</a></li>';
               }
-              echo '<li class="nav-item"><a class="nav-link" href="perfil.php">Tu Perfil</a></li>';
-              echo '<li class="nav-item"><a class="nav-link" href="cerrarSesion.php">Cerrar Sesion</a></li>';
+              echo '<li class="nav-item"><a class="nav-link" href="perfil/perfil.php">Tu Perfil</a></li>';
+              echo '<li class="nav-item"><a class="nav-link" href="./sesion/cerrarSesion.php">Cerrar Sesion</a></li>';
             } else {
-              echo '<li class="nav-item"><a class="nav-link" href="iniciarSesion.php">Iniciar Sesion</a></li>
-            <li class="nav-item"><a class="nav-link" href="registrarSesion.php">Registrarse</a></li>';
+              echo '<li class="nav-item"><a class="nav-link" href="./sesion/iniciarSesion.php">Iniciar Sesion</a></li>
+            <li class="nav-item"><a class="nav-link" href="./sesion/registrarSesion.php">Registrarse</a></li>';
             }
             ?>
           </ul>
