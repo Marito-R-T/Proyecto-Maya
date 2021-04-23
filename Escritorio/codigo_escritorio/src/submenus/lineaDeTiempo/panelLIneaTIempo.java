@@ -5,6 +5,7 @@
  */
 package submenus.lineaDeTiempo;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -34,7 +35,7 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
      */
     public panelLIneaTIempo(Usuario usuarioL) {
         initComponents();
-
+        panelTitulo.setBackground(new Color(255,255,255,100));
         this.usuario = usuarioL;
         obtenerHechos();
         addPrimerHecho();
@@ -90,10 +91,11 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
         panelPrincipal = new javax.swing.JPanel();
         botonAtrAas = new javax.swing.JButton();
         btnAdelante = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         botonAgregarEvento = new javax.swing.JButton();
         eliminarEvento = new javax.swing.JButton();
         editarElemento = new javax.swing.JButton();
+        panelTitulo = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -131,7 +133,6 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
         botonAtrAas.setFont(new java.awt.Font("Lobster", 1, 36)); // NOI18N
         botonAtrAas.setBorder(null);
         botonAtrAas.setEnabled(false);
-        botonAtrAas.setOpaque(false);
         botonAtrAas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAtrAasActionPerformed(evt);
@@ -141,20 +142,15 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
         btnAdelante.setBackground(new java.awt.Color(153, 204, 255));
         btnAdelante.setFont(new java.awt.Font("Lobster", 1, 36)); // NOI18N
         btnAdelante.setBorder(null);
-        btnAdelante.setOpaque(false);
         btnAdelante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdelanteActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Jenna Sue", 1, 75)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 153));
-        jLabel1.setText("Linea De Tiempo");
-
-        botonAgregarEvento.setBackground(new java.awt.Color(0, 102, 102));
-        botonAgregarEvento.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
-        botonAgregarEvento.setForeground(new java.awt.Color(255, 255, 255));
+        botonAgregarEvento.setBackground(new java.awt.Color(45, 201, 151));
+        botonAgregarEvento.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
+        botonAgregarEvento.setForeground(new java.awt.Color(0, 0, 0));
         botonAgregarEvento.setText("Agregar Evento");
         botonAgregarEvento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonAgregarEvento.addActionListener(new java.awt.event.ActionListener() {
@@ -163,9 +159,9 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
             }
         });
 
-        eliminarEvento.setBackground(new java.awt.Color(0, 102, 102));
-        eliminarEvento.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
-        eliminarEvento.setForeground(new java.awt.Color(255, 255, 255));
+        eliminarEvento.setBackground(new java.awt.Color(45, 201, 151));
+        eliminarEvento.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
+        eliminarEvento.setForeground(new java.awt.Color(0, 0, 0));
         eliminarEvento.setText("Eliminar Evento");
         eliminarEvento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         eliminarEvento.addActionListener(new java.awt.event.ActionListener() {
@@ -174,9 +170,9 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
             }
         });
 
-        editarElemento.setBackground(new java.awt.Color(0, 102, 102));
-        editarElemento.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
-        editarElemento.setForeground(new java.awt.Color(255, 255, 255));
+        editarElemento.setBackground(new java.awt.Color(45, 201, 151));
+        editarElemento.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
+        editarElemento.setForeground(new java.awt.Color(0, 0, 0));
         editarElemento.setText("Editar Evento");
         editarElemento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         editarElemento.addActionListener(new java.awt.event.ActionListener() {
@@ -184,6 +180,27 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
                 editarElementoActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Jenna Sue", 1, 75)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(112, 54, 139));
+        jLabel1.setText("Linea De Tiempo");
+
+        javax.swing.GroupLayout panelTituloLayout = new javax.swing.GroupLayout(panelTitulo);
+        panelTitulo.setLayout(panelTituloLayout);
+        panelTituloLayout.setHorizontalGroup(
+            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTituloLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
+        );
+        panelTituloLayout.setVerticalGroup(
+            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -204,15 +221,15 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
                         .addComponent(botonAgregarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(4, 4, 4))
             .addGroup(layout.createSequentialGroup()
-                .addGap(298, 298, 298)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1)
+                .addGap(28, 28, 28)
+                .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -341,5 +358,6 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelTitulo;
     // End of variables declaration//GEN-END:variables
 }

@@ -117,7 +117,7 @@ public class menuPerfil extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1100, 550));
 
         jLabel1.setFont(new java.awt.Font("Jenna Sue", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
+        jLabel1.setForeground(new java.awt.Color(101, 58, 139));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Perfil de Usuario");
 
@@ -128,7 +128,7 @@ public class menuPerfil extends javax.swing.JPanel {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addComponent(iconoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 893, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,19 +136,19 @@ public class menuPerfil extends javax.swing.JPanel {
             .addComponent(iconoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
         );
 
-        lbl2.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        lbl2.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
         lbl2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl2.setText("Nombre");
 
-        lbl3.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        lbl3.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
         lbl3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3.setText("Apellido");
 
-        lbl4.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        lbl4.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
         lbl4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl4.setText("Nacimiento");
 
-        btnEditarPerfil.setBackground(new java.awt.Color(255, 153, 0));
+        btnEditarPerfil.setBackground(new java.awt.Color(45, 201, 151));
         btnEditarPerfil.setFont(new java.awt.Font("Lobster", 0, 18)); // NOI18N
         btnEditarPerfil.setText("Editar Perfil");
         btnEditarPerfil.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -158,7 +158,7 @@ public class menuPerfil extends javax.swing.JPanel {
             }
         });
 
-        lbl5.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        lbl5.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
         lbl5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl5.setText("Telefono");
 
@@ -193,17 +193,17 @@ public class menuPerfil extends javax.swing.JPanel {
             }
         });
 
-        lbl7.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        lbl7.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
         lbl7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl7.setText("Correo");
 
-        lbl8.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        lbl8.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
         lbl8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl8.setText("Username");
 
         txtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        lbl9.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        lbl9.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
         lbl9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl9.setText("Password");
 
@@ -217,7 +217,8 @@ public class menuPerfil extends javax.swing.JPanel {
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,12 +244,8 @@ public class menuPerfil extends javax.swing.JPanel {
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtEmail)
                             .addComponent(txtPassword)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
-                        .addContainerGap(59, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(151, 151, 151))))
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,11 +298,14 @@ public class menuPerfil extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
