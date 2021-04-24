@@ -67,6 +67,8 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
                                 <button class="btn btn-get-started" type="submit" >Subir Fotos <i class="far fa-save"></i></button>
                                 <input hidden type="text" name="nombre" value="<?php echo isset($nombre) ? $nombre : ''; ?>">
                                 <input hidden type="text" name="admin" value="1">
+                                <input hidden type="text" name="categoria" value="<?php echo isset($categoria) ? $categoria : ''; ?>">
+                         
                             </form>
                         </div>
                     </div>
