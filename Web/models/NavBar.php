@@ -98,7 +98,7 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
                   <a class="nav-link" href="#" style="font-size: 13px;">Periodos </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <?php foreach ($periodosNav as $periodo) {
-                      echo "<li class='nav-item'><a class='nav-link' href='paginaModeloPeriodo.php?n=" . $periodo['nombre'] . "'>" . $periodo['nombre'] . "</a></li>";
+                      echo "<li class='nav-item'><a class='nav-link' href='paginaModeloPeriodo.php?periodo=" . $periodo['nombre'] . "'>" . $periodo['nombre'] . "</a></li>";
                     } ?>
                   </ul>
                 </li>

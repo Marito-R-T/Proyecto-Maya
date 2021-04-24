@@ -2,8 +2,9 @@
 <?php
 
 $conn = include '../conexion/conexion.php';
-$periodoP = $_GET['n'];
+$periodoP = $_GET['periodo'];
 $infos = $conn->query("SELECT * FROM tiempomaya.periodo WHERE nombre = '".$periodoP."';");
+//  echo "SELECT * FROM tiempomaya.periodo WHERE nombre = '".$periodoP."';";
 $info = mysqli_fetch_assoc($infos);
 
 
