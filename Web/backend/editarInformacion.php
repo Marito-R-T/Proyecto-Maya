@@ -39,9 +39,9 @@ if (isset($_POST['tabla']) && isset($_POST['nombre'])) {
         $mensaje = "mensaje=La informacion no se pudo actualizar";
     }
     $conn->close();
- // header('location: ../administracion.php?'.$mensaje);
+ header('location: ../administracion.php?'.$mensaje);
 } else {
- //header('location: ../administracion.php?mensaje=Error en actualizar informacion');
+header('location: ../administracion.php?mensaje=Error en actualizar informacion');
 }
 
 function deleteDirectory($dir)

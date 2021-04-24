@@ -1,3 +1,14 @@
+p{
+  margin: 10px;
+}
+
+h5{
+  color: cadetblue;
+}
+#information{
+  padding-top: 20px;
+}
+
 #portafolio {
   background: #f7f7f7;
   padding: 80px 0;

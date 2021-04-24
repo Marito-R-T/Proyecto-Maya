@@ -20,7 +20,7 @@ if ($acontecimiento_info->num_rows == 1) {
 </head>
 
 <body>
-    <?php include "NavBar.php" ?>
+    <?php include "../NavBar2.php" ?>
     <div>
         <section id="inicio">
             <div id="inicioContainer" class="inicio-container">

@@ -60,8 +60,8 @@ $array = "";
                                 <i class="far fa-save"></i>
                             </button>
                             <div>
-                                <input type="text" name="auxArray" id="auxArray" hidden value="<?php echo $array ?>">
-                                <input type="text" name="categoria" hidden value="<?php echo $nombre      ?>">                                                                                         
+                                <input type="text" name="auxArray" id="auxArray" hidden value="<?php echo isset($array) ? $array : ''; ?>">
+                                <input type="text" name="categoria" hidden value="<?php echo isset($nombre) ? $nombre : ''; ?>">                                                                                         
                         </div>
                     </form>
                 </div>

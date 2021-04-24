@@ -1,6 +1,7 @@
 <?php
 
 $conn = include 'conexion/conexion.php';
+$kinesNav = $conn->query("SELECT nombre FROM tiempomaya.kin order by nombre;");
 $uinalesNav = $conn->query("SELECT nombre FROM tiempomaya.uinal order by nombre;");
 $nahualesNav = $conn->query("SELECT nombre FROM tiempomaya.nahual order by nombre;");
 $energiasNav = $conn->query("SELECT nombre FROM tiempomaya.energia order by id;");
@@ -29,13 +30,31 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li>
                   <button type="button" style="opacity: 0; height: 0;" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Kin
+                  </button>
+                  <a class="nav-link" href="#" style="font-size: 13px;">Kines </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div div style="width: 200px; height: 400px; overflow-y: scroll;">
+                      <?php
+
+                      if (is_array($kinesNav) || is_object($kinesNav)) {
+                        foreach ($kinesNav as $kin) {
+                          echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloElemento.php?elemento=kin#" . $kin['nombre'] . "'>" . $kin['nombre'] . "</a></li>";
+                        }
+                      } ?>
+                  </ul>
+                </li>
+                <li>
+                  <button type="button" style="opacity: 0; height: 0;" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Uinal
                   </button>
                   <a class="nav-link" href="#" style="font-size: 13px;">Uniales </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <div div style="width: 200px; height: 400px; overflow-y: scroll;">
-                      <?php foreach ($uinalesNav as $uinal) {
-                        echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloElemento.php?elemento=uinal#" . $uinal['nombre'] . "'>" . $uinal['nombre'] . "</a></li>";
+                      <?php if (is_array($uinalesNav) || is_object($uinalesNav)) {
+                        foreach ($uinalesNav as $uinal) {
+                          echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloElemento.php?elemento=uinal#" . $uinal['nombre'] . "'>" . $uinal['nombre'] . "</a></li>";
+                        }
                       } ?>
                   </ul>
                 </li>
@@ -56,8 +75,10 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
                   <a class="nav-link" href="#" style="font-size: 13px;">Nahuales </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <div div style="width: 200px; height: 400px; overflow-y: scroll;">
-                      <?php foreach ($nahualesNav as $nahual) {
-                        echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloElemento.php?elemento=nahual#" . $nahual['nombre'] . "'>" . $nahual['nombre'] . "</a></li>";
+                      <?php if (is_array($nahualesNav) || is_object($nahualesNav)) {
+                        foreach ($nahualesNav as $nahual) {
+                          echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloElemento.php?elemento=nahual#" . $nahual['nombre'] . "'>" . $nahual['nombre'] . "</a></li>";
+                        }
                       } ?>
                     </div>
                   </ul>
@@ -69,8 +90,10 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
                   <a class="nav-link" href="#" style="font-size: 13px;">Energias </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <div div style="width: 200px; height:400px; overflow-y: scroll;">
-                      <?php foreach ($energiasNav as $energia) {
-                        echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloElemento.php?elemento=energia#" . $energia['nombre'] . "'>" . $energia['nombre'] . "</a></li>";
+                      <?php if (is_array($energiasNav) || is_object($energiasNav)) {
+                        foreach ($energiasNav as $energia) {
+                          echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloElemento.php?elemento=energia#" . $energia['nombre'] . "'>" . $energia['nombre'] . "</a></li>";
+                        }
                       } ?>
                     </div>
                   </ul>
@@ -89,7 +112,6 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <?php if (isset($_SESSION['usuario'])) {
                   echo " <li class='nav-item'><a class='nav-link' href='linea_tiempo/NuevoAcontecimiento.php'>Agregar Nuevo Acontecimiento</a></li>";
-
                 } ?>
                 <li>
                   <button type="button" style="opacity: 0; height: 0;" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,12 +119,14 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
                   </button>
                   <a class="nav-link" href="#" style="font-size: 13px;">Periodos </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <?php foreach ($periodosNav as $periodo) {
-                      echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloPeriodo.php?periodo=" . $periodo['nombre'] . "'>" . $periodo['nombre'] . "</a></li>";
+                    <?php if (is_array($periodosNav) || is_object($periodosNav)) {
+                      foreach ($periodosNav as $periodo) {
+                        echo "<li class='nav-item'><a class='nav-link' href='models/paginaModeloPeriodo.php?periodo=" . $periodo['nombre'] . "'>" . $periodo['nombre'] . "</a></li>";
+                      }
                     } ?>
                   </ul>
                 </li>
-               
+
               </ul>
             </li>
             <li class="nav-item"><a class="nav-link" href="calculadora.php">Calculadora</a></li>

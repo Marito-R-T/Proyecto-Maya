@@ -40,7 +40,7 @@ $cholquij = $nahual." ". strval($energia);
                     <form action="#" method="GET">
                         <div class="mb-1">
                             <label for="fecha" class="form-label">Fecha</label>
-                            <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $fecha_consultar?>" >
+                            <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo isset($fecha_consultar) ? $fecha_consultar : ''; ?>" >
                         </div>
                         <button type="submit" class="btn btn-get-started"><i class="far fa-clock"></i> Calcular</button>
                     </form>

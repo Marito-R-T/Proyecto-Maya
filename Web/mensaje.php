@@ -22,7 +22,7 @@ $(document).ready(function(){const valores = window.location.search;
         </button>
       </div>
       <div class="modal-body">
-        <?php  echo $_GET['mensaje']; ?>
+        <?php  echo isset($_GET['mensaje']) ? $_GET['mensaje'] : ''; ?>
       </div>
       <div class="modal-footer">
         <button class="btn btn-get-started" onclick=cerrar()>Cerrar</button>

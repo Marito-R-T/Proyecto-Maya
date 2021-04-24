@@ -20,10 +20,10 @@ if ($connection->query($sql)) {
         $mensaje = "mensaje=Informacion actualizada con exito";
 
     }else{
-        $mensaje = "mensaje='No se pudo actualizar las fotos'";
+        $mensaje = "mensaje=No se pudo actualizar las fotos";
     }
 } else {
-    $mensaje = "mensaje='No se pudo actualizar la informacion'";
+    $mensaje = "mensaje=No se pudo actualizar las ftoso";
 }
 
 $connection->close();

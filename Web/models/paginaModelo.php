@@ -24,7 +24,7 @@ $elementos = $conn->query("SELECT nombre FROM tiempomaya.pagina WHERE categoria=
 
 
 </head>
-<?php include "NavBar.php" ?>
+<?php include "../NavBar2.php" ?>
 
 <body>
     <section id="inicio">

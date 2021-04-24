@@ -4,7 +4,6 @@
 $conn = include '../conexion/conexion.php';
 $periodoP = $_GET['periodo'];
 $infos = $conn->query("SELECT * FROM tiempomaya.periodo WHERE nombre = '".$periodoP."';");
-//  echo "SELECT * FROM tiempomaya.periodo WHERE nombre = '".$periodoP."';";
 $info = mysqli_fetch_assoc($infos);
 
 
@@ -24,7 +23,7 @@ $info = mysqli_fetch_assoc($infos);
 
 
 </head>
-<?php include "NavBar.php" ?>
+<?php include "../NavBar2.php" ?>
 
 <body>
     <section id="inicio">
