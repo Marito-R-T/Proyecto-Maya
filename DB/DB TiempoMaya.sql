@@ -1,144 +1,164 @@
-CREATE DATABASE IF NOT EXISTS TiempoMaya;
-USE TiempoMaya;
+CREATE DATABASE IF NOT EXISTS tiempomaya;
+USE tiempomaya;
 
-CREATE TABLE Rol (
+DROP TABLE IF EXISTS rol; 
+CREATE TABLE rol (
  	id_rol INT NOT NULL AUTO_INCREMENT,
  	nombre VARCHAR (50),
  	descripcion VARCHAR (250),
  	CONSTRAINT PK_ID_ROL PRIMARY KEY (id_rol)
 );
 
-CREATE TABLE Usuario (
+DROP TABLE IF EXISTS usuario;
+CREATE TABLE usuario (
  	usuario VARCHAR (40) NOT NULL,
  	password VARCHAR (200) NOT NULL,
  	nombre VARCHAR (50) NOT NULL,
  	apellido VARCHAR (50) NOT NULL,
  	correo VARCHAR (100) NOT NULL,
- 	nacimiento DATE,
+ 	fechaNacimiento DATE,
  	telefono BIGINT,
  	imagen  LONGTEXT,
  	id_rol  INT NOT NULL,
- 	CONSTRAINT PK_USUARIO PRIMARY KEY(usuario),
- 	CONSTRAINT FK_USUARIO_ID_ROL FOREIGN KEY (id_rol) REFERENCES Rol (id_rol)
+ 	CONSTRAINT PK_USUARIO PRIMARY KEY(correo),
+ 	UNIQUE KEY usuario_UNIQUE (usuario),
+ 	CONSTRAINT FK_USUARIO_ID_ROL FOREIGN KEY (id_rol) REFERENCES rol (id_rol)
 );
 
-CREATE TABLE Periodo (
+DROP TABLE IF EXISTS administrador;
+CREATE TABLE administrador (
+	password varchar(200) NOT NULL,
+	correo varchar(100) NOT NULL,
+	CONSTRAINT PK_ADMIN PRIMARY KEY (correo),
+	CONSTRAINT FK_ADMIN_CORREO FOREIGN KEY (correo) REFERENCES usuario (correo)
+);
+
+DROP TABLE IF EXISTS categoria;
+CREATE TABLE categoria (
+	nombre VARCHAR (100) NOT NULL, 
+	CONSTRAINT PK_CATEGORIA PRIMARY KEY (nombre)
+);
+
+DROP TABLE IF EXISTS periodo;
+CREATE TABLE periodo (
+	categoria VARCHAR (100) NOT NULL,
  	-- Orden en WEB
- 	id_periodo INT NOT NULL AUTO_INCREMENT,
+ 	orden INT DEFAULT NULL,
  	nombre  VARCHAR (50) NOT NULL,
- 	fecha_inicio  DATE NOT NULL,
- 	fecha_fin DATE NOT NULL,
- 	ac_inicio VARCHAR (3),
- 	ac_fin  VARCHAR (3),
+ 	fechaInicio  DATE NOT NULL,
+ 	fechaFin DATE NOT NULL,
+ 	ACInicio VARCHAR (3),
+ 	ACFin  VARCHAR (3),
  	descripcion VARCHAR (250),
- 	html_codigo LONGTEXT,
- 	CONSTRAINT PK_PERIODO PRIMARY KEY (id_periodo)
+ 	htmlCodigo LONGTEXT,
+ 	CONSTRAINT PK_PERIODO PRIMARY KEY (nombre), 
+ 	CONSTRAINT FK_PERIODO_CATG FOREIGN KEY (categoria) REFERENCES categoria (nombre)
 );
 
-CREATE TABLE HechoHistorico (
-	 id_hecho_historico INT NOT NULL AUTO_INCREMENT,
-	 titulo   VARCHAR (150) NOT NULL,
+DROP TABLE IF EXISTS acontecimiento; 
+CREATE TABLE acontecimiento (
+	 id INT NOT NULL AUTO_INCREMENT,
+	 titulo   VARCHAR (100) NOT NULL,
 	 autor   VARCHAR (20),
-	 fecha_inicio  DATE NOT NULL,
-	 fecha_fin  DATE NOT NULL,
-	 ac_inicio  VARCHAR (3),
-	 ac_fin   VARCHAR (3),
-	 id_periodo  INT,
-	 CONSTRAINT PK_HECHO_HISTORICO PRIMARY KEY (id_hecho_historico),
-	 CONSTRAINT FR_HH_ID_P FOREIGN KEY (id_periodo) REFERENCES Periodo (id_periodo)
+	 Periodo_nombre VARCHAR (50) NOT NULL,
+	 htmlCodigo MEDIUMTEXT NOT NULL,
+	 categoria VARCHAR (100) NOT NULL,
+	 fechaInicio  DATE NOT NULL,
+	 fechaiFn  DATE NOT NULL,
+	 ACInicio  VARCHAR (3),
+	 ACFin   VARCHAR (3),
+	 CONSTRAINT PK_HECHO_HISTORICO PRIMARY KEY (id),
+	 CONSTRAINT FK_HH_ID_P FOREIGN KEY (Periodo_nombre) REFERENCES periodo (nombre),
+	 CONSTRAINT FK_HH_CATG FOREIGN KEY (categoria) REFERENCES categoria (nombre),
+	 CONSTRAINT FK_HH_USUARIO FOREIGN KEY (autor) REFERENCES usuario (usuario)
 );
 
-CREATE TABLE Imagen (
-	 id_imagen   INT NOT NULL AUTO_INCREMENT,
-	 ruta_escritorio VARCHAR (250),
-	 ruta_web VARCHAR (250),
-	 CONSTRAINT PK_IMAGEN PRIMARY KEY (id_imagen)
+DROP TABLE IF EXISTS imagen;
+CREATE TABLE imagen (
+	 nombre VARCHAR (25) NOT NULL,
+	 descripcion VARCHAR (45) DEFAULT NULL,
+	 categoria VARCHAR (100) NOT NULL,
+	 rutaEscritorio VARCHAR (250),
+	 data LONGTEXT,
+	 CONSTRAINT PK_IMAGEN PRIMARY KEY (nombre),
+	 CONSTRAINT FK_IMAGEN_CAT FOREIGN KEY (categoria) REFERENCES categoria (nombre)
 );
 
-CREATE TABLE Nahual (
-	 id_nahual INT NOT NULL,
-	 nombre_yucateco VARCHAR (50) NOT NULL,
-	 nombre_quiche  VARCHAR (50) NOT NULL,
-	 signigicado  VARCHAR (100),
-	 descripcion_escritorio VARCHAR (5000),
+DROP TABLE IF EXISTS nahual;
+CREATE TABLE nahual (
+	 id INT NOT NULL,
+	 nombre VARCHAR (20) NOT NULL,
+	 nombreYucateco VARCHAR (50),
+	 nombreQuiche  VARCHAR (50),
+	 signigicado  VARCHAR (100) NOT NULL,
+	 categoria VARCHAR (100) NOT NULL,
 	 -- HTML Codigo Nahual
-	 html_codigo  LONGTEXT,
-	 fecha_inicio  DATE,
-	 fecha_fin  DATE,
-	 CONSTRAINT PK_NAHUAL PRIMARY KEY (id_nahual)
+	 htmlCodigo  LONGTEXT,
+	 fechaInicio  DATE,
+	 fechaFin  DATE,
+	 CONSTRAINT PK_NAHUAL PRIMARY KEY (id), 
+	 CONSTRAINT FK_NAHUAL_CATG FOREIGN KEY (categoria) REFERENCES categoria (nombre)
 );
 
-CREATE TABLE Energia (
-	 id_energia  INT NOT NULL,
-	 nombre   VARCHAR (25),
+DROP TABLE IF EXISTS energia;
+CREATE TABLE energia (
+	 id INT NOT NULL,
+	 nombre   VARCHAR (25) NOT NULL,
+	 significado  VARCHAR (45) NOT NULL,
+	 htmlCodigo  VARCHAR (45) NOT NULL,
+	 nombreYucateco VARCHAR (30) NOT NULL,
+	 categoria VARCHAR (100) NOT NULL, 
+	 CONSTRAINT PK_ENERGIA PRIMARY KEY (id),
+	 CONSTRAINT FK_ENERGIA_CATG FOREIGN KEY (categoria) REFERENCES categoria (nombre)
+);
+
+
+DROP TABLE IF EXISTS uinal;
+CREATE TABLE uinal (
+	 id  INT NOT NULL,
+	 nombre   VARCHAR (25) NOT NULL,
+	 significado  VARCHAR (45) NOT NULL,
+	 categoria VARCHAR (100) NOT NULL, 
+	 dias INT,
+	 htmlCodigo  MEDIUMTEXT,
+	 CONSTRAINT PK_UINAL PRIMARY KEY (id),
+	 CONSTRAINT FK_UINAL_CATG FOREIGN KEY (categoria) REFERENCES categoria (nombre)
+);
+
+DROP TABLE IF EXISTS kin;
+CREATE TABLE kin (
+	 id INT NOT NULL,
+	 nombre VARCHAR (25),
 	 significado  VARCHAR (45),
-	 html_codigo  VARCHAR (45),
-	 CONSTRAINT PK_ENERGIA PRIMARY KEY (id_energia)
+	 htmlCodigo  VARCHAR (45),
+	 CONSTRAINT PK_KIN PRIMARY KEY (id)
 );
 
-CREATE TABLE Uinal (
-	 id_uinal  INT NOT NULL,
-	 nombre   VARCHAR (25),
-	 significado  VARCHAR (45),
-	 dias   INT,
-	 html_codigo  MEDIUMTEXT,
-	 CONSTRAINT PK_UINAL PRIMARY KEY (id_uinal)
-);
-
-CREATE TABLE Kin (
-	 id_kin   INT NOT NULL,
-	 nombre   VARCHAR (25),
-	 significado  VARCHAR (45),
-	 html_codigo  VARCHAR (45),
-	 CONSTRAINT PK_KIN PRIMARY KEY (id_kin)
-);
-
-CREATE TABLE Pagina (
+DROP TABLE IF EXISTS pagina;
+CREATE TABLE pagina (
 	 orden  INT NOT NULL,
-	 nombre  VARCHAR (30),
-	 seccion VARCHAR (45),
-	 html_codigo LONGTEXT,
-	 CONSTRAINT PK_PAGINA PRIMARY KEY (orden)
+	 nombre  VARCHAR (30) NOT NULL,
+	 categoria VARCHAR (100) NOT NULL,
+	 seccion VARCHAR (45) DEFAULT NULL,
+	 htmlCodigo LONGTEXT,
+	 CONSTRAINT PK_PAGINA PRIMARY KEY (nombre, categoria),
+	 CONSTRAINT FK_PAGINA_CATG FOREIGN KEY (categoria) REFERENCES categoria (nombre)
 );
 
-CREATE TABLE CategoriaCalendario (
+DROP TABLE IF EXISTS categoriacalendario; 
+CREATE TABLE categoriacalendario (
 	id_cat_calendario INT NOT NULL AUTO_INCREMENT,
 	nombre VARCHAR (50),
 	CONSTRAINT PK_CC PRIMARY KEY (id_cat_calendario)
 );
 
-CREATE TABLE Informacion (
+DROP TABLE IF EXISTS informacion;
+CREATE TABLE informacion (
 	id_informacion INT NOT NULL AUTO_INCREMENT,
 	nombre_informacion VARCHAR (45),
 	id_cat_calendario INT NOT NULL,
 	descripcion_web VARCHAR (500),
 	descripcion_escritorio VARCHAR (500),
 	CONSTRAINT PK_INF PRIMARY KEY (id_informacion), 
-	CONSTRAINT FK_CC_INF FOREIGN KEY (id_cat_calendario)
-		REFERENCES CategoriaCalendario (id_cat_calendario)
-	);
-
-CREATE TABLE AsignacionImagen (
-	id_recurso INT NOT NULL,
-	nombre_tabla VARCHAR (75),	
-	id_imagen INT NOT NULL,
-	CONSTRAINT PK_ID_AsignacionImagen PRIMARY KEY (id_recurso, nombre_tabla),
-	CONSTRAINT FK_SG_ID_RECURSO_E FOREIGN KEY (id_recurso) 
- 		REFERENCES Energia (id_energia),
- 	CONSTRAINT FK_SG_ID_RECURSO_K FOREIGN KEY (id_recurso)
- 		REFERENCES Kin (id_kin),
- 	CONSTRAINT FK_SG_ID_RECURSO_AI FOREIGN KEY (id_recurso)
- 		REFERENCES Nahual (id_nahual),
- 	CONSTRAINT FK_SG_ID_RECURSO_UI FOREIGN KEY (id_recurso)
- 		REFERENCES Uinal (id_uinal),
- 	CONSTRAINT FK_SG_ID_RECURSO_HH FOREIGN KEY (id_recurso)
- 		REFERENCES HechoHistorico (id_hecho_historico),
- 	CONSTRAINT FK_SG_ID_RECURSO_PAG FOREIGN KEY (id_recurso)
- 		REFERENCES Pagina (orden),
- 	CONSTRAINT FK_SG_ID_RECURSO_PER FOREIGN KEY (id_recurso)
- 		REFERENCES Periodo (id_periodo),
- 	CONSTRAINT FK_SG_ID_IMG_IMG FOREIGN KEY (id_imagen)
- 		REFERENCES Imagen (id_imagen)
-);
-
+	CONSTRAINT FK_CC_INF FOREIGN KEY (id_cat_calendario) REFERENCES categoriacalendario (id_cat_calendario));
 
