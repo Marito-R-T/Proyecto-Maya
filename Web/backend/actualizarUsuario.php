@@ -27,7 +27,7 @@ if (!(isset($_POST['usuario']) //Verificacion de los campos
         $birthday = $_POST['fechaNacimiento'];
     }
     $sql = "UPDATE tiempomaya.usuario SET nombre='".$username. "' , apellido='".$lastname."', correo='".$email."', usuario='".$user."'";
-    $sql = $sql.", celular='".$phone_number."', fechaNacimiento='".$birthday."'";
+    $sql = $sql.", telefono='".$phone_number."', fechaNacimiento='".$birthday."'";
     if (isset($_POST['password'])) {
         $password_decoded = hash("sha256", $_POST['password']);
         $sql = $sql.", password='".$password_decoded."'";

@@ -7,7 +7,7 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
     if($nombre=='Calendario Haab' || $nombre=='Calendario Cholquij' || $nombre=='Rueda Calendarica'){
         $sql = $conn->query("SELECT htmlCodigo,categoria  FROM tiempomaya." . $table . " WHERE nombre='Informacion' AND categoria='" . $nombre . "' ;");
     }else{
-    $sql = $conn->query("SELECT htmlCodigo,categoria FROM tiempomaya." . $table . " WHERE nombre='" . $nombre . "';");
+    $sql = $conn->query("SELECT htmlCodigo, nombre as categoria FROM tiempomaya." . $table . " WHERE nombre='" . $nombre . "';");
     }
     if ($sql->num_rows == 1) {
         while ($row = mysqli_fetch_assoc($sql)) {
@@ -66,6 +66,7 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
                             <form action="editarFotos.php" method="POST"> 
                                 <button class="btn btn-get-started" type="submit" >Subir Fotos <i class="far fa-save"></i></button>
                                 <input hidden type="text" name="nombre" value="<?php echo isset($nombre) ? $nombre : ''; ?>">
+                                 <input hidden type="text" name="categoria" value="<?php echo isset($categoria) ? $categoria : ''; ?>">
                                 <input hidden type="text" name="admin" value="1">
                                 <input hidden type="text" name="categoria" value="<?php echo isset($categoria) ? $categoria : ''; ?>">
                          
@@ -113,7 +114,7 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
 
         }
     </script>
-    <?php include 'blocks/bloquesJs.html' ?>
+    <?php include 'blocks/bloquesJs1.html' ?>
 
     <!--
 Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.

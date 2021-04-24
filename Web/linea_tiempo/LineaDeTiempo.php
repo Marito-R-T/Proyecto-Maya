@@ -22,7 +22,7 @@ $acontecimientosL = $conn->query("SELECT a.*, concat(a.fechaInicio,' ', a.ACInic
 </head>
 
 <body>
-  <?php include "NavBar.php" ?>
+  <?php include "../NavBar2.php" ?>
   <div>
     <section id="inicio">
       <div id="inicioContainer" class="inicio-container">

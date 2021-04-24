@@ -13,17 +13,16 @@ if ($user->num_rows == 1) {
       session_start();
       $_SESSION['usuario'] = $row['usuario'];
       $_SESSION['correo']=$row['correo'];
-      $admin = $connection->query("SELECT correo FROM tiempomaya.admin as a INNER JOIN tiempomaya.usuario as u WHERE a.correo==u.correo;");
-        if($user->num_rows ==1){
-          $_SESSION['admin']=$row['correo'];
-        }
-      $mensaje = "?mensaje='Inicio de Sesion exitoso'";
+      if($row['id_rol']=='2'){
+        $_SESSION['admin']=$row['correo'];
+      }
+      $mensaje = "?mensaje=Inicio de Sesion exitoso";
     }else{
       $mensaje="?mensaje=Contraseña incorrecta";
     }
   }
 } else {
-  $mensaje = "?mensaje='No se encontro el correo'";
+  $mensaje = "?mensaje=No se encontro el correo";
 }
 $connection->close();
 $url = '../index.php' . $mensaje;

@@ -14,7 +14,7 @@
 
 <body>
 
-  <?php include "NavBar.php" ?>
+  <?php include "../NavBar2.php" ?>
   <div>
     <section id="inicio">
       <div id="inicioContainer" class="inicio-container">

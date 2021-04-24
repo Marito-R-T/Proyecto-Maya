@@ -61,9 +61,14 @@ $array = "";
                                 <i class="far fa-save"></i>
                             </button>
                             <div>
+<<<<<<< HEAD
                                 <input type="text" name="auxArray" id="auxArray" hidden value="<?php echo $array ?>">
                                 
                                 <input type="text" name="categoria" hidden value="<?php echo $nombre      ?>">                                                                                         
+=======
+                                <input type="text" name="auxArray" id="auxArray" hidden value="<?php echo isset($array) ? $array : ''; ?>">
+                                <input type="text" name="categoria" hidden value="<?php echo isset($nombre) ? $nombre : ''; ?>">                                                                                         
+>>>>>>> d6fc33c56d006f7b072d1497ef658fe9d6d6aef4
                         </div>
                     </form>
                 </div>
@@ -131,7 +136,7 @@ $array = "";
             $("#imgs").val(arv);
         }
     </script>
-    <?php include "blocks/bloquesJs.html" ?>
+    <?php include "blocks/bloquesJs1.html" ?>
 </body>
 
 </html>
