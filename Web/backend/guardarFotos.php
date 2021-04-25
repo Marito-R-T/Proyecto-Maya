@@ -14,9 +14,9 @@ if ($connection->query($sql)) {
         $imagenes = mb_split(",", $texto);
     }
     $i = 0;
-    $stringInsert = "INSERT INTO tiempomaya.imagen (nombre , categoria,descripcion, data) VALUES ";
+    $stringInsert = "INSERT INTO tiempomaya.imagen (nombre , categoria, data) VALUES ";
     while ($i < sizeof($imagenes)) {
-        $stringInsert .= "('". $imagenes[$i+2] . "','" . $categoria . "','" . $imagenes[$i] ."','". $imagenes[$i + 1] . "'),";
+        $stringInsert .= "('". $imagenes[$i+2] . "','" . $categoria . "','" . $imagenes[$i] .",". $imagenes[$i + 1] . "'),";
         $i += 3;
     }
     

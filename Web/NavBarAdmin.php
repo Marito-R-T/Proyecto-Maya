@@ -28,6 +28,7 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
                             </button>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <li>
                                 <button type="button" style="opacity: 0; height: 0;" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Kin &nbsp;&nbsp;
                                 </button>
