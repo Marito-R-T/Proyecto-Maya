@@ -4,12 +4,7 @@ USE 'tiempomaya';
 -- Base de datos: `tiempomaya`
 --
 
---
--- Volcado de datos para la tabla `acontecimiento`
---
 
-INSERT INTO `acontecimiento` (`id`, `titulo`, `autor`, `Periodo_nombre`, `htmlCodigo`, `fechaInicio`, `fechaFin`, `ACInicio`, `ACFin`, `categoria`) VALUES
-(1, 'Escritura', 'admin', 'Clasico', 'sdfasdf', '700', '', 'A.C', ' ', 'Escritura1');
 
 --
 -- Volcado de datos para la tabla `categoria`
@@ -257,6 +252,9 @@ INSERT INTO `usuario` (`usuario`, `password`, `nombre`, `apellido`, `correo`, `f
 ('admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin', 'admin', 'admin@gmail.com', '2000-01-01', 12345678, 'img/perfiladmin.jpeg', 2);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Volcado de datos para la tabla `acontecimiento`
+--
+
+INSERT INTO `acontecimiento` (`id`, `titulo`, `autor`, `Periodo_nombre`, `htmlCodigo`, `fechaInicio`, `fechaFin`, `ACInicio`, `ACFin`, `categoria`) VALUES
+(1, 'Escritura', 'admin', 'Clasico', 'sdfasdf', '700', '', 'A.C', ' ', 'Escritura1');
