@@ -32,7 +32,17 @@ if (!(isset($_POST['usuario']) || isset($_POST['password']) //Verificacion de lo
             $url = "../index.php";
             $mensaje = "?mensaje=Usuario creado con exito";
         } else {
-            $mensaje = "?mensaje=No se pudo crear al usuario -   Usuario o Correo repetidos";
+            $sql="SELECT 1 FROM tiempomaya.usuario WHERE correo='".$email."';";
+            $mensaje = "?mensaje=No se pudo crear al usuario ";
+            if($connection->query($sql)){
+                $mensaje.=" correo repetido ";
+
+            }
+            $sql="SELECT 1 FROM tiempomaya.usuario WHERE usuario='".$user."';";
+            if($connection->query($sql)){
+                $mensaje.=" usuario repetido ";
+            }
+            
         }
         $connection->close();
     }else{

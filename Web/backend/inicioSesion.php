@@ -25,6 +25,6 @@ if ($user->num_rows == 1) {
   $mensaje = "?mensaje=No se encontro el correo";
 }
 $connection->close();
-$url = '../index.php' . $mensaje;
+$url = '../sesion/iniciarSesion.php' . $mensaje;
 header('location: ' . $url);
 ?>

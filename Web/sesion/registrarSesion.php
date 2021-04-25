@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <input type="text" autocomplete="off"  pattern="[0-9]{8}" minlength="8" maxlength="8" class="form-control" id="celular" name="celular">
-                            <input type="date" class="form-control" require id="fechaNacimiento" name="fechaNacimiento">
+                            <input type="date" class="form-control"  id="fechaNacimiento" name="fechaNacimiento">
                         </div>
                         <div class="form-group ">
                             <label for="password">Contraseña</label>
