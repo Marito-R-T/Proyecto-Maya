@@ -101,8 +101,8 @@ CREATE TABLE `informacion` (
   `id_informacion` int NOT NULL,
   `nombre_informacion` varchar(45) DEFAULT NULL,
   `id_cat_calendario` int NOT NULL,
-  `descripcion_web` varchar(500) DEFAULT NULL,
-  `descripcion_escritorio` varchar(500) DEFAULT NULL
+  `descripcion_web` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `descripcion_escritorio` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
