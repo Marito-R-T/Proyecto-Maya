@@ -54,8 +54,7 @@ public class calculoRuedaCalendarica {
         txtKin.setText("" + numKi);
     }
 
-    public void calculoTzolqin(int cantidadSobrePasa, boolean sobrePasa, JLabel icNa, JLabel nombreN, JTextField numeroN) 
-    {
+    public void calculoTzolqin(int cantidadSobrePasa, boolean sobrePasa, JLabel icNa, JLabel nombreN, JTextField numeroN) {
         long op1 = (cantidadSobrePasa % 260);
         long op2 = (op1 % 13);
         long op3 = (op1 % 20);
@@ -201,7 +200,7 @@ public class calculoRuedaCalendarica {
     public void MostrarHaab(JLabel iconH, JLabel nombreH, JTextField diaH, int numero, int idNahualHab) {
         WinalDb w = new WinalDb();
 
-        Winal winalMostrar = w.getWinal(idNahualHab+1);
+        Winal winalMostrar = w.getWinal(idNahualHab);
         if (winalMostrar == null) {
 
         } else {
@@ -213,11 +212,7 @@ public class calculoRuedaCalendarica {
 
     public void MostrarTzolin(int idNahual, int numero, JLabel icoNT, JLabel nombreNT, JTextField numeroNT) {
         NahualDb n = new NahualDb();
-        if (idNahual > 10) {
-            idNahual = idNahual - 10;
-        } else {
-            idNahual = idNahual + 10;
-        }
+
         Nahual nMostrar = n.getNahual(idNahual);
 
         if (nMostrar == null) {
