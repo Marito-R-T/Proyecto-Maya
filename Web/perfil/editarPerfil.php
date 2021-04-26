@@ -27,7 +27,7 @@
                   <div class="avatar-edit" style="left: 200px;">
                     <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg ,.jfif" />
                     <label style="background-color: black;" for="imageUpload"><i class="far fa-edit"></i></label>
-                    <textarea type="text" name="path" id="path" value="<?php echo $foto ?>" ></textarea>
+                    <textarea type="text" name="path" id="path" value="<?php echo $foto ?>" hidden></textarea>
                     <input hidden name="correo" value="<?php print($user['correo']) ?>">
                     <input hidden name="usuario" value="<?php print($user['usuario']) ?>">
                   </div>
@@ -91,8 +91,14 @@
               <label for="password">Nueva Contraseña</label>
             </div>
             <div class="form-wrapper">
+              <div class="input-group">
               <input type="password" id="password"  class="form-control" name="password">
-              <i class="fas fa-lock"></i>
+              <div class="input-group-append">
+                  <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                </div>
+                <i class="fas fa-lock"></i>
+              </div>
+              
             </div>
             <button class="btn btn-get-started">Guardar
               <i class="far fa-save"></i>
@@ -120,6 +126,8 @@
         readURL(this);
       });
     });
+
+    <?php include "../js/PasswrdUser.js" ?>
   </script>
 
 
