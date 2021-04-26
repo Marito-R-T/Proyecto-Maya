@@ -7,9 +7,12 @@ package api.login;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,7 +20,6 @@ import modelos.database.RolDb;
 import modelos.database.UsuarioDb;
 import modelos.objetos.Rol;
 import modelos.objetos.Usuario;
-
 /**
  *
  * @author LENOVO-PC
@@ -54,23 +56,30 @@ public class SingUp extends javax.swing.JFrame {
 
         if (verificarCampos()) { //se modifico el manejo de ROl , pues solo se mandaba un # ahora se obtiene con la base de datos
             if (isContraseniaIgual()) {
-                int rolUser = buscarRolUsuario();//buscamos el rol del usuario
-        //        Date fecha = new Date(dateChoserFecha.getDate().getYear(), dateChoserFecha.getDate().getMonth(), dateChoserFecha.getDate().getDay());
-                Date fecha1 = new Date(dateChoserFecha.getDate().getTime());
-                int numTel = Integer.parseInt(textFieldTelefono.getText());
-
-                //Aqui se enviaria los datos del Usuario para ser Registrado
-                Usuario usuarioNuevo = new Usuario(textFieldUserName.getText(),
-                        textFieldContrasenia.getText(),
-                        textFieldCorreo.getText(),
-                        textFieldNombre.getText(),
-                        textFieldApellido.getText(),
-                        numTel,
-                        fecha1,
-                        rolUser);
-                //se enviaria este -> usuarioNuevo,
-                System.out.println(fecha1);
-                usuarioDb.crearUsuario(usuarioNuevo);
+                try {
+                    CifradoPasswords cifrado = new CifradoPasswords();
+                    String password = new String(cifrado.cifra(textFieldContrasenia.getText()), StandardCharsets.UTF_8);
+                    int rolUser = buscarRolUsuario();//buscamos el rol del usuario
+                    //        Date fecha = new Date(dateChoserFecha.getDate().getYear(), dateChoserFecha.getDate().getMonth(), dateChoserFecha.getDate().getDay());
+                    Date fecha1 = new Date(dateChoserFecha.getDate().getTime());
+                    int numTel = Integer.parseInt(textFieldTelefono.getText());
+                    
+                    //Aqui se enviaria los datos del Usuario para ser Registrado
+                    Usuario usuarioNuevo = new Usuario(textFieldUserName.getText(),
+                            password,
+                            textFieldNombre.getText(),
+                            textFieldApellido.getText(),
+                            textFieldCorreo.getText(),
+                            fecha1,
+                            numTel,
+                            null,
+                            rolUser);
+                    //se enviaria este -> usuarioNuevo,
+                    System.out.println(fecha1);
+                    usuarioDb.crearUsuario(usuarioNuevo);
+                } catch (Exception ex) {
+                    Logger.getLogger(SingUp.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             } else {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no COINCIDEN");
@@ -236,7 +245,7 @@ public class SingUp extends javax.swing.JFrame {
                         .addComponent(textFieldConfirme, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(textFieldTelefono)
                         .addComponent(dateChoserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(96, 96, 96))
+                .addGap(80, 80, 80))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(botonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)

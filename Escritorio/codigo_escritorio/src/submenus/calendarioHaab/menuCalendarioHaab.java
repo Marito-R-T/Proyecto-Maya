@@ -7,14 +7,19 @@ package submenus.calendarioHaab;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import modelos.database.FechaHaabDb;
+import modelos.database.InfoHaab;
 import modelos.database.InformacionDb;
 import modelos.database.Utilidades;
 import modelos.objetos.FechaHaab;
+import modelos.objetos.Informacion2;
 
 /**
  *
@@ -24,7 +29,10 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
 
     private Date fecha = Utilidades.LocalDateToDate(LocalDate.now());
     FechaHaabDb acceso = new FechaHaabDb();
-
+    
+    private int index = 0;
+    public static ArrayList<InformacionHaab> informacion;
+    
     /**
      * Creates new form calendarioHaab
      */
@@ -38,10 +46,31 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
 
         InformacionDb accesoInf = new InformacionDb();
         boxDate.setDate(fecha);
-        infHaab.setText(accesoInf.getInformacion("inf_haab_escritorio").getDescripcionEscritorio());
-        infKinal.setText(accesoInf.getInformacion("inf_kin_haab_escritorio").getDescripcionEscritorio());
-        infWinal.setText(accesoInf.getInformacion("inf_uinal_haab_escritorio").getDescripcionEscritorio());
-        escribirFecha();
+
+        
+        //PENDIENTE TRABAJAR ESTO:
+       // escribirFecha();
+       
+       
+       
+       
+        btnAtras.setEnabled(false);
+        obtenerInfo();
+        agregarPrimerHecho();
+        
+        
+        
+        ImageIcon imA = new ImageIcon("src/submenus/lineaDeTiempo/imagenesLineaTiempoMaya/adelante.png");
+        Icon iconA = new ImageIcon(imA.getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+        btnAdelante.setIcon(iconA);
+
+        ImageIcon imgAt = new ImageIcon("src/submenus/lineaDeTiempo/imagenesLineaTiempoMaya/atras.png");
+        Icon iconAt = new ImageIcon(imgAt.getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+        btnAtras.setIcon(iconAt);
+
+        
+        
+        
 
     }
 
@@ -73,14 +102,11 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        infHaab = new javax.swing.JEditorPane();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        infKinal = new javax.swing.JEditorPane();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        infWinal = new javax.swing.JEditorPane();
         boxDate = new com.toedter.calendar.JDateChooser();
         jButton3 = new javax.swing.JButton();
+        panelInfo = new javax.swing.JPanel();
+        btnAtras = new javax.swing.JButton();
+        btnAdelante = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -97,24 +123,6 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 36), new java.awt.Color(204, 0, 51))); // NOI18N
         jPanel1.setOpaque(false);
 
-        infHaab.setEditable(false);
-        infHaab.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Calendario Haab", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 24), new java.awt.Color(255, 102, 0))); // NOI18N
-        infHaab.setFont(new java.awt.Font("Noto Sans CJK JP DemiLight", 0, 14)); // NOI18N
-        jScrollPane4.setViewportView(infHaab);
-
-        infKinal.setEditable(false);
-        infKinal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KInal(Dia)", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 24), new java.awt.Color(255, 102, 0))); // NOI18N
-        infKinal.setFont(new java.awt.Font("Noto Sans CJK JP DemiLight", 0, 18)); // NOI18N
-        infKinal.setPreferredSize(new java.awt.Dimension(150, 58));
-        jScrollPane5.setViewportView(infKinal);
-
-        infWinal.setEditable(false);
-        infWinal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Winal (Mes)", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 24), new java.awt.Color(255, 153, 0))); // NOI18N
-        infWinal.setFont(new java.awt.Font("Noto Sans CJK JP DemiLight", 0, 18)); // NOI18N
-        infWinal.setToolTipText("");
-        infWinal.setMinimumSize(new java.awt.Dimension(150, 58));
-        jScrollPane6.setViewportView(infWinal);
-
         jButton3.setBackground(new java.awt.Color(255, 255, 204));
         jButton3.setFont(new java.awt.Font("Lobster", 1, 14)); // NOI18N
         jButton3.setText("Buscar");
@@ -125,36 +133,61 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout panelInfoLayout = new javax.swing.GroupLayout(panelInfo);
+        panelInfo.setLayout(panelInfoLayout);
+        panelInfoLayout.setHorizontalGroup(
+            panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 890, Short.MAX_VALUE)
+        );
+        panelInfoLayout.setVerticalGroup(
+            panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 408, Short.MAX_VALUE)
+        );
+
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+
+        btnAdelante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdelanteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(panelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnAdelante, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(boxDate, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 917, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtras, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                    .addComponent(btnAdelante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(panelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
 
         jPanel4.setBackground(new java.awt.Color(221, 221, 253));
@@ -227,7 +260,7 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCargador, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                .addComponent(lblCargador, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -305,7 +338,7 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -342,6 +375,38 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
             escribirFecha();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnAdelanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdelanteActionPerformed
+        index++;
+        panelInfo.removeAll();
+        if(informacion.size() > index){
+            panelInfo.add(informacion.get(index));
+            informacion.get(index).setVisible(true);
+            panelInfo.validate();
+            panelInfo.repaint();
+            if(index == informacion.size()-1){
+                btnAdelante.setEnabled(false);
+            } else {
+                btnAdelante.setEnabled(true);
+            }
+            btnAtras.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnAdelanteActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        index--;
+        panelInfo.removeAll();
+        panelInfo.add(informacion.get(index));
+        informacion.get(index).setVisible(true);
+        panelInfo.validate();
+        panelInfo.repaint();
+        if(index == 0){
+            btnAtras.setEnabled(false);
+        } else {
+            btnAtras.setEnabled(true);
+        }
+        btnAdelante.setEnabled(true);
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     public final void escribirFecha() {
         FechaHaab fechaActual = acceso.getFechaEspecifica(Utilidades.DateToLocalDate(fecha));
@@ -403,12 +468,33 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
         boxDate.setDate(fecha);
         escribirFecha();
     }
+    
+    //Colocando informacion
+    
+    public static final void obtenerInfo(){
+        InfoHaab datoHaab = new InfoHaab();
+        ArrayList<Informacion2> arrayInfo = datoHaab.leerHechosHistoricos();
+        informacion = new ArrayList<>();
+        for (int i = 0; i < arrayInfo.size(); i++) {
+            informacion.add(new InformacionHaab(arrayInfo.get(i)));
+        }
+    }
+
+    private void agregarPrimerHecho(){
+        if(informacion.size() > 0){
+            panelInfo.add(informacion.get(0));
+            informacion.get(0).setVisible(true);
+            panelInfo.validate();
+            panelInfo.repaint();
+        }
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser boxDate;
-    private javax.swing.JEditorPane infHaab;
-    private javax.swing.JEditorPane infKinal;
-    private javax.swing.JEditorPane infWinal;
+    private javax.swing.JButton btnAdelante;
+    private javax.swing.JButton btnAtras;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -418,12 +504,10 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel lblCargador;
     private javax.swing.JLabel lblNahual;
     private javax.swing.JLabel lblWinal;
+    private javax.swing.JPanel panelInfo;
     private javax.swing.JLabel txtDIaHaab;
     private javax.swing.JLabel txtMesHaab;
     // End of variables declaration//GEN-END:variables

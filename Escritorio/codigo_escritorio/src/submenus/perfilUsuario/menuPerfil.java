@@ -376,6 +376,7 @@ public class menuPerfil extends javax.swing.JPanel {
             actualizarArchivoLOgueo(usuarioAEditar);
         } else {
             //3.no se actualiza nada 
+            
 
         }
     }
@@ -391,7 +392,7 @@ public class menuPerfil extends javax.swing.JPanel {
         //   Date fecha = new Date(boxDate.getDate().getYear(),boxDate.getDate().getDay(),boxDate.getDate().getMonth());
         int numTel = Integer.parseInt(telefono);
         int rol = user.getRol();
-        Usuario usuarioAEditar = new Usuario(userName, password, email, nombre, apellido, numTel, fecha1, rol);
+        Usuario usuarioAEditar = new Usuario(userName, password, nombre, apellido, email, fecha1, numTel, null, rol);
         return usuarioAEditar;
     }
 

@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -20,18 +23,17 @@ public class Login extends javax.swing.JFrame {
     private MenuPrincipal menu;
     public static ArchivoLogin archivoLogin = new ArchivoLogin();
     public static Usuario usuarioLogueado = null;
-    
 
     public Login() {
         this.setContentPane(fondoPanel);
         initComponents();
         this.setLocationRelativeTo(null);
         panelSesion.setBackground(new Color(255, 255, 255, 100));
- 
+
         ImageIcon imIcon = new ImageIcon("src/api/login/imagenes/icono.png");
         Icon icono = new ImageIcon(imIcon.getImage().getScaledInstance(labelIcono.getWidth(), labelIcono.getHeight(), Image.SCALE_DEFAULT));
         labelIcono.setIcon(icono);
-        
+
         ImageIcon imIconExit = new ImageIcon("src/api/login/imagenes/salir.png");
         Icon iconoExit = new ImageIcon(imIconExit.getImage().getScaledInstance(botonSalir.getWidth(), botonSalir.getHeight(), Image.SCALE_DEFAULT));
         botonSalir.setIcon(iconoExit);
@@ -39,16 +41,29 @@ public class Login extends javax.swing.JFrame {
 
     //logue al usuario
     public void loguear() {
-        usuarioLogueado = usuarioDb.validacionUsuario(textFieldCorreo.getText(), passFieldContrasenia.getText());
-        if (usuarioLogueado != null) {
-            System.out.println("Se logueo xD");
-            recordarSesion(usuarioLogueado);
-            menu = new MenuPrincipal(usuarioLogueado);
-            menu.setVisible(true);
-            this.setVisible(false);
-        } else {
-            System.out.println("NO Se logueo xD");
-            JOptionPane.showMessageDialog(null, "El Correo o Contraseña son Incorrectos");
+        try {
+            CifradoPasswords cifrado = new CifradoPasswords();
+            
+            usuarioLogueado = usuarioDb.validacionUsuario(textFieldCorreo.getText(), passFieldContrasenia.getText());
+            String password = cifrado.descifra(usuarioLogueado.getPassword().getBytes());
+
+            if (usuarioLogueado != null) {
+                if (password.equals(passFieldContrasenia.getText())) {
+                    System.out.println("Se logueo xD");
+                    recordarSesion(usuarioLogueado);
+                    menu = new MenuPrincipal(usuarioLogueado);
+                    menu.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    System.out.println("NO Se logueo xD");
+                    JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+                }
+            } else {
+                System.out.println("NO Se logueo xD");
+                JOptionPane.showMessageDialog(null, "El Correo o Contraseña son Incorrectos");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

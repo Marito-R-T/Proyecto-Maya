@@ -17,11 +17,12 @@ public class Usuario {
     private int numeroTel;
     private Date nacimiento;
     private int rol;
+    private String imagen;
 
     public Usuario() {
     }
     
-    public Usuario(String username, String password, String email, String nombre, String apellido, int numeroTel, Date nacimiento, int rol) {
+    public Usuario(String username, String password, String nombre, String apellido, String email, Date nacimiento, int numeroTel, String imagen,  int rol) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -30,6 +31,7 @@ public class Usuario {
         this.numeroTel = numeroTel;
         this.nacimiento = nacimiento;
         this.rol = rol;
+        this.imagen = imagen;
     }
 
     public String getUsername() {
@@ -96,6 +98,16 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Usuario{" + "username=" + username + ", password=" + password + ", email=" + email + ", nombre=" + nombre + ", apellido=" + apellido + ", numeroTel=" + numeroTel + ", nacimiento=" + nacimiento + ", rol=" + rol + '}';

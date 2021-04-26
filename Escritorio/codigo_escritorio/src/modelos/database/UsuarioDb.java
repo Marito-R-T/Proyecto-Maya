@@ -20,7 +20,7 @@ import modelos.objetos.Usuario;
  */
 public class UsuarioDb {
 
-    public static String VALIDACION_LOGEO = "SELECT * FROM usuario WHERE email = ? AND password = ?";
+    public static String VALIDACION_LOGEO = "SELECT * FROM usuario WHERE correo = ?";
     private Mensaje mensajes = new Mensaje();
 
     public void crearUsuario(Usuario usuarioACrear) {//creamos un nuevo usuario
@@ -118,8 +118,8 @@ public class UsuarioDb {
         Usuario usuarioDevolver = null;
         try {
             usuarioDevolver = new Usuario(resultado.getString(1), resultado.getString(2), resultado.getString(3),
-                    resultado.getString(4), resultado.getString(5), resultado.getInt(7),
-                    resultado.getDate(6), resultado.getInt(8));
+                    resultado.getString(4), resultado.getString(5), resultado.getDate(6), resultado.getInt(7), resultado.getString(8),
+                     resultado.getInt(9));
         } catch (SQLException ex) {
             System.out.println("error en conversion de usuario");
         }
@@ -132,7 +132,6 @@ public class UsuarioDb {
         try {
             PreparedStatement statement = ConexionDb.conexion.prepareStatement(VALIDACION_LOGEO);
             statement.setString(1, correo);
-            statement.setString(2, password);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 aDevolver = convertirAUsuario(result);
