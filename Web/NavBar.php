@@ -62,7 +62,7 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
             </li>
 
             <li>
-              <a class="nav-link" href="models/paginaModelo.php?pagina=Calendario Cholquij">Calendario Cholquij &nbsp;&nbsp;&nbsp;&nbsp; </a>
+              <a class="nav-link" href="models/paginaModelo.php?pagina=Calendario Cholquij">Calendario Cholq'ij &nbsp;&nbsp;&nbsp;&nbsp; </a>
               <button type="button" style="opacity: 0; height: 0;" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Calendario Cholquij
               </button>

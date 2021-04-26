@@ -14,8 +14,13 @@
     font-size: 20px;
 }
 
+.form-control {
+    width: 85%;
+    font-size: 18px;
+    margin: auto;
+}
 
-.form-control{
+.input-group {
     width: 85%;
     font-size: 18px;
     margin: auto;
