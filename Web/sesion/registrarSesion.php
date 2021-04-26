@@ -73,7 +73,7 @@
                             <div class="input-group">
                                 <input type="password" id="passwordConfirm" required class="form-control" name="passwordConfirm">
                                 <div class="input-group-append">
-                                        <!-- <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPasswordRegistro('passwordConfirm')"> <span class="fa fa-eye-slash icon2"></span> </button> -->
+                                        <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPasswordRegistro('passwordConfirm')"> <span class="fa fa-eye-slash icon2"></span> </button>
                                     </div>  
                                     <i class="fas fa-lock"></i>
                                 </div>
