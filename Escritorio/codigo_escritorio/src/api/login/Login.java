@@ -41,7 +41,6 @@ public class Login extends javax.swing.JFrame {
     public void loguear() {
         usuarioLogueado = usuarioDb.validacionUsuario(textFieldCorreo.getText(), passFieldContrasenia.getText());
         if (usuarioLogueado != null) {
-            System.out.println("Se logueo xD");
             recordarSesion(usuarioLogueado);
             menu = new MenuPrincipal(usuarioLogueado);
             menu.setVisible(true);

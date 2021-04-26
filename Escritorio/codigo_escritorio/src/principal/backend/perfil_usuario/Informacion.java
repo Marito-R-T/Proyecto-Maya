@@ -34,7 +34,7 @@ public class Informacion {
                 user.setNombre(result.getString("nombre"));
                 user.setApellido(result.getString("apellido"));
                 user.setNacimiento(result.getDate("nacimiento"));
-                user.setNumeroTel(result.getInt("telefono"));
+                user.setNumeroTel(result.getString("telefono"));
                 user.setRol(result.getInt("rol"));
             }
         } catch (SQLException ex) {

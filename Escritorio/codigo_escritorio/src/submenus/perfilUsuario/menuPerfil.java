@@ -389,9 +389,9 @@ public class menuPerfil extends javax.swing.JPanel {
         String userName = txtUsername.getText();
         Date fecha1 = new Date(boxDate.getDate().getTime());
         //   Date fecha = new Date(boxDate.getDate().getYear(),boxDate.getDate().getDay(),boxDate.getDate().getMonth());
-        int numTel = Integer.parseInt(telefono);
+        
         int rol = user.getRol();
-        Usuario usuarioAEditar = new Usuario(userName, password, email, nombre, apellido, numTel, fecha1, rol);
+        Usuario usuarioAEditar = new Usuario(userName, password, nombre, apellido, email, fecha1, telefono, rol);
         return usuarioAEditar;
     }
 

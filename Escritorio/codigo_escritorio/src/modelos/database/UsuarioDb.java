@@ -20,7 +20,7 @@ import modelos.objetos.Usuario;
  */
 public class UsuarioDb {
 
-    public static String VALIDACION_LOGEO = "SELECT * FROM usuario WHERE email = ? AND password = ?";
+    public static String VALIDACION_LOGEO = "SELECT * FROM usuario WHERE correo = ? AND password = ?";
     private Mensaje mensajes = new Mensaje();
 
     public void crearUsuario(Usuario usuarioACrear) {//creamos un nuevo usuario
@@ -34,7 +34,7 @@ public class UsuarioDb {
             statement.setString(4, usuarioACrear.getNombre());
             statement.setString(5, usuarioACrear.getApellido());
             statement.setDate(6, usuarioACrear.getNacimiento());
-            statement.setInt(7, usuarioACrear.getNumeroTel());
+            statement.setString(7, usuarioACrear.getNumeroTel());
             statement.setInt(8, usuarioACrear.getRol());
             statement.executeUpdate();
             mensajes.informacion("Se ha creado el usuario con exito.");
@@ -57,7 +57,7 @@ public class UsuarioDb {
             statement.setString(4, usuarioActualizar.getNombre());
             statement.setString(5, usuarioActualizar.getApellido());
             statement.setDate(6, usuarioActualizar.getNacimiento());
-            statement.setInt(7, usuarioActualizar.getNumeroTel());
+            statement.setString(7, usuarioActualizar.getNumeroTel());
             statement.setInt(8, usuarioActualizar.getRol());
 
             statement.setString(9, userNameAntiguo);
@@ -118,8 +118,8 @@ public class UsuarioDb {
         Usuario usuarioDevolver = null;
         try {
             usuarioDevolver = new Usuario(resultado.getString(1), resultado.getString(2), resultado.getString(3),
-                    resultado.getString(4), resultado.getString(5), resultado.getInt(7),
-                    resultado.getDate(6), resultado.getInt(8));
+                    resultado.getString(4), resultado.getString(5), resultado.getDate(6),
+                    resultado.getString(7), resultado.getInt(9));
         } catch (SQLException ex) {
             System.out.println("error en conversion de usuario");
         }

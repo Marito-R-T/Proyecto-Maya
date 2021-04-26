@@ -57,7 +57,6 @@ public class SingUp extends javax.swing.JFrame {
                 int rolUser = buscarRolUsuario();//buscamos el rol del usuario
         //        Date fecha = new Date(dateChoserFecha.getDate().getYear(), dateChoserFecha.getDate().getMonth(), dateChoserFecha.getDate().getDay());
                 Date fecha1 = new Date(dateChoserFecha.getDate().getTime());
-                int numTel = Integer.parseInt(textFieldTelefono.getText());
 
                 //Aqui se enviaria los datos del Usuario para ser Registrado
                 Usuario usuarioNuevo = new Usuario(textFieldUserName.getText(),
@@ -65,8 +64,9 @@ public class SingUp extends javax.swing.JFrame {
                         textFieldCorreo.getText(),
                         textFieldNombre.getText(),
                         textFieldApellido.getText(),
-                        numTel,
                         fecha1,
+                        textFieldTelefono.getText(),
+                        
                         rolUser);
                 //se enviaria este -> usuarioNuevo,
                 System.out.println(fecha1);
