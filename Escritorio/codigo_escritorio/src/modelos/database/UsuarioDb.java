@@ -26,16 +26,20 @@ public class UsuarioDb {
     public void crearUsuario(Usuario usuarioACrear) {//creamos un nuevo usuario
         try {
             PreparedStatement statement = ConexionDb.conexion.prepareStatement("INSERT INTO usuario "
-                    + "(username,password,email,nombre,apellido,nacimiento,telefono,rol) "
-                    + "VALUES (?,?,?,?,?,?,?,?);");
+                    + "(usuario,password,nombre,apellido,correo,fechaNacimiento,telefono,imagen,id_rol) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?);");
             statement.setString(1, usuarioACrear.getUsername());
             statement.setString(2, usuarioACrear.getPassword());
-            statement.setString(3, usuarioACrear.getEmail());
-            statement.setString(4, usuarioACrear.getNombre());
-            statement.setString(5, usuarioACrear.getApellido());
+            statement.setString(3, usuarioACrear.getNombre());
+            statement.setString(4, usuarioACrear.getApellido());
+            statement.setString(5, usuarioACrear.getEmail());
+            
+            
             statement.setDate(6, usuarioACrear.getNacimiento());
             statement.setString(7, usuarioACrear.getNumeroTel());
-            statement.setInt(8, usuarioACrear.getRol());
+            statement.setString(8, null);
+            statement.setInt(9, usuarioACrear.getRol());
+            System.out.println(statement);
             statement.executeUpdate();
             mensajes.informacion("Se ha creado el usuario con exito.");
         } catch (SQLException ex) {
@@ -47,10 +51,10 @@ public class UsuarioDb {
         boolean actualizado = false;
         try {
             PreparedStatement statement = ConexionDb.conexion.prepareStatement("UPDATE usuario SET "
-                    + "userName=? , password =? , email=?,  "
-                    + "nombre=? ,  apellido=? , nacimiento= ? , "
-                    + "telefono = ? , rol=?  "
-                    + "WHERE username=?;");
+                    + "usuario=? , password =? , correo=?,  "
+                    + "nombre=? ,  apellido=? , fechaNacimiento= ? , "
+                    + "telefono = ? , id_rol=?  "
+                    + "WHERE usuario=?;");
             statement.setString(1, usuarioActualizar.getUsername());
             statement.setString(2, usuarioActualizar.getPassword());
             statement.setString(3, usuarioActualizar.getEmail());
@@ -73,7 +77,7 @@ public class UsuarioDb {
 
     public void eliminarUsuario(Usuario usuarioAEliminar) {//eliminamos usuario
         try {
-            PreparedStatement statement = ConexionDb.conexion.prepareStatement("DELETE FROM usuario WHERE username=?;");
+            PreparedStatement statement = ConexionDb.conexion.prepareStatement("DELETE FROM usuario WHERE usuario=?;");
             statement.setString(1, usuarioAEliminar.getUsername());
             statement.executeUpdate();
             mensajes.informacion("Se ha eliminado el usuario con exito.");

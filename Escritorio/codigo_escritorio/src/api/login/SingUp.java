@@ -41,7 +41,7 @@ public class SingUp extends javax.swing.JFrame {
         RolDb rolUsar = new RolDb();
         LinkedList<Rol> roles = rolUsar.leerRoles();
         for (int i = 0; i < roles.size(); i++) {
-            if (roles.get(i).getTipo().equals("GUEST")) {
+            if (roles.get(i).getTipo().equals("user")) {
                 rol = roles.get(i).getId();
                 break;
             } else {
@@ -61,9 +61,11 @@ public class SingUp extends javax.swing.JFrame {
                 //Aqui se enviaria los datos del Usuario para ser Registrado
                 Usuario usuarioNuevo = new Usuario(textFieldUserName.getText(),
                         textFieldContrasenia.getText(),
-                        textFieldCorreo.getText(),
                         textFieldNombre.getText(),
                         textFieldApellido.getText(),
+                        textFieldCorreo.getText(),
+                        
+                        
                         fecha1,
                         textFieldTelefono.getText(),
                         
