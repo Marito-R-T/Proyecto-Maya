@@ -20,6 +20,7 @@ import modelos.database.RolDb;
 import modelos.database.UsuarioDb;
 import modelos.objetos.Rol;
 import modelos.objetos.Usuario;
+
 /**
  *
  * @author LENOVO-PC
@@ -43,7 +44,7 @@ public class SingUp extends javax.swing.JFrame {
         RolDb rolUsar = new RolDb();
         LinkedList<Rol> roles = rolUsar.leerRoles();
         for (int i = 0; i < roles.size(); i++) {
-            if (roles.get(i).getTipo().equals("GUEST")) {
+            if (roles.get(i).getTipo().equals("user")) {
                 rol = roles.get(i).getId();
                 break;
             } else {
@@ -57,13 +58,13 @@ public class SingUp extends javax.swing.JFrame {
         if (verificarCampos()) { //se modifico el manejo de ROl , pues solo se mandaba un # ahora se obtiene con la base de datos
             if (isContraseniaIgual()) {
                 try {
-                    CifradoPasswords cifrado = new CifradoPasswords();
-                    String password = new String(cifrado.cifra(textFieldContrasenia.getText()), StandardCharsets.UTF_8);
+                    String password = CifradoPasswords.md5(textFieldContrasenia.getText());  //new String(cifrado.cifra(textFieldContrasenia.getText()), StandardCharsets.UTF_8);
+                    System.out.println("contrasena del nuevo usuario "+password);
+                    //ESSTA ES LA [ARTE DE CHEJO CON LA QUE TENGO QUE HACER FUSION
                     int rolUser = buscarRolUsuario();//buscamos el rol del usuario
                     //        Date fecha = new Date(dateChoserFecha.getDate().getYear(), dateChoserFecha.getDate().getMonth(), dateChoserFecha.getDate().getDay());
                     Date fecha1 = new Date(dateChoserFecha.getDate().getTime());
-                    int numTel = Integer.parseInt(textFieldTelefono.getText());
-                    
+
                     //Aqui se enviaria los datos del Usuario para ser Registrado
                     Usuario usuarioNuevo = new Usuario(textFieldUserName.getText(),
                             password,
@@ -71,8 +72,7 @@ public class SingUp extends javax.swing.JFrame {
                             textFieldApellido.getText(),
                             textFieldCorreo.getText(),
                             fecha1,
-                            numTel,
-                            null,
+                            textFieldTelefono.getText(),
                             rolUser);
                     //se enviaria este -> usuarioNuevo,
                     System.out.println(fecha1);
@@ -81,6 +81,7 @@ public class SingUp extends javax.swing.JFrame {
                     Logger.getLogger(SingUp.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
+                //AQUI TERMINA LA PARTE DE CHEJO
             } else {
                 JOptionPane.showMessageDialog(null, "Las contraseñas no COINCIDEN");
             }

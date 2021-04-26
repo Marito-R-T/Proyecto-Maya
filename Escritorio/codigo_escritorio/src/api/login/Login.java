@@ -42,14 +42,12 @@ public class Login extends javax.swing.JFrame {
     //logue al usuario
     public void loguear() {
         try {
-            CifradoPasswords cifrado = new CifradoPasswords();
-            
+            //PARTE DE CHEJIN QUE TENGO QUE FUSIONAR
             usuarioLogueado = usuarioDb.validacionUsuario(textFieldCorreo.getText(), passFieldContrasenia.getText());
-            String password = cifrado.descifra(usuarioLogueado.getPassword().getBytes());
-
+            String password = CifradoPasswords.md5(passFieldContrasenia.getText());   //new String(cifrado.cifra(passFieldContrasenia.getText()), StandardCharsets.UTF_8);
             if (usuarioLogueado != null) {
-                if (password.equals(passFieldContrasenia.getText())) {
-                    System.out.println("Se logueo xD");
+                System.out.println(password + " --- " +usuarioLogueado.getPassword());
+                if (password.equals(usuarioLogueado.getPassword())) {
                     recordarSesion(usuarioLogueado);
                     menu = new MenuPrincipal(usuarioLogueado);
                     menu.setVisible(true);
@@ -61,6 +59,8 @@ public class Login extends javax.swing.JFrame {
             } else {
                 System.out.println("NO Se logueo xD");
                 JOptionPane.showMessageDialog(null, "El Correo o Contraseña son Incorrectos");
+
+                //FIN PARTE DE CHEJIN
             }
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

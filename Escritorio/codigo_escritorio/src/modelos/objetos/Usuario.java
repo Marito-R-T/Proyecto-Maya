@@ -14,7 +14,7 @@ import java.sql.Date;
 public class Usuario {
     
     private String username, password, email, nombre, apellido;
-    private int numeroTel;
+    private String numeroTel;
     private Date nacimiento;
     private int rol;
     private String imagen;
@@ -22,7 +22,8 @@ public class Usuario {
     public Usuario() {
     }
     
-    public Usuario(String username, String password, String nombre, String apellido, String email, Date nacimiento, int numeroTel, String imagen,  int rol) {
+//    public Usuario(String username, String password, String nombre, String apellido, String email, Date nacimiento, int numeroTel, String imagen,  int rol) {
+    public Usuario(String username, String password, String nombre, String apellido, String email, Date nacimiento, String numeroTel, int rol) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -74,13 +75,15 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public int getNumeroTel() {
+    public String getNumeroTel() {
         return numeroTel;
     }
 
-    public void setNumeroTel(int numeroTel) {
+    public void setNumeroTel(String numeroTel) {
         this.numeroTel = numeroTel;
     }
+
+
 
     public Date getNacimiento() {
         return nacimiento;
