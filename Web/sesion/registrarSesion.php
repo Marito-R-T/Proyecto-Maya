@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <?php include "NavBar.php" ?>
+    <?php include "../NavBar2.php" ?>
     <div>
         <section id="inicio">
             <div id="inicioContainer" class="inicio-container">
@@ -52,21 +52,31 @@
                         </div>
                         <div class="form-group">
                             <input type="text" autocomplete="off"  pattern="[0-9]{8}" minlength="8" maxlength="8" class="form-control" id="celular" name="celular">
-                            <input type="date" class="form-control" require id="fechaNacimiento" name="fechaNacimiento">
+                            <input type="date" class="form-control"  id="fechaNacimiento" name="fechaNacimiento">
                         </div>
                         <div class="form-group ">
-                            <label for="password">Contraseña</label>
+                                <label for="password">Contraseña</label>
                         </div>
                         <div class="form-wrapper">
-                            <input type="password" id="password" required class="form-control" name="password">
-                            <i class="fas fa-lock"></i>
+                            <div class="input-group">
+                                <input type="password" id="password" required class="form-control" name="password">
+                                <div class="input-group-append">
+                                    <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPasswordRegistro('password')"> <span class="fa fa-eye-slash icon1"></span> </button>
+                                </div>  
+                                <i class="fas fa-lock"></i>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="passwordConfirm">Confirmar Contraseña</label><br>
                         </div>
                         <div class="form-wrapper">
-                            <input type="password" id="passwordConfirm" required class="form-control" name="passwordConfirm">
-                            <i class="fas fa-lock"></i>
+                            <div class="input-group">
+                                <input type="password" id="passwordConfirm" required class="form-control" name="passwordConfirm">
+                                <div class="input-group-append">
+                                        <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPasswordRegistro('passwordConfirm')"> <span class="fa fa-eye-slash icon2"></span> </button>
+                                    </div>  
+                                    <i class="fas fa-lock"></i>
+                                </div>
                         </div>
 
                         <button class="btn btn-get-started">Registrar
@@ -78,6 +88,9 @@
         </section>
     </div>
     <?php include "../blocks/bloquesJs.html" ?>
+    <script type="text/javascript">
+        <?php include "../js/PasswrdUser.js" ?>
+    </script>
 </body>
 
 </html>

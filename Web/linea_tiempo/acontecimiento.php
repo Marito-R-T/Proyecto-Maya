@@ -33,7 +33,7 @@ if(isset($_GET['categoria'])){
 </head>
 
 <body>
-    <?php include "NavBar.php" ?>
+    <?php include "../NavBar2.php" ?>
     <div>
         <section id="inicio">
             <div id="inicioContainer" class="inicio-container">
@@ -53,7 +53,7 @@ if(isset($_GET['categoria'])){
                                 </div>
                                 <?php foreach($imagens as $img){?>
                                     <div class="carousel-item">
-                                    <img class="d-block w-100" src="<?php echo $img['data'] ?>" width="300" height="300" alt="<?php echo $img['nombre'] ?>">
+                                    <img class="d-block w-100" src="<?php echo isset($img['data']) ? $img['data'] : ''; ?>" width="300" height="300" alt="<?php echo isset($img['nombre']) ? $img['nombre'] : ''; ?>">
                                 </div>
                                  <?php }?>
                                
@@ -63,8 +63,8 @@ if(isset($_GET['categoria'])){
                         </div>
                     </div>
                     <div class="informacion" style="text-align: start; padding-left:50px;">
-                        <h1><?php echo $acontecimiento['titulo'];?></h1> <br>
-                        <label>Periodo: <?php echo $acontecimiento['Periodo_nombre'];?> </label> <br>
+                        <h1><?php echo isset($acontecimiento['titulo']) ? $acontecimiento['titulo'] : ''; ?></h1> <br>
+                        <label>Periodo: <?php echo isset($acontecimiento['Periodo_nombre']) ? $acontecimiento['Periodo_nombre'] : ''; ?> </label> <br>
                         <label>Fecha: <?php echo $acontecimiento['fechaI']; if($acontecimiento['fechaF']!='  '){echo " - ".$acontecimiento['fechaF'];}?> </label> <br>
                         <label>Descripcion: </label> <br>
                         <p><?php echo $acontecimiento['htmlCodigo'];?></p> <br>

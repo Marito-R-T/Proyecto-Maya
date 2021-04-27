@@ -29,7 +29,7 @@ $informacion = $conn->query("SELECT htmlCodigo FROM tiempomaya.pagina WHERE nomb
 
 
 </head>
-<?php include "NavBar.php" ?>
+<?php include "../NavBar2.php" ?>
 
 <body>
     <section id="inicio">

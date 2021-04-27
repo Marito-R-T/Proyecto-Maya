@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <?php include "NavBar.php" ?>
+    <?php include "../NavBar2.php" ?>
     <?php include "../backend/verificarSesion.php"?>   
      <?php include '../backend/obtenerDatosUsuario.php' ?>
     <section id="inicio">
@@ -58,7 +58,7 @@
                                     </li>
                                     <li>
                                         <i class="entypo-location"></i>
-                                         <?php print($user['celular']) ?> <strong> <i class="fas fa-phone"></i></strong>
+                                         <?php print($user['telefono']) ?> <strong> <i class="fas fa-phone"></i></strong>
                                     </li>
                                     <li>
                                         <i class="entypo-location"></i>

@@ -114,6 +114,16 @@ label {
   padding: 0;
   margin-bottom: 5px;
 }
+.input-group {
+  width: 100%;
+  
+  /* font-size: 18px; */
+  /* margin: auto; */
+}
+
+.btn {
+  height: 30px;
+}
 
 .form-control textarea{
   height: 50px;

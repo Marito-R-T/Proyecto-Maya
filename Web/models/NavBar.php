@@ -43,7 +43,7 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
             </li>
 
             <li>
-              <a class="nav-link" href="paginaModelo.php?pagina=Calendario Cholquij">Calendario Cholquij &nbsp;&nbsp;&nbsp;&nbsp; </a>
+              <a class="nav-link" href="paginaModelo.php?pagina=Calendario Cholquij">Calendario Cholq'ij &nbsp;&nbsp;&nbsp;&nbsp; </a>
               <button type="button" style="opacity: 0; height: 0;" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Calendario Cholquij
               </button>
@@ -98,14 +98,13 @@ $periodosNav = $conn->query("SELECT nombre FROM tiempomaya.periodo order by orde
                   <a class="nav-link" href="#" style="font-size: 13px;">Periodos </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <?php foreach ($periodosNav as $periodo) {
-                      echo "<li class='nav-item'><a class='nav-link' href='paginaModeloPeriodo.php?n=" . $periodo['nombre'] . "'>" . $periodo['nombre'] . "</a></li>";
+                      echo "<li class='nav-item'><a class='nav-link' href='paginaModeloPeriodo.php?periodo=" . $periodo['nombre'] . "'>" . $periodo['nombre'] . "</a></li>";
                     } ?>
                   </ul>
                 </li>
 
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="../calculadora.php">Calculadora</a></li>
             <?php
             if (isset($_SESSION['usuario'])) {
               if (isset($_SESSION['admin'])) {

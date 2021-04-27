@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../css/editarPerfil.css?v=<?php echo (rand()); ?>" />
 
 </head>
-<?php include "NavBar.php" ?>
+<?php include "../NavBar2.php" ?>
 <?php include "../backend/verificarSesion.php"?>
 
 <body>

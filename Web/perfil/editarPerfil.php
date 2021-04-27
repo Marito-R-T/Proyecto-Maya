@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../css/registroSesion.css?v=<?php echo (rand()); ?>" />
   <link rel="stylesheet" href="../css/editarPerfil.css?v=<?php echo (rand()); ?>" />
 </head>
-<?php include "NavBar.php" ?>
+<?php include "../NavBar2.php" ?>
 <?php include "../backend/verificarSesion.php"?>
 <?php include "../backend/obtenerDatosUsuario.php" ?>
 
@@ -27,8 +27,9 @@
                   <div class="avatar-edit" style="left: 200px;">
                     <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg ,.jfif" />
                     <label style="background-color: black;" for="imageUpload"><i class="far fa-edit"></i></label>
-                    <textarea type="text" name="path" id="path" hidden></textarea>
+                    <textarea type="text" name="path" id="path" value="<?php echo $foto ?>" hidden></textarea>
                     <input hidden name="correo" value="<?php print($user['correo']) ?>">
+                    <input hidden name="usuario" value="<?php print($user['usuario']) ?>">
                   </div>
                   <div class="avatar-preview">
                     <div id="previsualizacion" style="background-image: url(<?php echo $foto ?>);">
@@ -83,15 +84,21 @@
               <label for="fechaNacimiento">Fecha de Nacimiento</label>
             </div>
             <div class="form-group">
-              <input type="text" autocomplete="off" pattern="[0-9]{8}" minlength="8" name='celular' maxlength="8" class="form-control" id="celular" value="<?php print($user['celular']) ?>">
+              <input type="text" autocomplete="off" pattern="[0-9]{8}" minlength="8" name='celular' maxlength="8" class="form-control" id="celular" value="<?php print($user['telefono']) ?>">
               <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="<?php print($user['fechaNacimiento']) ?>">
             </div>
             <div class="form-group ">
               <label for="password">Nueva Contraseña</label>
             </div>
             <div class="form-wrapper">
+              <div class="input-group">
               <input type="password" id="password"  class="form-control" name="password">
-              <i class="fas fa-lock"></i>
+              <div class="input-group-append">
+                  <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                </div>
+                <i class="fas fa-lock"></i>
+              </div>
+              
             </div>
             <button class="btn btn-get-started">Guardar
               <i class="far fa-save"></i>
@@ -119,6 +126,8 @@
         readURL(this);
       });
     });
+
+    <?php include "../js/PasswrdUser.js" ?>
   </script>
 
 

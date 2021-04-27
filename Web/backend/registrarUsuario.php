@@ -1,13 +1,13 @@
 <?php
 
 $url = "../sesion/registrarSesion.php";
-$mensaje = "?mensaje=";
+$mensaje = "";
 if (!(isset($_POST['usuario']) || isset($_POST['password']) //Verificacion de los campos
     || isset($_POST['nombre'])
     || isset($_POST['correo'])
     || isset($_POST['apellido'])
     || isset($_POST['passwordConfirm']))) {
-    $mensaje = $mensaje . "'Los campos no estan llenos revisar'";
+    $mensaje = "?mensaje=Los campos no estan llenos revisar";
 } else {
     $password = $_POST['password'];
     $passwordConfirm = $_POST['passwordConfirm'];
@@ -24,20 +24,29 @@ if (!(isset($_POST['usuario']) || isset($_POST['password']) //Verificacion de lo
         if (isset($_POST['fechaNacimiento'])) {
             $birthday = $_POST['fechaNacimiento'];
         }
-         $path = '../img/perfil.jpg';
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        $base64 = 'img/perfil.jpg';
         $password_decoded = hash("sha256", $password);
         $connection = include '../conexion/conexion.php';
-        $sql = "INSERT INTO tiempomaya.usuario (usuario,nombre, apellido,celular,password,fechaNacimiento,correo,imagen) VALUES('" . $user . "','" . $username . "','" . $lastname . "','" . $phone_number . "','" . $password_decoded . "','" . $birthday . "','" . $email . "','".$base64."');";
+        $sql = "INSERT INTO tiempomaya.usuario (usuario,nombre, apellido,telefono,password,fechaNacimiento,correo,imagen,id_rol) VALUES('" . $user . "','" . $username . "','" . $lastname . "','" . $phone_number . "','" . $password_decoded . "','" . $birthday . "','" . $email . "','".$base64."',1);";
         if ($connection->query($sql)) {
-            $url = "../index.php?";
-            $mensaje = "mensaje='Usuario creado con exito'";
+            $url = "../index.php";
+            $mensaje = "?mensaje=Usuario creado con exito";
         } else {
-            $mensaje = $mensaje . "'No se pudo crear al usuario  Usuario o Correo repetidos'";
+            $sql="SELECT 1 FROM tiempomaya.usuario WHERE correo='".$email."';";
+            $mensaje = "?mensaje=No se pudo crear al usuario ";
+            if($connection->query($sql)){
+                $mensaje.=" correo repetido ";
+
+            }
+            $sql="SELECT 1 FROM tiempomaya.usuario WHERE usuario='".$user."';";
+            if($connection->query($sql)){
+                $mensaje.=" usuario repetido ";
+            }
+            
         }
         $connection->close();
+    }else{
+        $mensaje = "?mensaje=Las contraseñas no coinciden";
     }
 }
 $url = $url . $mensaje;

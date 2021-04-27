@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <?php
 $conn = include 'conexion/conexion.php';
+
 if (isset($_POST['categoria'])) {
     $nombre = $_POST['categoria'];
 } elseif (isset($_GET['nombre'])) {
@@ -60,8 +61,8 @@ $array = "";
                                 <i class="far fa-save"></i>
                             </button>
                             <div>
-                                <input type="text" name="auxArray" id="auxArray" hidden value="<?php echo $array ?>">
-                                <input type="text" name="categoria" hidden value="<?php echo $nombre      ?>">                                                                                         
+                                <input type="text" name="auxArray" id="auxArray" hidden value="<?php echo isset($array) ? $array : ''; ?>">
+                                <input type="text" name="categoria" hidden value="<?php echo isset($nombre) ? $nombre : ''; ?>">                                                                                         
                         </div>
                     </form>
                 </div>

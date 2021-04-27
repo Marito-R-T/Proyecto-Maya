@@ -68,6 +68,8 @@ if (isset($_GET['t']) && isset($_GET['n'])) {
                                 <input hidden type="text" name="nombre" value="<?php echo isset($nombre) ? $nombre : ''; ?>">
                                  <input hidden type="text" name="categoria" value="<?php echo isset($categoria) ? $categoria : ''; ?>">
                                 <input hidden type="text" name="admin" value="1">
+                                <input hidden type="text" name="categoria" value="<?php echo isset($categoria) ? $categoria : ''; ?>">
+                         
                             </form>
                         </div>
                     </div>

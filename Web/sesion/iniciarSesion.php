@@ -14,7 +14,7 @@
 
 <body>
 
-  <?php include "NavBar.php" ?>
+  <?php include "../NavBar2.php" ?>
   <div>
     <section id="inicio">
       <div id="inicioContainer" class="inicio-container">
@@ -23,12 +23,17 @@
           <form action="../backend/inicioSesion.php" method="POST">
             <h1>Inicio de Sesion</h1>
             <div class="mb-1">
-              <label for="email" class="form-label">Correo Electronico</label>
+              <label for="email" class="form-label ">Correo Electronico</label>
               <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-1">
-              <label for="password" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="password" name="password">
+              <label for="password" class="form-label ">Contraseña</label>
+              <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password">
+                <div class="input-group-append">
+                  <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                </div>
+              </div>
             </div>
             <button type="submit" class="btn btn-get-started">Login</button>
           </form>
@@ -41,6 +46,10 @@
 
 
   <?php include "../blocks/bloquesJs.html" ?>
+
+  <script type="text/javascript">
+    <?php include "../js/PasswrdUser.js" ?>
+  </script>
 
 </body>
 
