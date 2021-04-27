@@ -5,6 +5,7 @@
  */
 package submenus.calendarioCholquij;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -12,6 +13,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import modelos.database.Mensaje;
 import modelos.database.informacionCalendarioCholqijDb;
+import modelos.objetos.Informacion2;
 import modelos.objetos.Usuario;
 import modelos.objetos.datoCalendarioCholqij;
 
@@ -36,12 +38,18 @@ public class panelInformacionCalendarioCholqij extends javax.swing.JPanel {
         Imagen img = new Imagen();
         this.add(img);
         this.repaint();
-
+        panelTitulo.setBackground(new Color(255,255,255,100));
         opcionInfo = opcion;
         usuarioLogueado = user;
         //dependiendo del rol se puede editar o no.
-        validacionusuario();
 
+
+        /*
+        validacionusuario();
+*/
+        
+        
+        
         areaInformacion.setLineWrap(true);
         //dependiendo la opcion leemos la DB
         clasificarDatoMostrar();
@@ -62,15 +70,15 @@ public class panelInformacionCalendarioCholqij extends javax.swing.JPanel {
 
 
     private void clasificarDatoMostrar() {
-        datoCalendarioCholqij datoLee = infCC.leerDatoCalendarioCholqij(opcionInfo);
-        lblTitulo.setText(datoLee.getTitulo());
-        areaInformacion.setText(datoLee.getContenido());
+        Informacion2 datoLee = infCC.leerDatoCalendarioCholqij(opcionInfo);
+        lblTitulo.setText(datoLee.getNombre());
+        areaInformacion.setText(datoLee.getDescEscritorio());
 
-        ImageIcon imIconExit = new ImageIcon(datoLee.getUrlImagen());
-        Icon iconoExit = new ImageIcon(imIconExit.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
-        iconoCalendario.setIcon(iconoExit);
+      //  ImageIcon imIconExit = new ImageIcon(datoLee.getUrlImagen());
+       // Icon iconoExit = new ImageIcon(imIconExit.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
+        //iconoCalendario.setIcon(iconoExit);
 
-        datoCC = datoLee;
+       // datoCC = datoLee;
     }
 
     public class Imagen extends javax.swing.JPanel {
@@ -100,21 +108,18 @@ public class panelInformacionCalendarioCholqij extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitulo2 = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
         iconoCalendario = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         areaInformacion = new javax.swing.JTextArea();
+        panelTitulo = new javax.swing.JPanel();
+        lblTitulo2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setPreferredSize(new java.awt.Dimension(1100, 550));
 
-        lblTitulo2.setFont(new java.awt.Font("Jenna Sue", 1, 48)); // NOI18N
-        lblTitulo2.setForeground(new java.awt.Color(204, 0, 102));
-        lblTitulo2.setText("CALENDARIO CHOLQIJ");
-
-        lblTitulo.setFont(new java.awt.Font("Jenna Sue", 3, 50)); // NOI18N
+        lblTitulo.setFont(new java.awt.Font("Jenna Sue", 3, 36)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(153, 0, 102));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText(" ");
@@ -138,47 +143,71 @@ public class panelInformacionCalendarioCholqij extends javax.swing.JPanel {
         areaInformacion.setWrapStyleWord(true);
         jScrollPane2.setViewportView(areaInformacion);
 
+        lblTitulo2.setFont(new java.awt.Font("Jenna Sue", 1, 48)); // NOI18N
+        lblTitulo2.setForeground(new java.awt.Color(43, 145, 113));
+        lblTitulo2.setText("CALENDARIO CHOLQIJ");
+
+        javax.swing.GroupLayout panelTituloLayout = new javax.swing.GroupLayout(panelTitulo);
+        panelTitulo.setLayout(panelTituloLayout);
+        panelTituloLayout.setHorizontalGroup(
+            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo2)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        panelTituloLayout.setVerticalGroup(
+            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTituloLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitulo2)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(lblTitulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
-                                .addComponent(iconoCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(65, 65, 65)
-                        .addComponent(jScrollPane2)))
-                .addContainerGap())
+                                .addComponent(iconoCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTitulo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(iconoCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30))
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -202,5 +231,6 @@ public class panelInformacionCalendarioCholqij extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo2;
+    private javax.swing.JPanel panelTitulo;
     // End of variables declaration//GEN-END:variables
 }

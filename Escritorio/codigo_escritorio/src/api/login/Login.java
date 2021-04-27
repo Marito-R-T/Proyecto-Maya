@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -20,18 +23,17 @@ public class Login extends javax.swing.JFrame {
     private MenuPrincipal menu;
     public static ArchivoLogin archivoLogin = new ArchivoLogin();
     public static Usuario usuarioLogueado = null;
-    
 
     public Login() {
         this.setContentPane(fondoPanel);
         initComponents();
         this.setLocationRelativeTo(null);
         panelSesion.setBackground(new Color(255, 255, 255, 100));
- 
+
         ImageIcon imIcon = new ImageIcon("src/api/login/imagenes/icono.png");
         Icon icono = new ImageIcon(imIcon.getImage().getScaledInstance(labelIcono.getWidth(), labelIcono.getHeight(), Image.SCALE_DEFAULT));
         labelIcono.setIcon(icono);
-        
+
         ImageIcon imIconExit = new ImageIcon("src/api/login/imagenes/salir.png");
         Icon iconoExit = new ImageIcon(imIconExit.getImage().getScaledInstance(botonSalir.getWidth(), botonSalir.getHeight(), Image.SCALE_DEFAULT));
         botonSalir.setIcon(iconoExit);
@@ -39,16 +41,29 @@ public class Login extends javax.swing.JFrame {
 
     //logue al usuario
     public void loguear() {
-        usuarioLogueado = usuarioDb.validacionUsuario(textFieldCorreo.getText(), passFieldContrasenia.getText());
-        if (usuarioLogueado != null) {
-            System.out.println("Se logueo xD");
-            recordarSesion(usuarioLogueado);
-            menu = new MenuPrincipal(usuarioLogueado);
-            menu.setVisible(true);
-            this.setVisible(false);
-        } else {
-            System.out.println("NO Se logueo xD");
-            JOptionPane.showMessageDialog(null, "El Correo o Contraseña son Incorrectos");
+        try {
+            //PARTE DE CHEJIN QUE TENGO QUE FUSIONAR
+            usuarioLogueado = usuarioDb.validacionUsuario(textFieldCorreo.getText(), passFieldContrasenia.getText());
+            String password = CifradoPasswords.md5(passFieldContrasenia.getText());   //new String(cifrado.cifra(passFieldContrasenia.getText()), StandardCharsets.UTF_8);
+            if (usuarioLogueado != null) {
+                System.out.println(password + " --- " +usuarioLogueado.getPassword());
+                if (password.equals(usuarioLogueado.getPassword())) {
+                    recordarSesion(usuarioLogueado);
+                    menu = new MenuPrincipal(usuarioLogueado);
+                    menu.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    System.out.println("NO Se logueo xD");
+                    JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+                }
+            } else {
+                System.out.println("NO Se logueo xD");
+                JOptionPane.showMessageDialog(null, "El Correo o Contraseña son Incorrectos");
+
+                //FIN PARTE DE CHEJIN
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -119,33 +134,42 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        textFieldCorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lobster", 1, 24), new java.awt.Color(255, 102, 204))); // NOI18N
+        textFieldCorreo.setBackground(new java.awt.Color(216, 221, 239));
+        textFieldCorreo.setForeground(new java.awt.Color(60, 21, 59));
+        textFieldCorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lobster", 1, 24), new java.awt.Color(60, 21, 59)));
         textFieldCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldCorreojTextField2ActionPerformed(evt);
             }
         });
 
-        passFieldContrasenia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contraseña", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lobster", 1, 24), new java.awt.Color(51, 102, 255))); // NOI18N
+        passFieldContrasenia.setBackground(new java.awt.Color(216, 221, 239));
+        passFieldContrasenia.setForeground(new java.awt.Color(60, 21, 59));
+        passFieldContrasenia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contraseña", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lobster", 1, 24), new java.awt.Color(60, 21, 59)));
+        passFieldContrasenia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passFieldContraseniaActionPerformed(evt);
+            }
+        });
         passFieldContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 passFieldContraseniaKeyReleased(evt);
             }
         });
 
-        checkBoxRecordar.setBackground(new java.awt.Color(255, 255, 255));
-        checkBoxRecordar.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
-        checkBoxRecordar.setForeground(new java.awt.Color(0, 0, 0));
+        checkBoxRecordar.setBackground(new java.awt.Color(216, 221, 239));
+        checkBoxRecordar.setFont(new java.awt.Font("Jenna Sue", 1, 12)); // NOI18N
+        checkBoxRecordar.setForeground(new java.awt.Color(60, 21, 59));
         checkBoxRecordar.setText("No cerrar sesion");
-        checkBoxRecordar.setOpaque(false);
         checkBoxRecordar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkBoxRecordarActionPerformed(evt);
             }
         });
 
-        botonSingIn.setBackground(new java.awt.Color(153, 204, 255));
-        botonSingIn.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
+        botonSingIn.setBackground(new java.awt.Color(45, 201, 151));
+        botonSingIn.setFont(new java.awt.Font("Jenna Sue", 1, 18)); // NOI18N
+        botonSingIn.setForeground(new java.awt.Color(115, 111, 114));
         botonSingIn.setText("Ingresar");
         botonSingIn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonSingIn.addActionListener(new java.awt.event.ActionListener() {
@@ -154,10 +178,11 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jSeparator1.setBackground(new java.awt.Color(255, 0, 0));
+        jSeparator1.setBackground(new java.awt.Color(244, 96, 54));
 
-        botonSingUp.setBackground(new java.awt.Color(153, 255, 153));
-        botonSingUp.setFont(new java.awt.Font("Jenna Sue", 1, 24)); // NOI18N
+        botonSingUp.setBackground(new java.awt.Color(115, 111, 114));
+        botonSingUp.setFont(new java.awt.Font("Jenna Sue", 1, 18)); // NOI18N
+        botonSingUp.setForeground(new java.awt.Color(45, 201, 151));
         botonSingUp.setText("Registrarse");
         botonSingUp.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(255, 255, 0)));
         botonSingUp.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +192,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Liberation Serif", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(60, 21, 59));
         jLabel2.setText("BIENVENIDO");
 
         javax.swing.GroupLayout panelSesionLayout = new javax.swing.GroupLayout(panelSesion);
@@ -207,10 +233,10 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(textFieldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(passFieldContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(panelSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonSingIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkBoxRecordar))
+                .addGap(0, 0, 0)
+                .addComponent(checkBoxRecordar)
+                .addGap(2, 2, 2)
+                .addComponent(botonSingIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -220,7 +246,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(102, 255, 255));
         jLabel1.setFont(new java.awt.Font("Jenna Sue", 3, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel1.setForeground(new java.awt.Color(60, 21, 59));
         jLabel1.setText("Salir");
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
@@ -230,8 +256,8 @@ public class Login extends javax.swing.JFrame {
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                 .addContainerGap(113, Short.MAX_VALUE)
@@ -243,9 +269,9 @@ public class Login extends javax.swing.JFrame {
             .addGroup(panelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(panelSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,6 +312,10 @@ public class Login extends javax.swing.JFrame {
         verificarCampos();
     }//GEN-LAST:event_botonSingInActionPerformed
 
+    private void passFieldContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFieldContraseniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passFieldContraseniaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
@@ -298,7 +328,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel labelIcono;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panelSesion;
-    private javax.swing.JPasswordField passFieldContrasenia;
+    public javax.swing.JPasswordField passFieldContrasenia;
     private javax.swing.JTextField textFieldCorreo;
     // End of variables declaration//GEN-END:variables
 

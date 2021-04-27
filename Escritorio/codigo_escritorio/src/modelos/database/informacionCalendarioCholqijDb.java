@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static modelos.database.UsuarioDb.VALIDACION_LOGEO;
+import modelos.objetos.Informacion2;
 import modelos.objetos.Usuario;
 import modelos.objetos.datoCalendarioCholqij;
 
@@ -88,21 +89,68 @@ public class informacionCalendarioCholqijDb {
         return listaDatosCC;
     }
 
-    public datoCalendarioCholqij leerDatoCalendarioCholqij(int idDatoCC) {//leemos un datoCC en especifico y lo devolvemos
-        datoCalendarioCholqij datoBuscar = null;
-
-        try {
-            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM datosCalendarioCholqij WHERE idDato= ? ;");
-            statement.setInt(1, idDatoCC);
-            ResultSet resultado = statement.executeQuery();
-
-            while (resultado.next()) {
-                datoBuscar = convertirDato(resultado);
+    public Informacion2 leerDatoCalendarioCholqij(int idDatoCC) {//leemos un datoCC en especifico y lo devolvemos
+        Informacion2 datoCholqij = null;
+        switch(idDatoCC){
+            case 1:
+            {
+                try {
+                    PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM informacion WHERE id_cat_calendario = 1 AND nombre_informacion = 'El Calendario Tzolk’in';");
+                    ResultSet result = statement.executeQuery();
+                    while(result.next()){
+                        datoCholqij = new Informacion2(result.getInt(1), result.getString(2), result.getInt(3), result.getString(4), result.getString(5));
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(informacionCalendarioCholqijDb.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }    
+                
+                break;
+            case 2:
+            {
+                try {
+                    PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM informacion WHERE id_cat_calendario = 1 AND nombre_informacion = 'Dias del Cholq’ij';");
+                    ResultSet result = statement.executeQuery();
+                    while(result.next()){
+                        datoCholqij = new Informacion2(result.getInt(1), result.getString(2), result.getInt(3), result.getString(4), result.getString(5));
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(informacionCalendarioCholqijDb.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }    
+                break;
+            case 3:
+            {
+                try {
+                    PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM informacion WHERE id_cat_calendario = 1 AND nombre_informacion = 'Forma de contar el Cholq’ij';");
+                    ResultSet result = statement.executeQuery();
+                    while(result.next()){
+                        datoCholqij = new Informacion2(result.getInt(1), result.getString(2), result.getInt(3), result.getString(4), result.getString(5));
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(informacionCalendarioCholqijDb.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }                
+                break;
+            case 4:
+            {
+                try {
+                    PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM informacion WHERE id_cat_calendario = 1 AND nombre_informacion = 'Calendario Lunar';");
+                    ResultSet result = statement.executeQuery();
+                    while(result.next()){
+                        datoCholqij = new Informacion2(result.getInt(1), result.getString(2), result.getInt(3), result.getString(4), result.getString(5));
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(informacionCalendarioCholqijDb.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR: \n no se encontro el usuario");
+                break;
+
+            default:
+                
+                break;
         }
-        return datoBuscar;
+        return datoCholqij;
     }
 
     public datoCalendarioCholqij convertirDato(ResultSet resultado) {//del resultado de la busqueda obtener el datoCC

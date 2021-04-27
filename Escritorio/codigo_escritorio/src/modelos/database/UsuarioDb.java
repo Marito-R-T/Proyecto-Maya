@@ -20,22 +20,26 @@ import modelos.objetos.Usuario;
  */
 public class UsuarioDb {
 
-    public static String VALIDACION_LOGEO = "SELECT * FROM usuario WHERE email = ? AND password = ?";
+    public static String VALIDACION_LOGEO = "SELECT * FROM usuario WHERE correo = ?";
     private Mensaje mensajes = new Mensaje();
 
     public void crearUsuario(Usuario usuarioACrear) {//creamos un nuevo usuario
         try {
             PreparedStatement statement = ConexionDb.conexion.prepareStatement("INSERT INTO usuario "
-                    + "(username,password,email,nombre,apellido,nacimiento,telefono,rol) "
-                    + "VALUES (?,?,?,?,?,?,?,?);");
+                    + "(usuario,password,nombre,apellido,correo,fechaNacimiento,telefono,imagen,id_rol) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?);");
             statement.setString(1, usuarioACrear.getUsername());
             statement.setString(2, usuarioACrear.getPassword());
-            statement.setString(3, usuarioACrear.getEmail());
-            statement.setString(4, usuarioACrear.getNombre());
-            statement.setString(5, usuarioACrear.getApellido());
+            statement.setString(3, usuarioACrear.getNombre());
+            statement.setString(4, usuarioACrear.getApellido());
+            statement.setString(5, usuarioACrear.getEmail());
+            
+            
             statement.setDate(6, usuarioACrear.getNacimiento());
-            statement.setInt(7, usuarioACrear.getNumeroTel());
-            statement.setInt(8, usuarioACrear.getRol());
+            statement.setString(7, usuarioACrear.getNumeroTel());
+            statement.setString(8, null);
+            statement.setInt(9, usuarioACrear.getRol());
+            System.out.println(statement);
             statement.executeUpdate();
             mensajes.informacion("Se ha creado el usuario con exito.");
         } catch (SQLException ex) {
@@ -47,17 +51,17 @@ public class UsuarioDb {
         boolean actualizado = false;
         try {
             PreparedStatement statement = ConexionDb.conexion.prepareStatement("UPDATE usuario SET "
-                    + "userName=? , password =? , email=?,  "
-                    + "nombre=? ,  apellido=? , nacimiento= ? , "
-                    + "telefono = ? , rol=?  "
-                    + "WHERE username=?;");
+                    + "usuario=? , password =? , correo=?,  "
+                    + "nombre=? ,  apellido=? , fechaNacimiento= ? , "
+                    + "telefono = ? , id_rol=?  "
+                    + "WHERE usuario=?;");
             statement.setString(1, usuarioActualizar.getUsername());
             statement.setString(2, usuarioActualizar.getPassword());
             statement.setString(3, usuarioActualizar.getEmail());
             statement.setString(4, usuarioActualizar.getNombre());
             statement.setString(5, usuarioActualizar.getApellido());
             statement.setDate(6, usuarioActualizar.getNacimiento());
-            statement.setInt(7, usuarioActualizar.getNumeroTel());
+            statement.setString(7, usuarioActualizar.getNumeroTel());
             statement.setInt(8, usuarioActualizar.getRol());
 
             statement.setString(9, userNameAntiguo);
@@ -73,7 +77,7 @@ public class UsuarioDb {
 
     public void eliminarUsuario(Usuario usuarioAEliminar) {//eliminamos usuario
         try {
-            PreparedStatement statement = ConexionDb.conexion.prepareStatement("DELETE FROM usuario WHERE username=?;");
+            PreparedStatement statement = ConexionDb.conexion.prepareStatement("DELETE FROM usuario WHERE usuario=?;");
             statement.setString(1, usuarioAEliminar.getUsername());
             statement.executeUpdate();
             mensajes.informacion("Se ha eliminado el usuario con exito.");
@@ -118,8 +122,8 @@ public class UsuarioDb {
         Usuario usuarioDevolver = null;
         try {
             usuarioDevolver = new Usuario(resultado.getString(1), resultado.getString(2), resultado.getString(3),
-                    resultado.getString(4), resultado.getString(5), resultado.getInt(7),
-                    resultado.getDate(6), resultado.getInt(8));
+                    resultado.getString(4), resultado.getString(5), resultado.getDate(6),
+                    resultado.getString(7), resultado.getInt(9));
         } catch (SQLException ex) {
             System.out.println("error en conversion de usuario");
         }
@@ -132,7 +136,6 @@ public class UsuarioDb {
         try {
             PreparedStatement statement = ConexionDb.conexion.prepareStatement(VALIDACION_LOGEO);
             statement.setString(1, correo);
-            statement.setString(2, password);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 aDevolver = convertirAUsuario(result);

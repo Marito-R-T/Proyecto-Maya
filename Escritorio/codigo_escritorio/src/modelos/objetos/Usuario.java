@@ -14,14 +14,16 @@ import java.sql.Date;
 public class Usuario {
     
     private String username, password, email, nombre, apellido;
-    private int numeroTel;
+    private String numeroTel;
     private Date nacimiento;
     private int rol;
+    private String imagen;
 
     public Usuario() {
     }
     
-    public Usuario(String username, String password, String email, String nombre, String apellido, int numeroTel, Date nacimiento, int rol) {
+//    public Usuario(String username, String password, String nombre, String apellido, String email, Date nacimiento, int numeroTel, String imagen,  int rol) {
+    public Usuario(String username, String password, String nombre, String apellido, String email, Date nacimiento, String numeroTel, int rol) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -30,6 +32,7 @@ public class Usuario {
         this.numeroTel = numeroTel;
         this.nacimiento = nacimiento;
         this.rol = rol;
+        this.imagen = imagen;
     }
 
     public String getUsername() {
@@ -72,13 +75,15 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public int getNumeroTel() {
+    public String getNumeroTel() {
         return numeroTel;
     }
 
-    public void setNumeroTel(int numeroTel) {
+    public void setNumeroTel(String numeroTel) {
         this.numeroTel = numeroTel;
     }
+
+
 
     public Date getNacimiento() {
         return nacimiento;
@@ -96,6 +101,16 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Usuario{" + "username=" + username + ", password=" + password + ", email=" + email + ", nombre=" + nombre + ", apellido=" + apellido + ", numeroTel=" + numeroTel + ", nacimiento=" + nacimiento + ", rol=" + rol + '}';

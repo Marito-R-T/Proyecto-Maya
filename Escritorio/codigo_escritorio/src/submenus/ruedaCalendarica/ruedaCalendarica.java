@@ -109,7 +109,7 @@ public class ruedaCalendarica extends javax.swing.JPanel {
         boxDate.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Jenna Sue", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 0, 102));
+        jLabel2.setForeground(new java.awt.Color(112, 54, 139));
         jLabel2.setText("RUEDA CALENDARICA");
 
         jButton1.setBackground(new java.awt.Color(255, 255, 204));
@@ -127,8 +127,15 @@ public class ruedaCalendarica extends javax.swing.JPanel {
         txtKatun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Katun", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 24), new java.awt.Color(255, 0, 153))); // NOI18N
 
         txtBaktun.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtBaktun.setForeground(new java.awt.Color(25, 9, 9));
         txtBaktun.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtBaktun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Baktun", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 24), new java.awt.Color(255, 0, 153))); // NOI18N
+        txtBaktun.setSelectionColor(new java.awt.Color(93, 145, 250));
+        txtBaktun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBaktunActionPerformed(evt);
+            }
+        });
 
         txtTun.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtTun.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -142,8 +149,8 @@ public class ruedaCalendarica extends javax.swing.JPanel {
         txtKin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtKin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Kin", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 24), new java.awt.Color(255, 0, 153))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Jenna Sue", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 102));
+        jLabel1.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(112, 54, 139));
         jLabel1.setText("Cuenta Larga");
 
         lblKatun.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -204,7 +211,7 @@ public class ruedaCalendarica extends javax.swing.JPanel {
                             .addComponent(lblKin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtKin, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -272,11 +279,17 @@ public class ruedaCalendarica extends javax.swing.JPanel {
                     .addComponent(diaTzol, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        txtBaktun.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         verificarFecha();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtBaktunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBaktunActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBaktunActionPerformed
 
     private void verificarFecha() {
         if (boxDate.getDate() != null) {

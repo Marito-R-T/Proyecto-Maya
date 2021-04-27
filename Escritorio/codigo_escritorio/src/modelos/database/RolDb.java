@@ -88,7 +88,7 @@ public class RolDb {
     public Rol convertirARol(ResultSet resultado) {
         Rol rolDevolver = null;
         try {
-            rolDevolver = new Rol(resultado.getInt(1), resultado.getString("tipo"));
+            rolDevolver = new Rol(resultado.getInt(1), resultado.getString("nombre"));
         } catch (SQLException ex) {
             System.out.println("error en conversion de rol");
         }

@@ -72,7 +72,7 @@ public class panelMatrizCholqij extends javax.swing.JPanel {
         cuadroPanel.setLayout(cuadroPanelLayout);
         cuadroPanelLayout.setHorizontalGroup(
             cuadroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 995, Short.MAX_VALUE)
+            .addGap(0, 1005, Short.MAX_VALUE)
         );
         cuadroPanelLayout.setVerticalGroup(
             cuadroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,12 +86,14 @@ public class panelMatrizCholqij extends javax.swing.JPanel {
         infoTextArea.setLineWrap(true);
         infoTextArea.setRows(5);
         infoTextArea.setWrapStyleWord(true);
-        infoTextArea.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lobster", 1, 18), new java.awt.Color(153, 0, 51))); // NOI18N
+        infoTextArea.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lobster", 1, 18), new java.awt.Color(244, 96, 54)));
         jScrollPane2.setViewportView(infoTextArea);
 
-        labelNahual.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nahual", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 24), new java.awt.Color(204, 0, 51))); // NOI18N
+        labelNahual.setFont(new java.awt.Font("Ubuntu", 0, 10)); // NOI18N
+        labelNahual.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nahual", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 15), new java.awt.Color(60, 21, 59)));
 
-        labelEnergia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Energia", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 24), new java.awt.Color(204, 0, 51))); // NOI18N
+        labelEnergia.setFont(new java.awt.Font("Ubuntu", 0, 10)); // NOI18N
+        labelEnergia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Energia", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 15), new java.awt.Color(60, 21, 59)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

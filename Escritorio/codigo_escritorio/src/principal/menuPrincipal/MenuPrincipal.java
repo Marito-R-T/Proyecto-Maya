@@ -6,6 +6,7 @@
 package principal.menuPrincipal;
 
 import api.login.ArchivoLogin;
+import api.login.Login;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -13,8 +14,11 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import modelos.objetos.Usuario;
 import principal.backend.perfil_usuario.Informacion;
+import seguridad.VerificacionDeRoles;
+import submenus.nahuales.configuracionAdministrador.ConfiguracionAdministrador;
 import submenus.nahuales.panelNahuales;
 import submenus.perfilUsuario.menuPerfil;
 import submenus.ruedaCalendarica.ruedaCalendarica;
@@ -57,6 +61,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ImageIcon imCS = new ImageIcon("src/api/login/imagenes/cerrarSesion.png");
         Icon iconSC = new ImageIcon(imCS.getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT));
         cerrarSesion.setIcon(iconSC);
+        if (VerificacionDeRoles.verificarAccesoParaFuncionesAdministrativas(userM)) {
+            ImageIcon config = new ImageIcon("src/api/login/imagenes/config.png");
+            Icon iconConfig = new ImageIcon(config.getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT));
+            configAdmin.setIcon(iconConfig);
+        } else {
+            configAdmin.setVisible(false);
+        }
 
     }
 
@@ -90,11 +101,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         menuLineaTiempo = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         editPerfil = new javax.swing.JMenu();
-        menuEditPerfil = new javax.swing.JMenuItem();
         cerrarSesion = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        configAdmin = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -105,6 +114,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setResizable(false);
 
         panelPrincipal.setBackground(new java.awt.Color(0, 204, 204));
+
+        tabPP.setForeground(new java.awt.Color(60, 21, 59));
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -121,14 +132,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jMenuBar1.setBackground(new java.awt.Color(184, 220, 245));
+        jMenuBar1.setBackground(new java.awt.Color(45, 201, 151));
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenuBar1.setPreferredSize(new java.awt.Dimension(64, 60));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(64, 55));
 
+        jMenu5.setBackground(new java.awt.Color(45, 201, 151));
         jMenu5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu5.setForeground(new java.awt.Color(60, 21, 59));
         jMenu5.setText("Nahuales");
-        jMenu5.setFont(new java.awt.Font("Jenna Sue", 1, 30)); // NOI18N
-        jMenu5.setPreferredSize(new java.awt.Dimension(93, 40));
+        jMenu5.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu5.setPreferredSize(new java.awt.Dimension(105, 40));
 
         menuNahuales.setText("Conocer Nahuales");
         menuNahuales.addActionListener(new java.awt.event.ActionListener() {
@@ -140,9 +155,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu2.setBackground(new java.awt.Color(45, 201, 151));
         jMenu2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu2.setForeground(new java.awt.Color(60, 21, 59));
         jMenu2.setText("Calendario Cholqij");
-        jMenu2.setFont(new java.awt.Font("Jenna Sue", 1, 30)); // NOI18N
+        jMenu2.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu2.setPreferredSize(new java.awt.Dimension(200, 29));
 
         menuCalendarioLunarCC.setText("Calendario Lunar");
         menuCalendarioLunarCC.addActionListener(new java.awt.event.ActionListener() {
@@ -202,10 +222,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setBackground(new java.awt.Color(45, 201, 151));
         jMenu3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu3.setForeground(new java.awt.Color(60, 21, 59));
         jMenu3.setText("Calendario Haab");
-        jMenu3.setFont(new java.awt.Font("Jenna Sue", 1, 30)); // NOI18N
-        jMenu3.setPreferredSize(new java.awt.Dimension(141, 45));
+        jMenu3.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu3.setPreferredSize(new java.awt.Dimension(180, 45));
 
         menuCalendarioHaab.setText("Explorar Calendario Haab");
         menuCalendarioHaab.addActionListener(new java.awt.event.ActionListener() {
@@ -217,10 +241,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setBackground(new java.awt.Color(45, 201, 151));
         jMenu4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu4.setForeground(new java.awt.Color(60, 21, 59));
         jMenu4.setText("Rueda Calendarica");
-        jMenu4.setFont(new java.awt.Font("Jenna Sue", 1, 30)); // NOI18N
-        jMenu4.setPreferredSize(new java.awt.Dimension(171, 45));
+        jMenu4.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu4.setPreferredSize(new java.awt.Dimension(195, 45));
 
         menuRC.setText("Explorar rueda Calendarica");
         menuRC.addActionListener(new java.awt.event.ActionListener() {
@@ -232,10 +260,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu6.setBackground(new java.awt.Color(45, 201, 151));
         jMenu6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu6.setForeground(new java.awt.Color(60, 21, 59));
         jMenu6.setText("Linea de Tiempo");
-        jMenu6.setFont(new java.awt.Font("Jenna Sue", 1, 30)); // NOI18N
-        jMenu6.setPreferredSize(new java.awt.Dimension(141, 45));
+        jMenu6.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu6.setPreferredSize(new java.awt.Dimension(200, 45));
 
         menuLineaTiempo.setText("Explorar Linea de Tiempo");
         menuLineaTiempo.addActionListener(new java.awt.event.ActionListener() {
@@ -247,48 +279,76 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
+        jMenu1.setBackground(new java.awt.Color(45, 201, 151));
         jMenu1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu1.setForeground(new java.awt.Color(60, 21, 59));
         jMenu1.setText("Limpiar pantalla");
-        jMenu1.setFont(new java.awt.Font("Jenna Sue", 1, 31)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Century Schoolbook L", 0, 18)); // NOI18N
+        jMenu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu1.setOpaque(true);
+        jMenu1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jMenu1StateChanged(evt);
+            }
+        });
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu1MousePressed(evt);
+            }
+        });
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
             }
         });
-
-        jMenuItem2.setText("Limpiar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem2);
-
         jMenuBar1.add(jMenu1);
 
         editPerfil.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        menuEditPerfil.setText("Editar Perfil");
-        menuEditPerfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEditPerfilActionPerformed(evt);
+        editPerfil.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                editPerfilStateChanged(evt);
             }
         });
-        editPerfil.add(menuEditPerfil);
-
+        editPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editPerfilMousePressed(evt);
+            }
+        });
         jMenuBar1.add(editPerfil);
 
         cerrarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jMenuItem10.setText("Cerrar Sesion");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+        cerrarSesion.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                cerrarSesionStateChanged(evt);
             }
         });
-        cerrarSesion.add(jMenuItem10);
-
+        cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cerrarSesionMousePressed(evt);
+            }
+        });
         jMenuBar1.add(cerrarSesion);
+
+        configAdmin.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                configAdminStateChanged(evt);
+            }
+        });
+        configAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                configAdminMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                configAdminMousePressed(evt);
+            }
+        });
+        configAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configAdminActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(configAdmin);
 
         setJMenuBar(jMenuBar1);
 
@@ -336,22 +396,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             super.paintComponent(grafico);
         }
     }
-
-    private void menuEditPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditPerfilActionPerformed
-        Usuario user2 = info.buscarDatos(user.getUsername());
-        if (user2 != null) {
-            /*            FramePerfil perfil = new FramePerfil(null, true, user);
-            perfil.setVisible(true);
-            
-             */
-            String nombreTab = menuEditPerfil.getText();
-            tabPP.removeAll();
-            menuPerfil mp = new menuPerfil(null, true, user);
-            tabPP.add(mp);
-            tabPP.setTitleAt(0, nombreTab);
-
-        }
-    }//GEN-LAST:event_menuEditPerfilActionPerformed
 
     private void menuCalendarioLunarCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCalendarioLunarCCActionPerformed
         String nombreTab = menuCalendarioLunarCC.getText();
@@ -451,30 +495,95 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuNahualesActionPerformed
 
     private void menuRCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRCActionPerformed
-       String nombreTab = menuRC.getText();
+        String nombreTab = menuRC.getText();
         tabPP.removeAll();
         ruedaCalendarica p = new ruedaCalendarica();
         tabPP.add(p);
         tabPP.setTitleAt(0, nombreTab);
-         // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_menuRCActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
     }//GEN-LAST:event_jMenu1ActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        archivoLogin.escribirArchivo(null);
-        System.exit(0);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    private void configAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configAdminMouseClicked
+    }//GEN-LAST:event_configAdminMouseClicked
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        tabPP.removeAll();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void configAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configAdminActionPerformed
+
+    }//GEN-LAST:event_configAdminActionPerformed
+
+    private void configAdminStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_configAdminStateChanged
+      
+
+    }//GEN-LAST:event_configAdminStateChanged
+
+    private void editPerfilStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editPerfilStateChanged
+
+    }//GEN-LAST:event_editPerfilStateChanged
+
+    private void jMenu1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jMenu1StateChanged
+        
+        
+    }//GEN-LAST:event_jMenu1StateChanged
+
+    private void cerrarSesionStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cerrarSesionStateChanged
+        
+    }//GEN-LAST:event_cerrarSesionStateChanged
+
+    private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
+        if (jMenu1.isSelected()) {
+        tabPP.removeAll();    
+        }
+    }//GEN-LAST:event_jMenu1MousePressed
+
+    private void cerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarSesionMousePressed
+       if (cerrarSesion.isSelected()&&cerrarSesion.isTopLevelMenu()) {
+            
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        
+        int dialogResult = JOptionPane.showConfirmDialog(null, "¿ Está seguro que quiere cerrar la sesión ?", "Advertencia", dialogButton);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            Login log = new Login();
+            this.setVisible(false);
+            dispose();
+            log.setVisible(true);
+        } 
+        }
+    }//GEN-LAST:event_cerrarSesionMousePressed
+
+    private void editPerfilMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editPerfilMousePressed
+              if (editPerfil.isSelected()&&editPerfil.isTopLevelMenu()) {
+            Usuario user2 = info.buscarDatos(user.getUsername());
+            if (user2 != null) {
+                /*            FramePerfil perfil = new FramePerfil(null, true, user);
+            perfil.setVisible(true);
+            
+                 */
+
+                tabPP.removeAll();
+                menuPerfil mp = new menuPerfil(null, true, user);
+                tabPP.add(mp);
+                tabPP.setTitleAt(0, "Perfil");
+            }
+
+        }
+    }//GEN-LAST:event_editPerfilMousePressed
+
+    private void configAdminMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configAdminMousePressed
+          if (configAdmin.isSelected()) {
+
+            tabPP.removeAll();
+            ConfiguracionAdministrador p = new ConfiguracionAdministrador();
+            tabPP.add(p);
+            tabPP.setTitleAt(0, "Configuraciones De Administrador");
+        }
+    }//GEN-LAST:event_configAdminMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu cerrarSesion;
+    private javax.swing.JMenu configAdmin;
     private javax.swing.JMenu editPerfil;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -484,14 +593,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem menuCCInfo;
     private javax.swing.JMenuItem menuCalculaFecha;
     private javax.swing.JMenuItem menuCalendarioHaab;
     private javax.swing.JMenuItem menuCalendarioLunarCC;
     private javax.swing.JMenuItem menuDiasCalendarioLunarCC;
-    private javax.swing.JMenuItem menuEditPerfil;
     private javax.swing.JMenuItem menuFormasCotarCC;
     private javax.swing.JMenuItem menuLineaTiempo;
     private javax.swing.JMenuItem menuMatrizCholqij;
