@@ -426,3 +426,10 @@ ALTER TABLE `uinal`
 ALTER TABLE `usuario`
   ADD CONSTRAINT `FK_USUARIO_ID_ROL` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`);
 COMMIT;
+
+--
+-- Cambios a la entidad Nahual
+--
+ALTER TABLE `nahual` 
+   ADD COLUMN `descripcion` MEDIUMTEXT NULL AFTER `categoria`,
+   ADD COLUMN `rutaEscritorio` VARCHAR(100) NULL AFTER `descripcion`;  
