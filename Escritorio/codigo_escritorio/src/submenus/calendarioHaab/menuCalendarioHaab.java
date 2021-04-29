@@ -8,18 +8,27 @@ package submenus.calendarioHaab;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import modelos.database.FechaHaabDb;
 import modelos.database.InfoHaab;
 import modelos.database.InformacionDb;
 import modelos.database.Utilidades;
+import modelos.database.WinalDb;
 import modelos.objetos.FechaHaab;
 import modelos.objetos.Informacion2;
+import modelos.objetos.Winal;
+import submenus.nahuales.panelNahuales;
 
 /**
  *
@@ -29,16 +38,25 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
 
     private Date fecha = Utilidades.LocalDateToDate(LocalDate.now());
     FechaHaabDb acceso = new FechaHaabDb();
-    
+
     private int index = 0;
     public static ArrayList<InformacionHaab> informacion;
     
+    
+    private WinalDb winalDb = new WinalDb();
+    private ArrayList<Winal> listWinales = null;
+
+    private int indice = 0;
+
     /**
      * Creates new form calendarioHaab
      */
     public menuCalendarioHaab() {
         initComponents();
 
+        
+        listWinales = (ArrayList<Winal>) winalDb.getWinales();
+        
         //fondo de pantalla
         Imagen img = new Imagen();
         this.add(img);
@@ -47,19 +65,12 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
         InformacionDb accesoInf = new InformacionDb();
         boxDate.setDate(fecha);
 
-        
         //PENDIENTE TRABAJAR ESTO:
-       // escribirFecha();
-       
-       
-       
-       
+        // escribirFecha();
         btnAtras.setEnabled(false);
         obtenerInfo();
         agregarPrimerHecho();
-        
-        
-        
+
         ImageIcon imA = new ImageIcon("src/submenus/lineaDeTiempo/imagenesLineaTiempoMaya/adelante.png");
         Icon iconA = new ImageIcon(imA.getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
         btnAdelante.setIcon(iconA);
@@ -67,10 +78,6 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
         ImageIcon imgAt = new ImageIcon("src/submenus/lineaDeTiempo/imagenesLineaTiempoMaya/atras.png");
         Icon iconAt = new ImageIcon(imgAt.getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
         btnAtras.setIcon(iconAt);
-
-        
-        
-        
 
     }
 
@@ -108,17 +115,10 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
         btnAtras = new javax.swing.JButton();
         btnAdelante = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         txtMesHaab = new javax.swing.JLabel();
         lblWinal = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        lblCargador = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        txtDIaHaab = new javax.swing.JLabel();
-        lblNahual = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtSignificado = new javax.swing.JTextArea();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 36), new java.awt.Color(204, 0, 51))); // NOI18N
         jPanel1.setOpaque(false);
@@ -164,17 +164,15 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(panelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(btnAdelante, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(boxDate, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(103, 103, 103)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,23 +191,13 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(221, 221, 253));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Mes"));
 
-        jButton5.setText("Siguiente");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("Anterior");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         txtMesHaab.setText(".");
 
         lblWinal.setText(" ");
+
+        txtSignificado.setColumns(20);
+        txtSignificado.setRows(5);
+        jScrollPane1.setViewportView(txtSignificado);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -218,106 +206,28 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMesHaab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(lblWinal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtMesHaab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(lblWinal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 29, Short.MAX_VALUE)))
+                        .addGap(24, 24, 24))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(txtMesHaab)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(lblWinal, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton5)))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(229, 229, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cargador"));
-
-        lblCargador.setText(".");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(lblCargador, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCargador, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                 .addContainerGap())
-        );
-
-        jPanel9.setBackground(new java.awt.Color(223, 223, 253));
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Dia"));
-
-        jButton2.setText("Siguiente");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Anterior");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        txtDIaHaab.setText(".");
-
-        lblNahual.setText(" ");
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(txtDIaHaab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNahual, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(txtDIaHaab)
-                        .addGap(114, 114, 114))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addComponent(lblNahual, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -325,66 +235,44 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel4.getAccessibleContext().setAccessibleName("Winal");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        mesSiguiente();
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        mesAnterior();
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        fechaSiguiente();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        fechaAnterior();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (!boxDate.isValid()|| boxDate.getDate()==null) {
+        if (!boxDate.isValid() || boxDate.getDate() == null) {
             System.out.println("fecha invalida en calendario haab");
         } else {
             fecha = boxDate.getDate();
-            escribirFecha();
+            calcularFecha();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnAdelanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdelanteActionPerformed
         index++;
         panelInfo.removeAll();
-        if(informacion.size() > index){
+        if (informacion.size() > index) {
             panelInfo.add(informacion.get(index));
             informacion.get(index).setVisible(true);
             panelInfo.validate();
             panelInfo.repaint();
-            if(index == informacion.size()-1){
+            if (index == informacion.size() - 1) {
                 btnAdelante.setEnabled(false);
             } else {
                 btnAdelante.setEnabled(true);
@@ -400,7 +288,7 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
         informacion.get(index).setVisible(true);
         panelInfo.validate();
         panelInfo.repaint();
-        if(index == 0){
+        if (index == 0) {
             btnAtras.setEnabled(false);
         } else {
             btnAtras.setEnabled(true);
@@ -410,11 +298,8 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
 
     public final void escribirFecha() {
         FechaHaab fechaActual = acceso.getFechaEspecifica(Utilidades.DateToLocalDate(fecha));
-        txtDIaHaab.setText(fechaActual.getNahual().getNombre());
         txtMesHaab.setText(fechaActual.getWinal().getNombre());
-        fechaActual.getNahual().getImagen().colocarImagen(lblNahual,135,135);
-        fechaActual.getWinal().getImagen().colocarImagen(lblWinal,135,135);
-        fechaActual.getCargador().colocarImagen(lblCargador);
+        fechaActual.getWinal().getImagen().colocarImagen(lblWinal, 135, 135);
     }
 
     public void fechaSiguiente() {
@@ -468,10 +353,9 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
         boxDate.setDate(fecha);
         escribirFecha();
     }
-    
+
     //Colocando informacion
-    
-    public static final void obtenerInfo(){
+    public static final void obtenerInfo() {
         InfoHaab datoHaab = new InfoHaab();
         ArrayList<Informacion2> arrayInfo = datoHaab.leerHechosHistoricos();
         informacion = new ArrayList<>();
@@ -480,35 +364,93 @@ public class menuCalendarioHaab extends javax.swing.JPanel {
         }
     }
 
-    private void agregarPrimerHecho(){
-        if(informacion.size() > 0){
+    private void agregarPrimerHecho() {
+        if (informacion.size() > 0) {
             panelInfo.add(informacion.get(0));
             informacion.get(0).setVisible(true);
             panelInfo.validate();
             panelInfo.repaint();
         }
     }
+
+    //calculo de fecha para winal
+    private void calcularFecha() {
+        int numWinal = winal(timeHaab(boxDate.getCalendar().getTime().getTime()));
+        indice = numWinal;
+        pintarWinales();
+
+    }
+
+    public int winal(int cont) {
+        int contador = cont;
+        int contWinal = 0;
+        if (contador < 0) {
+            while (contador != 0) {
+                if (contWinal == 18) {
+                    contWinal = 0;
+                } else {
+                    contWinal++;
+                }
+                contador++;
+            }
+            return contWinal;
+        }
+        while (contador != 0) {
+            if (contWinal == 0) {
+                contWinal = 18;
+            } else {
+                contWinal--;
+            }
+            contador--;
+        }
+        return contWinal;
+    }
+
+    public int timeHaab(long date) {
+        try {
+            String string = "Nov 15, 2020 00:00:00 AM";
+            SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy h:mm:ss a", Locale.ROOT);
+            Date datePivote = sdf.parse(string);
+//            System.out.println("DATE PIVOTE " + datePivote);
+            long regresar = TimeUnit.DAYS.convert(datePivote.getTime() - date, TimeUnit.MILLISECONDS);
+            return (int) regresar;
+        } catch (ParseException ex) {
+            Logger.getLogger(panelNahuales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 1;
+
+    }
+
+    private Icon getIconWinal(Winal winal){
+        ImageIcon imIcon = new ImageIcon(winal.getImagen().getDirEscritorio());
+        Icon icono = new ImageIcon(imIcon.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        return icono;
+    }
     
-    
+    public void pintarWinales() {
+        if (indice == 0) {
+            lblWinal.setIcon(getIconWinal(listWinales.get(indice)));
+        } else if (indice == listWinales.size() - 1) {
+            lblWinal.setIcon(getIconWinal(listWinales.get(indice)));
+        } else {
+            lblWinal.setIcon(getIconWinal(listWinales.get(indice)));
+        }
+        txtMesHaab.setText(listWinales.get(indice).getIdDesk() + ". " + listWinales.get(indice).getNombre());
+        txtSignificado.setText(listWinales.get(indice).getSignificado());
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser boxDate;
     private javax.swing.JButton btnAdelante;
     private javax.swing.JButton btnAtras;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JLabel lblCargador;
-    private javax.swing.JLabel lblNahual;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblWinal;
     private javax.swing.JPanel panelInfo;
-    private javax.swing.JLabel txtDIaHaab;
     private javax.swing.JLabel txtMesHaab;
+    private javax.swing.JTextArea txtSignificado;
     // End of variables declaration//GEN-END:variables
 }
