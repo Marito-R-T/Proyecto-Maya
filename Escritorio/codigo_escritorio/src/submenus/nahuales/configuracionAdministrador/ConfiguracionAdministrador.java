@@ -5,6 +5,8 @@
  */
 package submenus.nahuales.configuracionAdministrador;
 
+import submenus.configuracionesAdmin.Usuarios;
+
 /**
  *
  * @author sergio
@@ -34,24 +36,34 @@ public class ConfiguracionAdministrador extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(45, 201, 151));
         jButton1.setForeground(new java.awt.Color(60, 21, 59));
         jButton1.setText("Control De Usuarios");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
+                .addGap(67, 67, 67)
                 .addComponent(jButton1)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addContainerGap()
                 .addComponent(jButton1)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Usuarios usuarios= new Usuarios();
+        usuarios.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
