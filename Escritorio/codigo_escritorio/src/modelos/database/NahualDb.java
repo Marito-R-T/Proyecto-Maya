@@ -41,17 +41,12 @@ public class NahualDb {
     public void modificar(Nahual nahual) {
         try {
             PreparedStatement statement = ConexionDb.conexion.prepareStatement("UPDATE nahual SET "
-                    + "nombre=?, idImagen=?, significado=?, descripcion=?, fechaInicio=?, fechaFinalizacion=?,"
-                    + "nombreYucateco=?, nombreSp=? WHERE id=?;");
-            statement.setString(1, nahual.getNombre());
-            statement.setInt(2, nahual.getImagen().getId());
-            statement.setString(3, nahual.getSignificado());
-            statement.setString(4, nahual.getDescripcion());
-            statement.setDate(5, nahual.getFechaInicio());
-            statement.setDate(6, nahual.getFechaFinalizacion());
-            statement.setString(7, nahual.getNombreYucateco());
-            statement.setString(8, nahual.getNombreEsp());
-            statement.setInt(9, nahual.getId());
+                    + "significado=?, descripcion=? WHERE iddesk=?;");
+            statement.setString(1, nahual.getSignificado());
+            statement.setString(2, nahual.getDescripcion());
+            statement.setInt(3, nahual.getId());
+
+            statement.execute();
         } catch (SQLException ex) {
             mensajes.error("EL nahual no se actualizo");
         }

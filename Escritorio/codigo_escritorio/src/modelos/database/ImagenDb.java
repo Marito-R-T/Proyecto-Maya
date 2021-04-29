@@ -28,6 +28,11 @@ public class ImagenDb {
         return i;
     }
     
+//        public Imagen getImagen(int id ){
+//        
+//        return null;
+//    }
+    
     private Imagen instanciarDeResultSet(ResultSet resultado) throws SQLException{
         return new Imagen(
                 resultado.getInt("id"),

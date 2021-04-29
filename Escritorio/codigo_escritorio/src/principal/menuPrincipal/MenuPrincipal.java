@@ -489,7 +489,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void menuNahualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNahualesActionPerformed
         String nombreTab = menuNahuales.getText();
         tabPP.removeAll();
-        panelNahuales p = new panelNahuales();
+        panelNahuales p = new panelNahuales(user);
         tabPP.add(p);
         tabPP.setTitleAt(0, nombreTab);
     }//GEN-LAST:event_menuNahualesActionPerformed
