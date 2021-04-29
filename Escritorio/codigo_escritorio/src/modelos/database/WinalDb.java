@@ -57,7 +57,7 @@ public class WinalDb {
     
     public Winal getWinal(int id) {
         try {
-            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM winal WHERE id=?;");
+            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM uinal WHERE iddesk=?;");
             statement.setInt(1, id);
             ResultSet resultado = statement.executeQuery();
             if(resultado.next()) return instanciarDeResultSet(resultado);
@@ -70,7 +70,7 @@ public class WinalDb {
     public List<Winal> getWinales(){
         List<Winal> winales = new ArrayList();
         try {
-            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM winal;");
+            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM uinal;");
             ResultSet resultado = statement.executeQuery();
             while(resultado.next()) winales.add(instanciarDeResultSet(resultado));
         } catch (SQLException ex) {
@@ -82,10 +82,14 @@ public class WinalDb {
     private Winal instanciarDeResultSet(ResultSet resultado) throws SQLException{
         ImagenDb accesoImagen = new ImagenDb();
         return new Winal(
-                resultado.getInt("id"),
+                resultado.getInt("idweb"),
                 resultado.getString("nombre"),
-                resultado.getString("descripcion"),
-                accesoImagen.getImagen(resultado.getInt("idImagen"))
+                resultado.getString("significado"),
+                resultado.getInt("dias"),
+                resultado.getString("htmlCodigo"),
+                resultado.getString("categoria"),
+                resultado.getInt("iddesk"),
+                accesoImagen.getImagen(resultado.getInt("iddesk"), resultado.getString("ruta"), resultado.getString("categoria"))
         );
     }
     

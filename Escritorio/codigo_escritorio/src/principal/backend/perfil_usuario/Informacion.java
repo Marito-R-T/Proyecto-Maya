@@ -19,7 +19,7 @@ import modelos.objetos.Usuario;
  */
 public class Informacion {
     
-    private static String CONSULTA_PERFIL = "SELECT * FROM usuario WHERE username = ?";
+    private static String CONSULTA_PERFIL = "SELECT * FROM usuario WHERE usuario = ?";
     
     public Usuario buscarDatos(String nombre){
         Usuario user = new Usuario();
@@ -28,18 +28,19 @@ public class Informacion {
             statement.setString(1, nombre);
             ResultSet result = statement.executeQuery();
             while(result.next()){
-                user.setUsername(result.getString("username"));
+                user.setUsername(result.getString("usuario"));
                 user.setPassword(result.getString("password"));
-                user.setEmail(result.getString("email"));
+                user.setEmail(result.getString("correo"));
                 user.setNombre(result.getString("nombre"));
                 user.setApellido(result.getString("apellido"));
-                user.setNacimiento(result.getDate("nacimiento"));
+                user.setNacimiento(result.getDate("fechaNacimiento"));
                 user.setNumeroTel(result.getString("telefono"));
-                user.setRol(result.getInt("rol"));
+                user.setRol(result.getInt("id_rol"));
             }
         } catch (SQLException ex) {
             System.out.println("no se encontro nada");
-            Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+//            Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
             
         }
         return user;

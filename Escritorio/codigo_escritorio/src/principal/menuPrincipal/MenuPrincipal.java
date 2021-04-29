@@ -85,7 +85,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         tabPP = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
-        menuNahuales = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuCalendarioLunarCC = new javax.swing.JMenuItem();
         menuFormasCotarCC = new javax.swing.JMenuItem();
@@ -95,11 +94,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         menuNahualEnergia = new javax.swing.JMenuItem();
         menuMatrizCholqij = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        menuCalendarioHaab = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        menuRC = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        menuLineaTiempo = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         editPerfil = new javax.swing.JMenu();
         cerrarSesion = new javax.swing.JMenu();
@@ -144,15 +140,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenu5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu5.setPreferredSize(new java.awt.Dimension(105, 40));
-
-        menuNahuales.setText("Conocer Nahuales");
-        menuNahuales.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuNahualesActionPerformed(evt);
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu5MousePressed(evt);
             }
         });
-        jMenu5.add(menuNahuales);
-
         jMenuBar1.add(jMenu5);
 
         jMenu2.setBackground(new java.awt.Color(45, 201, 151));
@@ -230,15 +222,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenu3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu3.setPreferredSize(new java.awt.Dimension(180, 45));
-
-        menuCalendarioHaab.setText("Explorar Calendario Haab");
-        menuCalendarioHaab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuCalendarioHaabActionPerformed(evt);
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu3MousePressed(evt);
             }
         });
-        jMenu3.add(menuCalendarioHaab);
-
         jMenuBar1.add(jMenu3);
 
         jMenu4.setBackground(new java.awt.Color(45, 201, 151));
@@ -249,15 +237,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenu4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu4.setPreferredSize(new java.awt.Dimension(195, 45));
-
-        menuRC.setText("Explorar rueda Calendarica");
-        menuRC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuRCActionPerformed(evt);
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu4MousePressed(evt);
             }
         });
-        jMenu4.add(menuRC);
-
         jMenuBar1.add(jMenu4);
 
         jMenu6.setBackground(new java.awt.Color(45, 201, 151));
@@ -268,15 +252,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenu6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu6.setPreferredSize(new java.awt.Dimension(200, 45));
-
-        menuLineaTiempo.setText("Explorar Linea de Tiempo");
-        menuLineaTiempo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuLineaTiempoActionPerformed(evt);
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu6MousePressed(evt);
             }
         });
-        jMenu6.add(menuLineaTiempo);
-
         jMenuBar1.add(jMenu6);
 
         jMenu1.setBackground(new java.awt.Color(45, 201, 151));
@@ -467,42 +447,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuMatrizCholqijActionPerformed
 
-    private void menuCalendarioHaabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCalendarioHaabActionPerformed
-        String nombreTab = menuCalendarioHaab.getText();
-        tabPP.removeAll();
-
-        submenus.calendarioHaab.menuCalendarioHaab infoCC = new submenus.calendarioHaab.menuCalendarioHaab();
-        tabPP.add(infoCC);
-        tabPP.setTitleAt(0, nombreTab);
-
-    }//GEN-LAST:event_menuCalendarioHaabActionPerformed
-
-    private void menuLineaTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLineaTiempoActionPerformed
-        String nombreTab = menuLineaTiempo.getText();
-        tabPP.removeAll();
-        submenus.lineaDeTiempo.panelLIneaTIempo p = new submenus.lineaDeTiempo.panelLIneaTIempo(user);
-        tabPP.add(p);
-        tabPP.setTitleAt(0, nombreTab);
-
-    }//GEN-LAST:event_menuLineaTiempoActionPerformed
-
-    private void menuNahualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNahualesActionPerformed
-        String nombreTab = menuNahuales.getText();
-        tabPP.removeAll();
-        panelNahuales p = new panelNahuales();
-        tabPP.add(p);
-        tabPP.setTitleAt(0, nombreTab);
-    }//GEN-LAST:event_menuNahualesActionPerformed
-
-    private void menuRCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRCActionPerformed
-        String nombreTab = menuRC.getText();
-        tabPP.removeAll();
-        ruedaCalendarica p = new ruedaCalendarica();
-        tabPP.add(p);
-        tabPP.setTitleAt(0, nombreTab);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuRCActionPerformed
-
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
     }//GEN-LAST:event_jMenu1ActionPerformed
 
@@ -580,6 +524,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_configAdminMousePressed
 
+    private void jMenu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MousePressed
+        tabPP.removeAll();
+        panelNahuales p = new panelNahuales(user);
+        tabPP.add(p);
+        tabPP.setTitleAt(0, "Nahuales");
+    }//GEN-LAST:event_jMenu5MousePressed
+
+    private void jMenu6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MousePressed
+       tabPP.removeAll();
+        submenus.lineaDeTiempo.panelLIneaTIempo p = new submenus.lineaDeTiempo.panelLIneaTIempo(user);
+        tabPP.add(p);
+        tabPP.setTitleAt(0, "Linea De Tiempo");
+    }//GEN-LAST:event_jMenu6MousePressed
+
+    private void jMenu4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MousePressed
+        
+        tabPP.removeAll();
+        ruedaCalendarica p = new ruedaCalendarica();
+        tabPP.add(p);
+        tabPP.setTitleAt(0, "Rueda Calendarica");
+    }//GEN-LAST:event_jMenu4MousePressed
+
+    private void jMenu3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MousePressed
+
+        tabPP.removeAll();
+
+        submenus.calendarioHaab.menuCalendarioHaab infoCC = new submenus.calendarioHaab.menuCalendarioHaab();
+        tabPP.add(infoCC);
+        tabPP.setTitleAt(0, "Calendario Haab");
+    }//GEN-LAST:event_jMenu3MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu cerrarSesion;
@@ -595,15 +570,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem menuCCInfo;
     private javax.swing.JMenuItem menuCalculaFecha;
-    private javax.swing.JMenuItem menuCalendarioHaab;
     private javax.swing.JMenuItem menuCalendarioLunarCC;
     private javax.swing.JMenuItem menuDiasCalendarioLunarCC;
     private javax.swing.JMenuItem menuFormasCotarCC;
-    private javax.swing.JMenuItem menuLineaTiempo;
     private javax.swing.JMenuItem menuMatrizCholqij;
     private javax.swing.JMenuItem menuNahualEnergia;
-    private javax.swing.JMenuItem menuNahuales;
-    private javax.swing.JMenuItem menuRC;
     private javax.swing.JPanel panelPrincipal;
     public static javax.swing.JTabbedPane tabPP;
     // End of variables declaration//GEN-END:variables

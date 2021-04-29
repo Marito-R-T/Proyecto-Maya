@@ -17,8 +17,8 @@ import modelos.objetos.Nahual;
  * @author jose_
  */
 public class NahualDb {
-        private final Mensaje mensajes = new Mensaje();
 
+    private final Mensaje mensajes = new Mensaje();
 
     public void crear(Nahual nahual) {
         try {
@@ -41,17 +41,12 @@ public class NahualDb {
     public void modificar(Nahual nahual) {
         try {
             PreparedStatement statement = ConexionDb.conexion.prepareStatement("UPDATE nahual SET "
-                    + "nombre=?, idImagen=?, significado=?, descripcion=?, fechaInicio=?, fechaFinalizacion=?,"
-                    + "nombreYucateco=?, nombreSp=? WHERE id=?;");
-            statement.setString(1, nahual.getNombre());
-            statement.setInt(2, nahual.getImagen().getId());
-            statement.setString(3, nahual.getSignificado());
-            statement.setString(4, nahual.getDescripcion());
-            statement.setDate(5, nahual.getFechaInicio());
-            statement.setDate(6, nahual.getFechaFinalizacion());
-            statement.setString(7, nahual.getNombreYucateco());
-            statement.setString(8, nahual.getNombreEsp());
-            statement.setInt(9, nahual.getId());
+                    + "significado=?, descripcion=? WHERE iddesk=?;");
+            statement.setString(1, nahual.getSignificado());
+            statement.setString(2, nahual.getDescripcion());
+            statement.setInt(3, nahual.getId());
+
+            statement.execute();
         } catch (SQLException ex) {
             mensajes.error("EL nahual no se actualizo");
         }
@@ -84,14 +79,14 @@ public class NahualDb {
     public Nahual getNahual(int id) {
         Nahual n = null;
         try {
-            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM nahual WHERE id=?;");
+            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM nahual WHERE iddesk=?;");
             statement.setInt(1, id);
             ResultSet resultado = statement.executeQuery();
             if (resultado.next()) {
                 n = instanciarDeResultSet(resultado);
             }
         } catch (SQLException ex) {
-            System.out.println("no se obtuvo el nahual"); 
+            System.out.println("no se obtuvo el nahual");
         }
         return n;
     }
@@ -99,15 +94,17 @@ public class NahualDb {
     private Nahual instanciarDeResultSet(ResultSet resultado) throws SQLException {
         ImagenDb accesoImagen = new ImagenDb();
         return new Nahual(
-                resultado.getInt("id"),
+                resultado.getInt("iddesk"),
                 resultado.getString("nombre"),
-                accesoImagen.getImagen(resultado.getInt("idImagen")),
+                accesoImagen.getImagen(resultado.getInt("iddesk"),
+                        resultado.getString("rutaEscritorio"),
+                        resultado.getString("categoria")),
                 resultado.getString("significado"),
                 resultado.getString("descripcion"),
-                resultado.getDate("fechaInicio"),
-                resultado.getDate("fechaFinalizacion"),
+                null,
+                null,
                 resultado.getString("nombreYucateco"),
-                resultado.getString("nombreSp")
+                null
         );
     }
 }

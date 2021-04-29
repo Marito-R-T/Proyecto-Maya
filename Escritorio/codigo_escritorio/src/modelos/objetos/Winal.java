@@ -16,6 +16,10 @@ public class Winal {
     private String nombre, descripcion;
     private Imagen imagen;
 
+    
+    private int idWeb, dias, idDesk;
+    private String significado, htmlCodigo, categoria, ruta;
+    
     public Winal() {
     }
 
@@ -25,6 +29,76 @@ public class Winal {
         this.descripcion = descripcion;
         this.imagen = imagen;
     }
+    
+    
+    public Winal(int idWeb, String nombre, String significado, int dias, String htmlCodigo, String categoria, int idDesk, Imagen imagen){
+        this.idWeb = idWeb;
+        this.nombre = nombre;
+        this.significado = significado;
+        this.dias = dias;
+        this.htmlCodigo = htmlCodigo;
+        this.categoria = categoria;
+        this.idDesk = idDesk;
+        this.imagen = imagen;
+    }
+
+    public int getIdWeb() {
+        return idWeb;
+    }
+
+    public void setIdWeb(int idWeb) {
+        this.idWeb = idWeb;
+    }
+
+    public int getDias() {
+        return dias;
+    }
+
+    public void setDias(int dias) {
+        this.dias = dias;
+    }
+
+    public int getIdDesk() {
+        return idDesk;
+    }
+
+    public void setIdDesk(int idDesk) {
+        this.idDesk = idDesk;
+    }
+
+    public String getSignificado() {
+        return significado;
+    }
+
+    public void setSignificado(String significado) {
+        this.significado = significado;
+    }
+
+    public String getHtmlCodigo() {
+        return htmlCodigo;
+    }
+
+    public void setHtmlCodigo(String htmlCodigo) {
+        this.htmlCodigo = htmlCodigo;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+    
+    
 
     public int getId() {
         return id;

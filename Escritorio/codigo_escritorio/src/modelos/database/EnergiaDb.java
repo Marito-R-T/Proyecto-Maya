@@ -81,8 +81,8 @@ public class EnergiaDb {
         ImagenDb accesoImagen = new ImagenDb();
         return new Energia(
                 resultado.getInt("id"),
-                resultado.getString("nombre"),
-                accesoImagen.getImagen(resultado.getInt("idImagen"))
+                resultado.getString("nombre"),null
+         //       accesoImagen.getImagen(resultado.getInt("idImagen"))
         );
     }
 }

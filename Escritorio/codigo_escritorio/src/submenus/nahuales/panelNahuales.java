@@ -22,6 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import modelos.database.NahualDb;
 import modelos.objetos.Nahual;
+import modelos.objetos.Usuario;
+import seguridad.VerificacionDeRoles;
 
 /**
  *
@@ -36,8 +38,9 @@ public final class panelNahuales extends javax.swing.JPanel {
     private ArrayList<Nahual> listaNahuales = null;
     private int indice = 0;
 
-    public panelNahuales() {
+    public panelNahuales(Usuario usuario) {
         initComponents();
+        mostrarEditarNahual(usuario);
         //fondo de pantalla
         Imagen img = new Imagen();
         this.add(img);
@@ -55,6 +58,13 @@ public final class panelNahuales extends javax.swing.JPanel {
         listaNahuales = (ArrayList<Nahual>) nahualDb.getNahuales();
         pintar();
 
+    }
+    private void mostrarEditarNahual(Usuario usuario){
+        if (VerificacionDeRoles.verificarAccesoParaEditar(usuario)) {
+            btnEditar.setVisible(true);
+        }else{
+            btnEditar.setVisible(false);
+        }
     }
 
     public class Imagen extends javax.swing.JPanel {
@@ -207,6 +217,7 @@ public final class panelNahuales extends javax.swing.JPanel {
         iconoDerecha = new javax.swing.JLabel();
         iconoIzquierda = new javax.swing.JLabel();
         lblNOmbreNahual = new javax.swing.JLabel();
+        btnEditar = new javax.swing.JButton();
 
         botonAnterior.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonAnterior.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -301,6 +312,15 @@ public final class panelNahuales extends javax.swing.JPanel {
                 .addContainerGap(130, Short.MAX_VALUE))
         );
 
+        btnEditar.setBackground(new java.awt.Color(253, 202, 18));
+        btnEditar.setForeground(new java.awt.Color(1, 1, 1));
+        btnEditar.setText("Editar Nahual");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -316,9 +336,15 @@ public final class panelNahuales extends javax.swing.JPanel {
                 .addComponent(botonAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 101, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 101, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditar)
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(214, 214, 214)
                 .addComponent(boxDate, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,7 +359,8 @@ public final class panelNahuales extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
+                        .addComponent(btnEditar)
+                        .addGap(44, 44, 44)
                         .addComponent(botonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -377,6 +404,15 @@ public final class panelNahuales extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnCalcularActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        EditarNahual en = new EditarNahual(null, true, listaNahuales.get(indice));
+        en.setVisible(true);
+        System.out.println("holas");
+        listaNahuales = (ArrayList<Nahual>) nahualDb.getNahuales();
+        pintar();
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaDescripcion;
@@ -385,6 +421,7 @@ public final class panelNahuales extends javax.swing.JPanel {
     private javax.swing.JButton botonSiguiente;
     private com.toedter.calendar.JDateChooser boxDate;
     private javax.swing.JButton btnCalcular;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JLabel iconoCentral;
     private javax.swing.JLabel iconoDerecha;
     private javax.swing.JLabel iconoIzquierda;

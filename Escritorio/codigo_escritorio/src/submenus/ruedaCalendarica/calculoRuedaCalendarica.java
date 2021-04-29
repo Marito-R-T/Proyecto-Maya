@@ -202,7 +202,6 @@ public class calculoRuedaCalendarica {
 
         Winal winalMostrar = w.getWinal(idNahualHab);
         if (winalMostrar == null) {
-
         } else {
             winalMostrar.getImagen().colocarImagen(iconH, 115, 75);
             diaH.setText("" + numero);
@@ -217,6 +216,7 @@ public class calculoRuedaCalendarica {
 
         if (nMostrar == null) {
         } else {
+            System.out.println(nMostrar.getImagen().getDirEscritorio());
             nMostrar.getImagen().colocarImagen(icoNT, 115, 75);
             nombreNT.setText(nMostrar.getNombre());
             numeroNT.setText("" + numero);
