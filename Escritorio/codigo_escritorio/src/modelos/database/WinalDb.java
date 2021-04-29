@@ -57,7 +57,7 @@ public class WinalDb {
     
     public Winal getWinal(int id) {
         try {
-            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM winal WHERE id=?;");
+            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM uinal WHERE iddesk=?;");
             statement.setInt(1, id);
             ResultSet resultado = statement.executeQuery();
             if(resultado.next()) return instanciarDeResultSet(resultado);
