@@ -99,15 +99,15 @@ public class NahualDb {
     private Nahual instanciarDeResultSet(ResultSet resultado) throws SQLException {
         ImagenDb accesoImagen = new ImagenDb();
         return new Nahual(
-                resultado.getInt("id"),
+                resultado.getInt("iddesk"),
                 resultado.getString("nombre"),
-                accesoImagen.getImagen(resultado.getInt("idImagen")),
+                accesoImagen.getImagen(resultado.getInt("iddesk"),resultado.getString("rutaEscritorio"),resultado.getString("categoria")),
                 resultado.getString("significado"),
                 resultado.getString("descripcion"),
-                resultado.getDate("fechaInicio"),
-                resultado.getDate("fechaFinalizacion"),
+                null,
+                null,
                 resultado.getString("nombreYucateco"),
-                resultado.getString("nombreSp")
+                null
         );
     }
 }
