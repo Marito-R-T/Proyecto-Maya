@@ -46,7 +46,7 @@ public class Login extends javax.swing.JFrame {
             usuarioLogueado = usuarioDb.validacionUsuario(textFieldCorreo.getText(), passFieldContrasenia.getText());
             String password = CifradoPasswords.md5(passFieldContrasenia.getText());   //new String(cifrado.cifra(passFieldContrasenia.getText()), StandardCharsets.UTF_8);
             if (usuarioLogueado != null) {
-                System.out.println(password + " --- " +usuarioLogueado.getPassword());
+                System.out.println(password + " --- " + usuarioLogueado.getPassword());
                 if (password.equals(usuarioLogueado.getPassword())) {
                     recordarSesion(usuarioLogueado);
                     menu = new MenuPrincipal(usuarioLogueado);
@@ -83,15 +83,18 @@ public class Login extends javax.swing.JFrame {
         }
     }
 
+    public static UsuarioLogueo usuarioLogueo = null;
+    public static Usuario usuarioB = null;
+
     public void iniciar() {
         archivoLogin.verificarExitenciaArchivo();
-        UsuarioLogueo usuarioLogueo = archivoLogin.leerLogueo();
+        usuarioLogueo = archivoLogin.leerLogueo();
 
         if (usuarioLogueo != null) {
-            Usuario usuario = usuarioDb.validacionUsuario(usuarioLogueo.getCorreo(), usuarioLogueo.getContrasenia());
-            if (usuario != null) {
+            usuarioB = usuarioDb.validacionUsuario(usuarioLogueo.getCorreo(), usuarioLogueo.getContrasenia());
+            if (usuarioB != null) {
                 System.out.println("Se logueo xD");
-                menu = new MenuPrincipal(usuario);
+                menu = new MenuPrincipal(usuarioB);
                 menu.setVisible(true);
                 this.setVisible(false);
             } else {
