@@ -5,6 +5,8 @@
  */
 package submenus.lineaDeTiempo;
 
+import api.login.Login;
+import static api.login.Login.usuarioLogueado;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,9 +15,14 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelos.database.HechoHistoricoDb;
+import modelos.database.PeriodoDb;
 import modelos.objetos.HechoHistorico;
 import static principal.menuPrincipal.MenuPrincipal.BG;
+import static submenus.lineaDeTiempo.EventoDeTiempo.categoria;
+import static submenus.lineaDeTiempo.EventoDeTiempo.htmlC;
 import static submenus.lineaDeTiempo.panelLIneaTIempo.obtenerHechos;
+import java.util.List;
+import modelos.objetos.Periodo;
 
 /**
  *
@@ -32,6 +39,13 @@ public class AgregarEvento extends javax.swing.JFrame {
         this.add(img);
         this.repaint();
 
+        //mostramos eventos
+        PeriodoDb p = new PeriodoDb();
+        List<Periodo> listaP = p.getPeriodo();
+        for (int i = 0; i < listaP.size(); i++) {
+            Periodo periodoM = listaP.get(i);
+            periodos.addItem(periodoM.getNombre());
+        }
         setLocationRelativeTo(null);
     }
 
@@ -81,14 +95,23 @@ public class AgregarEvento extends javax.swing.JFrame {
         btnCerrar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         descripcion = new javax.swing.JTextArea();
-        dateInicio = new com.toedter.calendar.JDateChooser();
-        dateFin = new com.toedter.calendar.JDateChooser();
+        periodos = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        autor = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        acI = new javax.swing.JTextField();
+        acF = new javax.swing.JTextField();
+        dateInicio = new javax.swing.JTextField();
+        dateFin = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 219, 255));
         setPreferredSize(new java.awt.Dimension(1200, 500));
 
         jLabel2.setFont(new java.awt.Font("Lobster", 0, 24)); // NOI18N
-        jLabel2.setText("Año Inicial");
+        jLabel2.setText("Año Inicial*");
 
         btnAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -119,37 +142,98 @@ public class AgregarEvento extends javax.swing.JFrame {
         descripcion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripcion", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Jenna Sue", 1, 36), new java.awt.Color(0, 102, 102))); // NOI18N
         jScrollPane2.setViewportView(descripcion);
 
-        dateInicio.setBackground(new java.awt.Color(229, 229, 255));
+        periodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                periodosActionPerformed(evt);
+            }
+        });
 
-        dateFin.setBackground(new java.awt.Color(229, 229, 255));
+        jLabel3.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Epoca*");
+
+        jLabel5.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Autor");
+
+        autor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                autorActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Acontecimiento Inicial*");
+
+        jLabel7.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Acontecimiento Final");
+
+        acI.setText("a.C");
+        acI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acIActionPerformed(evt);
+            }
+        });
+
+        acF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acFActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("*Solo 3 caracteres para la epoca");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(titulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dateFin, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dateFin, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                            .addComponent(dateInicio))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(periodos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel3)
+                                        .addGap(57, 57, 57))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel6)
+                                            .addComponent(acI, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(acF, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(autor, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel5)))
+                                        .addContainerGap(50, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,20 +244,40 @@ public class AgregarEvento extends javax.swing.JFrame {
                         .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateFin, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-                .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                            .addComponent(dateInicio))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                            .addComponent(dateFin))))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(periodos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel1)
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(acI, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addGap(22, 22, 22)
+                        .addComponent(acF, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(autor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5))
+                        .addGap(0, 36, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)))
         );
 
         pack();
@@ -184,7 +288,7 @@ public class AgregarEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void validarDatos() {
-        if (dateFin.getDate() == null || dateInicio.getDate() == null
+        if (dateFin.getText().isEmpty() || dateInicio.getText().isEmpty()
                 || descripcion.getText().isEmpty() || titulo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Llene todos los campos");
         } else {
@@ -194,35 +298,78 @@ public class AgregarEvento extends javax.swing.JFrame {
 
     private void agregarHH() {
 
-            Long a = dateInicio.getDate().getTime();
-            Date dateInit = new Date(a);
-            Long b = dateFin.getDate().getTime();
-            Date dateF = new Date(b);
+        String t = titulo.getText();
+        String d = descripcion.getText();
+        String dateInit = dateInicio.getText();
+        String dateFin2 = dateFin.getText();
 
-            HechoHistoricoDb hechoHistoricoDb = new HechoHistoricoDb();
+        //HechoHistoricoDb hechoHistoricoDb = new HechoHistoricoDb();
+        //procedemos a crear el hecho historico
+        String periodo = (String) periodos.getSelectedItem();
+        String autorH = autor.getText();
+        String Aci = acI.getText();
+        String Acf = acF.getText();
 
-            HechoHistorico edt = new HechoHistorico(hechoHistoricoDb.leerHechosHistoricos().size() + 2, dateInit, dateF, titulo.getText(), descripcion.getText());
-            hechoHistoricoDb.crearHH(edt);
-            obtenerHechos();
+        if (periodo.equals("")) {
+            periodo = "sin periodo";
+        } else if (autorH.equals("")) {
+            autorH = "Anonimo";
+        } else if (Aci.equals("")) {
+            Aci = "a.C";
+        } else if (Acf.equals("")) {
+            Acf = "-";
+        }
+
+        HechoHistoricoDb hechoHistoricoDb = new HechoHistoricoDb();
+
+        HechoHistorico edt = new HechoHistorico(hechoHistoricoDb.leerHechosHistoricos().size() + 2, t, autorH, periodo, htmlC, dateInit, dateFin2, Aci, Acf, categoria, d);
+
+        hechoHistoricoDb.crearHH(edt);
+        obtenerHechos();
     }
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
+    private void periodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_periodosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_periodosActionPerformed
+
+    private void autorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_autorActionPerformed
+
+    private void acIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_acIActionPerformed
+
+    private void acFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_acFActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField acF;
+    private javax.swing.JTextField acI;
+    private javax.swing.JTextField autor;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCerrar;
-    private com.toedter.calendar.JDateChooser dateFin;
-    private com.toedter.calendar.JDateChooser dateInicio;
+    private javax.swing.JTextField dateFin;
+    private javax.swing.JTextField dateInicio;
     private javax.swing.JTextArea descripcion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox<String> periodos;
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
 }
