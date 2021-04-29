@@ -5,6 +5,7 @@
  */
 package modelos.database;
 
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,16 +21,10 @@ public class ImagenDb {
     public void modificar(Imagen imagen){}
     public void eliminar(int id){}
     
-    public Imagen getImagen(int id){
-        Imagen i=null;
-        try {
-            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM rutaimagen WHERE id=?;");
-            statement.setInt(1, id);
-            ResultSet resultado = statement.executeQuery();
-            if(resultado.next()) i=instanciarDeResultSet(resultado);
-        } catch (SQLException ex) {
-            System.out.println("no se encontraron las rutas");
-        }
+    public Imagen getImagen(int idEscritorio,String ruta,String categoria){
+        
+        Imagen i=new Imagen(idEscritorio, ruta, ruta, categoria);
+
         return i;
     }
     
