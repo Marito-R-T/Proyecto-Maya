@@ -6,7 +6,7 @@ $nahual = $id % 20;
 if ($nahual < 0) {
 	$nahual = 19 + $nahual;
 }
-$Query = $conn->query("SELECT nombre FROM nahual WHERE id=".$nahual." ;");
+$Query = $conn->query("SELECT nombre FROM nahual WHERE idweb=".$nahual." ;");
 $row = mysqli_fetch_assoc($Query);
 $query = $row['nombre'];
 return $query;
