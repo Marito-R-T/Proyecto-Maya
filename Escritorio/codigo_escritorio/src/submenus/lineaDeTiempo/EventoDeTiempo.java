@@ -6,6 +6,8 @@
 package submenus.lineaDeTiempo;
 
 import api.login.Login;
+import static api.login.Login.usuarioB;
+import static api.login.Login.usuarioLogueado;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelos.database.HechoHistoricoDb;
@@ -291,7 +293,7 @@ public class EventoDeTiempo extends javax.swing.JPanel {
 
     public HechoHistorico hechoHistoricoNuevo() {
         HechoHistorico edt = null;
-        if (calendarFechaInicio.getText().isEmpty() 
+        if (calendarFechaInicio.getText().isEmpty()
                 || lblDescripcion.getText().isEmpty() || lblTitulo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Llene todos los campos");
         } else {
@@ -310,7 +312,16 @@ public class EventoDeTiempo extends javax.swing.JPanel {
             if (periodo.equals("")) {
                 periodo = "sin periodo";
             } else if (autorH.equals("")) {
-                autorH = Login.usuarioLogueado.getNombre();
+                if (usuarioLogueado == null) {
+                    if (usuarioB == null) {
+                    } else {
+                        autorH = usuarioB.getUsername();
+                        System.out.println(usuarioB.getUsername());
+                    }
+                } else {
+                    autorH = usuarioLogueado.getUsername();
+                    System.out.println(usuarioLogueado.getUsername());
+                }
             } else if (Aci.equals("")) {
                 Aci = "a.C";
             } else if (Acf.equals("")) {
@@ -323,7 +334,7 @@ public class EventoDeTiempo extends javax.swing.JPanel {
     }
 
     public static String htmlC = "-";
-    public static String categoria = "Escritura";
+    public static String categoria = "Escritura1";
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField acF;
