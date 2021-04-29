@@ -8,6 +8,7 @@ package modelos.database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,6 +101,23 @@ public class UsuarioDb {
         }
         return listaUsuarios;
     }
+    
+        public ArrayList<Usuario> leerUsuariosArray() { //mostramos todos los usuarios y devolvemos en una lista
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+        try {
+            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM usuario;");
+            ResultSet resultado = statement.executeQuery();
+            while (resultado.next()) {
+                Usuario usuario = convertirAUsuario(resultado);
+                listaUsuarios.add(usuario);
+            }
+        } catch (SQLException ex) {
+            System.out.println("No se leyeron los usuarios de la DB");
+        }
+        return listaUsuarios;
+    }
+    
+    
 
     public Usuario leerUsuario(Usuario usuarioABuscar) {//leemos un usuario en especifico y lo devolvemos
         Usuario usuario = null;
@@ -144,5 +162,27 @@ public class UsuarioDb {
             Logger.getLogger(UsuarioDb.class.getName()).log(Level.SEVERE, null, ex);
         }
         return aDevolver;
+    }
+        public boolean ascenderUsuario(Usuario usuarioActualizar, boolean ascender) {//actualizamos usuario
+        boolean actualizado = false;
+        try {
+            PreparedStatement statement = ConexionDb.conexion.prepareStatement("UPDATE usuario SET "
+                    + "id_rol=? "
+                    + "WHERE usuario=?;");
+            if (ascender) {
+              statement.setInt(1, 2);  
+            }else{
+                statement.setInt(1, 1);  
+            }
+ 
+            statement.setString(2, usuarioActualizar.getUsername());
+            statement.executeUpdate();
+            mensajes.informacion("Se ha modificado el usuario con exito.");
+            actualizado = true;
+        } catch (SQLException ex) {
+            mensajes.error("No se actualizo el usuario. Asegurese que el usuario 'no' exista");
+            actualizado = false;
+        }
+        return actualizado;
     }
 }
