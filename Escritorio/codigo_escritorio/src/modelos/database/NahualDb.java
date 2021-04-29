@@ -17,8 +17,8 @@ import modelos.objetos.Nahual;
  * @author jose_
  */
 public class NahualDb {
-        private final Mensaje mensajes = new Mensaje();
 
+    private final Mensaje mensajes = new Mensaje();
 
     public void crear(Nahual nahual) {
         try {
@@ -79,14 +79,14 @@ public class NahualDb {
     public Nahual getNahual(int id) {
         Nahual n = null;
         try {
-            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM nahual WHERE id=?;");
+            PreparedStatement statement = ConexionDb.conexion.prepareStatement("SELECT * FROM nahual WHERE iddesk=?;");
             statement.setInt(1, id);
             ResultSet resultado = statement.executeQuery();
             if (resultado.next()) {
                 n = instanciarDeResultSet(resultado);
             }
         } catch (SQLException ex) {
-            System.out.println("no se obtuvo el nahual"); 
+            System.out.println("no se obtuvo el nahual");
         }
         return n;
     }
@@ -96,7 +96,9 @@ public class NahualDb {
         return new Nahual(
                 resultado.getInt("iddesk"),
                 resultado.getString("nombre"),
-                accesoImagen.getImagen(resultado.getInt("iddesk"),resultado.getString("rutaEscritorio"),resultado.getString("categoria")),
+                accesoImagen.getImagen(resultado.getInt("iddesk"),
+                        resultado.getString("rutaEscritorio"),
+                        resultado.getString("categoria")),
                 resultado.getString("significado"),
                 resultado.getString("descripcion"),
                 null,
