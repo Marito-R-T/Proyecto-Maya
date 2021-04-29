@@ -5,10 +5,13 @@
  */
 package submenus.lineaDeTiempo;
 
-import java.sql.Date;
+import api.login.Login;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelos.database.HechoHistoricoDb;
+import modelos.database.PeriodoDb;
 import modelos.objetos.HechoHistorico;
+import modelos.objetos.Periodo;
 
 /**
  *
@@ -30,8 +33,21 @@ public class EventoDeTiempo extends javax.swing.JPanel {
             System.out.println("titulo " + hechoHistorico.getTitulo());
             lblTitulo.setText(hechoHistorico.getTitulo());
             lblDescripcion.setText(hechoHistorico.getDescripcion());
-            calendarFechaInicio.setDate(hechoHistorico.getFechaInicio());
-            calendarioFechaFin.setDate(hechoHistorico.getFechaFinalizacion());
+            calendarFechaInicio.setText(hechoHistorico.getFechaInicio());
+            calendarioFechaFin.setText(hechoHistorico.getFechaFin());
+            /*Cargar los periodos de la base de datos*/
+            //mostramos eventos
+            PeriodoDb p = new PeriodoDb();
+            List<Periodo> listaP = p.getPeriodo();
+            for (int i = 0; i < listaP.size(); i++) {
+                Periodo periodoM = listaP.get(i);
+                periodos.addItem(periodoM.getNombre());
+            }
+
+            autor.setText(hechoHistorico.getAutor());
+            acI.setText(hechoHistorico.getAcI());
+            acF.setText(hechoHistorico.getAcF());
+
         }
         this.setSize(1030, 445);
     }
@@ -46,12 +62,21 @@ public class EventoDeTiempo extends javax.swing.JPanel {
     private void initComponents() {
 
         lblTitulo = new javax.swing.JTextField();
-        calendarFechaInicio = new com.toedter.calendar.JDateChooser();
-        calendarioFechaFin = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lblDescripcion = new javax.swing.JTextArea();
+        calendarFechaInicio = new javax.swing.JTextField();
+        calendarioFechaFin = new javax.swing.JTextField();
+        periodos = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        autor = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        acI = new javax.swing.JTextField();
+        acF = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setAutoscrolls(true);
         setOpaque(false);
@@ -68,15 +93,9 @@ public class EventoDeTiempo extends javax.swing.JPanel {
             }
         });
 
-        calendarFechaInicio.setBackground(new java.awt.Color(229, 229, 255));
-        calendarFechaInicio.setForeground(new java.awt.Color(0, 102, 204));
-        calendarFechaInicio.setFont(new java.awt.Font("Lobster", 0, 14)); // NOI18N
-
-        calendarioFechaFin.setBackground(new java.awt.Color(229, 229, 255));
-
         jLabel1.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Fecha Inicio");
+        jLabel1.setText("Fecha Inicio*");
 
         jLabel2.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,29 +109,104 @@ public class EventoDeTiempo extends javax.swing.JPanel {
         lblDescripcion.setWrapStyleWord(true);
         jScrollPane1.setViewportView(lblDescripcion);
 
+        calendarFechaInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calendarFechaInicioActionPerformed(evt);
+            }
+        });
+
+        calendarioFechaFin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calendarioFechaFinActionPerformed(evt);
+            }
+        });
+
+        periodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                periodosActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Epoca*");
+
+        jLabel4.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Autor");
+
+        autor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                autorActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Acontecimiento Inicial*");
+
+        jLabel6.setFont(new java.awt.Font("Jenna Sue", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Acontecimiento Final");
+
+        acI.setText("a.c");
+        acI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acIActionPerformed(evt);
+            }
+        });
+
+        acF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acFActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Solo 3 caracteres para el acontecimeinto");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(296, 296, 296))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(calendarFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
-                .addComponent(calendarioFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(140, 140, 140))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitulo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(lblTitulo)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(calendarFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(calendarioFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(periodos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(autor, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(acI, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(acF, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(79, 79, 79))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -120,16 +214,44 @@ public class EventoDeTiempo extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(calendarFechaInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(calendarioFechaFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(calendarFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(periodos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(autor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(calendarioFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addComponent(acI, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(acF, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -139,38 +261,86 @@ public class EventoDeTiempo extends javax.swing.JPanel {
     private void lblTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblTituloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lblTituloActionPerformed
+
+    private void calendarFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calendarFechaInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_calendarFechaInicioActionPerformed
+
+    private void calendarioFechaFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calendarioFechaFinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_calendarioFechaFinActionPerformed
+
+    private void periodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_periodosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_periodosActionPerformed
+
+    private void autorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_autorActionPerformed
+
+    private void acIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_acIActionPerformed
+
+    private void acFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_acFActionPerformed
     public HechoHistorico devolverHH() {
         return this.hechoHistorico;
     }
 
     public HechoHistorico hechoHistoricoNuevo() {
         HechoHistorico edt = null;
-        if (calendarFechaInicio.getDate() == null || calendarioFechaFin.getDate() == null
+        if (calendarFechaInicio.getText().isEmpty() 
                 || lblDescripcion.getText().isEmpty() || lblTitulo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Llene todos los campos");
         } else {
             String t = lblTitulo.getText();
             String d = lblDescripcion.getText();
-            Long a = calendarFechaInicio.getDate().getTime();
-            Date dateInit = new Date(a);
-            Long b = calendarioFechaFin.getDate().getTime();
-            Date dateF = new Date(b);
+            String dateInit = calendarFechaInicio.getText();
+            String dateFin = calendarioFechaFin.getText();
 
-            HechoHistoricoDb hechoHistoricoDb = new HechoHistoricoDb();
+            //HechoHistoricoDb hechoHistoricoDb = new HechoHistoricoDb();
+            //procedemos a crear el hecho historico
+            String periodo = (String) periodos.getSelectedItem();
+            String autorH = autor.getText();
+            String Aci = acI.getText();
+            String Acf = acF.getText();
 
-            edt = new HechoHistorico(this.hechoHistorico.getId(),
-                    dateInit, dateF, t, d);
+            if (periodo.equals("")) {
+                periodo = "sin periodo";
+            } else if (autorH.equals("")) {
+                autorH = Login.usuarioLogueado.getNombre();
+            } else if (Aci.equals("")) {
+                Aci = "a.C";
+            } else if (Acf.equals("")) {
+                Acf = "-";
+            }
+
+            edt = new HechoHistorico(this.hechoHistorico.getId(), t, autorH, periodo, htmlC, dateInit, dateFin, Aci, Acf, categoria, d);
         }
         return edt;
     }
 
+    public static String htmlC = "-";
+    public static String categoria = "Escritura";
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser calendarFechaInicio;
-    private com.toedter.calendar.JDateChooser calendarioFechaFin;
+    private javax.swing.JTextField acF;
+    private javax.swing.JTextField acI;
+    private javax.swing.JTextField autor;
+    private javax.swing.JTextField calendarFechaInicio;
+    private javax.swing.JTextField calendarioFechaFin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea lblDescripcion;
     private javax.swing.JTextField lblTitulo;
+    private javax.swing.JComboBox<String> periodos;
     // End of variables declaration//GEN-END:variables
 }

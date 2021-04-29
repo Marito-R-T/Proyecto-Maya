@@ -14,17 +14,22 @@ import java.sql.Date;
 public class HechoHistorico {
     
     private int id;
-    private Date fechaInicio, fechaFinalizacion;
-    private String titulo, descripcion;
+    private String titulo, autor, periodo, htmlCode, fechaInicio, fechaFin, AcI, AcF,categoria, descripcion;
 
     public HechoHistorico() {
     }
 
-    public HechoHistorico(int id, Date fechaInicio, Date fechaFinalizacion, String titulo, String descripcion) {
+    public HechoHistorico(int id, String titulo, String autor, String periodo, String htmlCode, String fechaInicio, String fechaFin, String AcI, String AcF, String categoria, String descripcion) {
         this.id = id;
-        this.fechaInicio = fechaInicio;
-        this.fechaFinalizacion = fechaFinalizacion;
         this.titulo = titulo;
+        this.autor = autor;
+        this.periodo = periodo;
+        this.htmlCode = htmlCode;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.AcI = AcI;
+        this.AcF = AcF;
+        this.categoria = categoria;
         this.descripcion = descripcion;
     }
 
@@ -36,28 +41,76 @@ public class HechoHistorico {
         this.id = id;
     }
 
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public Date getFechaFinalizacion() {
-        return fechaFinalizacion;
-    }
-
-    public void setFechaFinalizacion(Date fechaFinalizacion) {
-        this.fechaFinalizacion = fechaFinalizacion;
-    }
-
     public String getTitulo() {
         return titulo;
     }
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
+    public String getHtmlCode() {
+        return htmlCode;
+    }
+
+    public void setHtmlCode(String htmlCode) {
+        this.htmlCode = htmlCode;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public String getAcI() {
+        return AcI;
+    }
+
+    public void setAcI(String AcI) {
+        this.AcI = AcI;
+    }
+
+    public String getAcF() {
+        return AcF;
+    }
+
+    public void setAcF(String AcF) {
+        this.AcF = AcF;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getDescripcion() {
@@ -67,5 +120,10 @@ public class HechoHistorico {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
+    
+    
+    
+
     
 }
