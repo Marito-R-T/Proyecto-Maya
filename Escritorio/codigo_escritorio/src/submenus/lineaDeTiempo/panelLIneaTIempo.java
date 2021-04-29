@@ -11,10 +11,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import modelos.database.HechoHistoricoDb;
+import modelos.database.PeriodoDb;
 import modelos.objetos.HechoHistorico;
+import modelos.objetos.Periodo;
 import modelos.objetos.Usuario;
 import static principal.menuPrincipal.MenuPrincipal.BG;
 
@@ -35,7 +38,7 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
      */
     public panelLIneaTIempo(Usuario usuarioL) {
         initComponents();
-        panelTitulo.setBackground(new Color(255,255,255,100));
+        panelTitulo.setBackground(new Color(255, 255, 255, 100));
         this.usuario = usuarioL;
         obtenerHechos();
         addPrimerHecho();
@@ -273,7 +276,6 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
         panelPrincipal.repaint();
         if (index == 0) {
             botonAtrAas.setEnabled(false);
-
         } else {
             botonAtrAas.setEnabled(true);
         }
@@ -281,12 +283,12 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
     }//GEN-LAST:event_botonAtrAasActionPerformed
 
     private void btnAdelanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdelanteActionPerformed
-        index++;
         panelPrincipal.removeAll();
-        System.out.println("cantidad de eventos "+eventos.size());
-        System.out.println("index "+index);
-        
+//        System.out.println("cantidad de eventos " + eventos.size());
+//        System.out.println("index " + index);
+
         if (eventos.size() > index) {
+            index++;
             panelPrincipal.add(eventos.get(index));
             eventos.get(index).setVisible(true);
             panelPrincipal.validate();
@@ -315,7 +317,6 @@ public class panelLIneaTIempo extends javax.swing.JPanel {
             hAc.actualizarHechoHistorico(hechoHN);
             obtenerHechos();
         }
-
     }//GEN-LAST:event_editarElementoActionPerformed
 
     public static final void obtenerHechos() {
