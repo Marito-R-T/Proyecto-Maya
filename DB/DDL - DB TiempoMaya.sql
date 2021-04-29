@@ -433,3 +433,16 @@ COMMIT;
 ALTER TABLE `nahual` 
    ADD COLUMN `descripcion` MEDIUMTEXT NULL AFTER `categoria`,
    ADD COLUMN `rutaEscritorio` VARCHAR(100) NULL AFTER `descripcion`;  
+   
+--
+-- Cambios Uinal
+--
+ALTER TABLE `uinal` 
+    ADD COLUMN `ruta` VARCHAR(100) NULL AFTER `iddesk`;
+
+--
+-- Cambios
+--
+ALTER TABLE `acontecimiento` 
+    ADD COLUMN `descripcion` VARCHAR(45) NULL AFTER `categoria`;
+
