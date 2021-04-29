@@ -18,7 +18,7 @@ public class ConexionDb {//Aquí la conexion a la base de datos
     public static Connection conexion = null;
 
     //llenar con credenciales de su DB , datos de ejemplo
-    final static String nombreBaseDatos = "tiempomaya";
+    final static String nombreBaseDatos = "tiempomaya2";
     final static String usuario = "root";
     final static String password = "PASSWORD";
 
