@@ -38,7 +38,7 @@ public class HechoHistoricoDb {
             statement.executeUpdate();
             mensajes.informacion("Se ha creado el hecho historico con éxito.");
         } catch (SQLException ex) {
-           // System.out.println(ex);
+ //           System.out.println(ex);
             mensajes.error("No se pudo guardar el hecho historico. Ingrese otro hecho historico. ");
         }
     }
@@ -58,7 +58,7 @@ public class HechoHistoricoDb {
             statement.setString(6, hhActualizar.getFechaFin());
             statement.setString(7, hhActualizar.getAcI());
             statement.setString(8, hhActualizar.getAcF());
-            statement.setString(9, hhActualizar.getTitulo());
+            statement.setString(9, hhActualizar.getCategoria());
             statement.setString(10, hhActualizar.getDescripcion());
             statement.setInt(11, hhActualizar.getId());
             statement.executeUpdate();

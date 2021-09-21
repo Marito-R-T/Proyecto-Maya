@@ -6,7 +6,9 @@
 package submenus.lineaDeTiempo;
 
 import api.login.Login;
+import static api.login.Login.usuarioB;
 import static api.login.Login.usuarioLogueado;
+import static api.login.Login.usuarioLogueo;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -288,7 +290,7 @@ public class AgregarEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void validarDatos() {
-        if (dateFin.getText().isEmpty() || dateInicio.getText().isEmpty()
+        if ( dateInicio.getText().isEmpty()
                 || descripcion.getText().isEmpty() || titulo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Llene todos los campos");
         } else {
@@ -313,7 +315,16 @@ public class AgregarEvento extends javax.swing.JFrame {
         if (periodo.equals("")) {
             periodo = "sin periodo";
         } else if (autorH.equals("")) {
-            autorH = "Anonimo";
+            if (usuarioLogueado == null) {
+                if (usuarioB == null) {
+                } else {
+                    autorH = usuarioB.getUsername();
+                    System.out.println(usuarioB.getUsername());
+                }
+            } else {
+                autorH = usuarioLogueado.getUsername();
+                System.out.println(usuarioLogueado.getUsername());
+            }
         } else if (Aci.equals("")) {
             Aci = "a.C";
         } else if (Acf.equals("")) {
@@ -325,7 +336,7 @@ public class AgregarEvento extends javax.swing.JFrame {
         HechoHistorico edt = new HechoHistorico(hechoHistoricoDb.leerHechosHistoricos().size() + 2, t, autorH, periodo, htmlC, dateInit, dateFin2, Aci, Acf, categoria, d);
 
         hechoHistoricoDb.crearHH(edt);
-        obtenerHechos();
+              obtenerHechos();
     }
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
