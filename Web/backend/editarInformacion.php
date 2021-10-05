@@ -1,5 +1,6 @@
 <?php
-if (isset($_POST['tabla']) && isset($_POST['nombre'])) {
+if (isset($_POST['tabla']) && isset($_POST['nombre']) && isset($_POST['text'])
+    && $_POST['text']!='') {
     include('../lib/simple_html_dom.php');
     $table = $_POST['tabla'];
     $nombre = $_POST['nombre'];
